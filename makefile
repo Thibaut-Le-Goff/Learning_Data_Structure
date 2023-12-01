@@ -8,7 +8,7 @@ SRCDIR := src
 BINDIR := bin
 OBJDIR := $(BINDIR)/obj
 
-SOURCES := $(wildcard $(SRCDIR)/**/*.c $(SRCDIR)/*.c)
+SOURCES := $(wildcard $(SRCDIR)/**//**/*.c $(SRCDIR)/**/*.c $(SRCDIR)/*.c)
 OBJECTS := $(patsubst $(SRCDIR)/%,$(OBJDIR)/%,$(SOURCES:.c=.o))
 TARGET := test
 
