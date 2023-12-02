@@ -1,5 +1,6 @@
 #ifndef NEW_H
 #define NEW_H
+
     typedef struct Node Node;
 
     struct Node {
@@ -11,7 +12,6 @@
 
         int hash_value;
     };
-
 
     Node *new_linked_list(int *value);
 

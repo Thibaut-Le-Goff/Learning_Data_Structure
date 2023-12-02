@@ -5,15 +5,15 @@
 void print_node(Node *node_to_print) {
 
     if (node_to_print->node_greater_hash != NULL) {
-        printf("%p\n", node_to_print->node_greater_hash);       
+        printf("addr of node with a greater hash : %p\n", node_to_print->node_greater_hash);       
     }
 
     if (node_to_print->node_lesser_hash != NULL) {
-        printf("%p\n", node_to_print->node_lesser_hash);
+        printf("addr of node with a lesser hash : %p\n", node_to_print->node_lesser_hash);
     }
 
-    printf("%d\n", node_to_print->value);
-    printf("%d\n", node_to_print->hash_value);
+    printf("Value stored : %d\n", node_to_print->value);
+    printf("Hash : %d\n", node_to_print->hash_value);
 }
 
 /*
