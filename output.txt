@@ -1,0 +1,39 @@
+valgrind --leak-check=full -s ./bin/test
+Before the creation of a second node :
+Addr of the node : 0x4a4f040
+Value stored : 50
+Hash : 50
+
+After the creation of a second node :
+Addr of the node : 0x4a4f040
+addr of node with a greater hash : 0x4a500e0
+Value stored : 50
+Hash : 50
+
+The seconde node :
+Addr of the node : 0x4a500e0
+Value stored : 60
+Hash : 60
+
+The seconde node after the creation of a thrid node :
+Addr of the node : 0x4a500e0
+addr of node with a lesser hash : 0x4a50140
+Value stored : 60
+Hash : 60
+
+The thrid node :
+Addr of the node : 0x4a50140
+Value stored : 55
+Hash : 55
+
+The first node after the creation of a fourth node :
+Addr of the node : 0x4a4f040
+addr of node with a greater hash : 0x4a500e0
+addr of node with a lesser hash : 0x4a501a0
+Value stored : 50
+Hash : 50
+
+The fourth node :
+Addr of the node : 0x4a501a0
+Value stored : 4
+Hash : 4
