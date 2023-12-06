@@ -17,10 +17,10 @@ void create_node(Node *linked_list_first_element, int *value) {
 
     int num_max_jumps = 10;
 
-    // 
+    // find the place to put the new node
     Node *linked_list_iterator_node = linked_list_first_element;
 
-    for (int jump_trhought_nodes = 0; jump_trhought_nodes <= num_max_jumps; ++jump_trhought_nodes)
+    for (int jump_thought_nodes = 0; jump_thought_nodes <= num_max_jumps; ++jump_thought_nodes)
     {
         if (new_node->hash_value > linked_list_iterator_node->hash_value)
         // if the node created has a hash value greater than the iterator node 
@@ -71,8 +71,8 @@ void create_node(Node *linked_list_first_element, int *value) {
             break;
         }
 
-        if (jump_trhought_nodes == (num_max_jumps - 1)) {
-            printf("Error : The node created was not able to find a place to fit in %d jumps.", num_max_jumps);
+        if (jump_thought_nodes == num_max_jumps) {
+            printf("Error : The node created was not able to find a place to fit in %d jumps.", num_max_jumps -1);
             free(new_node);
         }
     }

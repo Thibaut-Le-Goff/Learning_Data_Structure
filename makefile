@@ -1,6 +1,6 @@
 CC := gcc
 
-CFLAGS := -g -Wall -Wextra -Iinclude -MMD -MP
+CFLAGS := -g -Wall -Wextra -pedantic-errors -Werror -Wfatal-errors -Iinclude -MMD -MP
 LDFLAGS := -lm
 VALGRIND_FLAGS := --leak-check=full -s
 
