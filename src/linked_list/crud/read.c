@@ -28,14 +28,16 @@ void print_node(Node *linked_list_first_element, int hash_node_to_print) {
         else if (hash_node_to_print == linked_list_iterator_node->hash_value)
         // if the hash is the one of the one we are looking for
         {
-            printf("Addr of the node : %p\n", (void*)linked_list_iterator_node);
+            printf("Addr of the node : %p\n", (void *)linked_list_iterator_node);
+
+            printf("Addr of the parent node : %p\n", (void *)linked_list_iterator_node->parent_node);
 
             if (linked_list_iterator_node->node_greater_hash != NULL) {
-                printf("addr of node with a greater hash : %p\n", (void*)linked_list_iterator_node->node_greater_hash);       
+                printf("addr of node with a greater hash : %p\n", (void *)linked_list_iterator_node->node_greater_hash);       
             }
 
             if (linked_list_iterator_node->node_lesser_hash != NULL) {
-                printf("addr of node with a lesser hash : %p\n", (void*)linked_list_iterator_node->node_lesser_hash);
+                printf("addr of node with a lesser hash : %p\n", (void *)linked_list_iterator_node->node_lesser_hash);
             }
 
             printf("Value stored : %d\n", linked_list_iterator_node->value);

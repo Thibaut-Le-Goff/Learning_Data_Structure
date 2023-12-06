@@ -43,7 +43,7 @@ run:
 
 sanitize: clean compile_sanitize
 
-CFLAGSSANITIZER := -Wall -Wextra -Iinclude -fsanitize=address -static-libasan -MMD -MP
+CFLAGSSANITIZER := -g -Wall -Wextra -pedantic-errors -Werror -Wfatal-errors -Iinclude -fsanitize=address -static-libasan -MMD -MP
 LDFLAGSSANITIZER := -lm -fsanitize=address -static-libasan
 
 compile_sanitize: CFLAGS += -fsanitize=address

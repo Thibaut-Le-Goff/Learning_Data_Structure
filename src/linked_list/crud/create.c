@@ -10,6 +10,7 @@ void create_node(Node *linked_list_first_element, int *value) {
 
     new_node->node_greater_hash = NULL;
     new_node->node_lesser_hash = NULL;
+    new_node->parent_node = NULL;
 
     new_node->value = *value;
 
@@ -28,6 +29,7 @@ void create_node(Node *linked_list_first_element, int *value) {
             if (linked_list_iterator_node->node_greater_hash == NULL)
             // if there are no node on the greater branch of the iterator node
             {
+                new_node->parent_node = linked_list_iterator_node;
                 linked_list_iterator_node->node_greater_hash = new_node;
                 // the node created will take the place
                 break;
@@ -48,6 +50,7 @@ void create_node(Node *linked_list_first_element, int *value) {
             if (linked_list_iterator_node->node_lesser_hash == NULL)
             // if there are no node at the lesser branche of the iterator node
             {
+                new_node->parent_node = linked_list_iterator_node;
                 linked_list_iterator_node->node_lesser_hash = new_node;
                 // the node created will take the place
                 break;
