@@ -44,7 +44,14 @@ Addr of the node : 0x4a501a0
 Addr of the parent node : 0x4a4f040
 Value stored : 4
 Hash : 4
-the node 0x4a500e0 is the great child of the node 0x4a4f040
+the node 0x4a501a0 to delete is a leaf node.
+the node 0x4a501a0 is the lesser child of the node 0x4a4f040
+
+the node 0x4a50140 to delete is a leaf node.
 the node 0x4a50140 is the lesser child of the node 0x4a500e0
+
+the node 0x4a500e0 to delete is a leaf node.
 the node 0x4a500e0 is the great child of the node 0x4a4f040
-other case
+
+the node 0x4a4f040 to delete is a leaf node.
+this is the root node

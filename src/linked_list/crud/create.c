@@ -75,7 +75,7 @@ void create_node(Node *linked_list_first_element, int *value) {
         }
 
         if (jump_thought_nodes == num_max_jumps) {
-            printf("Error : The node created was not able to find a place to fit in %d jumps.", num_max_jumps -1);
+            printf("Error : The node created was not able to find a place to fit in %d jumps.", num_max_jumps + 1);
             free(new_node);
         }
     }

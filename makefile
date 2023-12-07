@@ -49,8 +49,9 @@ LDFLAGSSANITIZER := -lm -fsanitize=address -static-libasan
 compile_sanitize: CFLAGS += -fsanitize=address
 compile_sanitize: LDFLAGS += -fsanitize=address
 compile_sanitize: $(OBJECTS)
-	$(CC) $^ -o $(BINDIR)/$(TARGET) $(LDFLAGSSANITIZER)
+	$(CC) $^ -o $(BINDIR)/$(TARGET) $(LDFLAGSSANITIZER) 
 
+#./$(BINDIR)/$(TARGET)
 #$(OBJDIR)/%.o: $(SRCDIR)/%.c
 #@mkdir -p $(@D)
 #$(CC) $(CFLAGS) -c $< -o $@

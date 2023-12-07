@@ -47,7 +47,7 @@ void print_node(Node *linked_list_first_element, int hash_node_to_print) {
         }
 
         if (jump_thought_nodes == num_max_jumps) {
-            printf("Error : The node wanted was not found in %d jumps.", num_max_jumps - 1);
+            printf("Error : The node wanted was not found in %d jumps.", num_max_jumps + 1);
         }
     }
 }
