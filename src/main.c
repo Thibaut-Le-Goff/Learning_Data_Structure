@@ -46,12 +46,25 @@ int main() {
     delete_node(first_node, 4);
     delete_node(first_node, 55);
     delete_node(first_node, 60);
+
+    printf("\nThe first node after the deletion :\n");
+    print_node(first_node, 50);
     delete_node(first_node, 50);
 
     /*
-    free(first_node->node_greater_hash->node_lesser_hash);
-    free(first_node->node_greater_hash);
-    free(first_node->node_lesser_hash);
-    free(first_node);
+    int num_max_jumps = 10;
+    Node *linked_list_iterator_node = linked_list_first_element;
+
+    for (int jump_thought_nodes = 0; jump_thought_nodes <= num_max_jumps; ++jump_thought_nodes)
+    {
+        create_node(first_node, &fourth_value);
+        print_node(first_node, 50);
+    }
+
+    for (int jump_thought_nodes = 0; jump_thought_nodes <= num_max_jumps; ++jump_thought_nodes)
+    {
+        delete_node(first_node, 50);
+        print_node(first_node, 50);
+    }
     */
 }

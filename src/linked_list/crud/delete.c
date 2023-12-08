@@ -3,7 +3,10 @@
 #include "../../../include/linked_list/new.h"
 #include "../../../include/linked_list/crud/read.h"
 
+
 void leaf_node_case(Node *linked_list_iterator_node);
+void parent_node_case(Node *linked_list_iterator_node);
+
 
 void delete_node(Node *linked_list_first_element, int hash_node_to_delete) {
 
@@ -31,16 +34,20 @@ void delete_node(Node *linked_list_first_element, int hash_node_to_delete) {
         else if (hash_node_to_delete == linked_list_iterator_node->hash_value)
         // if the hash is the one of the node we are looking for
         {
-            if ((linked_list_iterator_node->node_greater_hash == NULL) && (linked_list_iterator_node->node_lesser_hash == NULL))
-            // if the node to delete is a leaf node
+            if ( (linked_list_iterator_node->node_greater_hash == NULL) && 
+                 (linked_list_iterator_node->node_lesser_hash == NULL) &&
+                 (linked_list_iterator_node->parent_node != NULL) )
+            // if the node to delete is a leaf node :
+            // it has no child but has a parent
             {
-                printf("the node %p to delete is a leaf node.\n", (void *)linked_list_iterator_node);
                 leaf_node_case(linked_list_iterator_node);
             }
-            else if ((linked_list_iterator_node->node_greater_hash != NULL) || (linked_list_iterator_node->node_lesser_hash != NULL))
-            // if the node to delete is a parent node
+            else if ( (linked_list_iterator_node->node_greater_hash != NULL) || 
+                      (linked_list_iterator_node->node_lesser_hash != NULL) )
+            // if the node to delete is a parent node :
+            // it has at least one child
             {
-                printf("the node %p to delete is not a leaf node.\n\n", (void *)linked_list_iterator_node);
+                parent_node_case(linked_list_iterator_node);
             }
 
             free(linked_list_iterator_node);
@@ -56,24 +63,67 @@ void delete_node(Node *linked_list_first_element, int hash_node_to_delete) {
 
 
 
-void leaf_node_case(Node *linked_list_iterator_node)
+void leaf_node_case(Node *node_to_delete)
 {
-    if (linked_list_iterator_node->parent_node == NULL)
-    {
-        printf("this is the root node");
-    }            
-    else if (linked_list_iterator_node->hash_value > linked_list_iterator_node->parent_node->hash_value)
+    if (node_to_delete->hash_value > node_to_delete->parent_node->hash_value)
     // if the node to be deleted is on the larger branch of its parent
     {
-        printf("the node %p is the great child of the node %p\n\n", (void *)linked_list_iterator_node->parent_node->node_greater_hash, (void *)linked_list_iterator_node->parent_node);
-        linked_list_iterator_node->parent_node->node_greater_hash = NULL;
-        // we redirect the pointer to null to avoid referencing an invalid address    
+        node_to_delete->parent_node->node_greater_hash = NULL;
+        // the node to delete is disconnected from its parent
+        // frome the side of the parent
+        
+        node_to_delete->parent_node = NULL;
+        // the node to delete is disconnected from its parent
+        // frome the side of the children
     }
-    else if (linked_list_iterator_node->hash_value < linked_list_iterator_node->parent_node->hash_value)
+    else if (node_to_delete->hash_value < node_to_delete->parent_node->hash_value)
     // if the node to be deleted is on the lower branch of its parent
     {
-        printf("the node %p is the lesser child of the node %p\n\n", (void *)linked_list_iterator_node->parent_node->node_lesser_hash, (void *)linked_list_iterator_node->parent_node);
-        linked_list_iterator_node->parent_node->node_lesser_hash = NULL;
-        // we redirect the pointer to null to avoid referencing an invalid address    
+        node_to_delete->parent_node->node_lesser_hash = NULL;
+        // the node to delete is disconnected from its parent
+        // frome the side of the parent
+
+        node_to_delete->parent_node = NULL;
+        // the node to delete is disconnected from its parent
+        // frome the side of the children
     } 
+}
+
+
+/**/
+void parent_node_case(Node *node_to_delete)
+{
+    printf("Node parent à suprimer %p", (void *)node_to_delete);
+
+    /*
+    // The node to replace the node to delete must be the next higher one
+    if (node_to_delete->node_greater_hash->node_lesser_hash == !NULL)
+    // if the node on the greater branch does not have a lesser child
+    // that mean the next higher hash is this one
+    {
+        // the node who will replace the node to delete will inherit his pointer
+        node_to_delete->node_greater_hash->node_lesser_hash = node_to_delete->node_lesser_hash;
+        node_to_delete->node_greater_hash->parent_node = node_to_delete->parent_node;
+        // except the one who point to his greater branch because it would mean
+        // to create a pointer who point to its value
+
+        // the pointer coming from the node to delete have been inherit to
+        // to the replacement node.
+
+        // but there still the node who point to the node to delete
+
+
+        // finaly, we set all pointer of the node to delete to null :
+        node_to_delete->parent_node = NULL;
+        node_to_delete->node_lesser_hash = NULL;
+        node_to_delete->node_greater_hash = NULL;
+    }
+
+    int num_max_jumps = 10;
+    Node *iterator_node_next_sup = node_to_delete;
+
+    for (int jump_thought_nodes = 0; jump_thought_nodes <= num_max_jumps; ++jump_thought_nodes)
+    {
+        iterator_node_next_sup
+    }*/
 }

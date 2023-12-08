@@ -43,14 +43,9 @@ Addr of the node : 0x6030000000d0
 Addr of the parent node : 0x603000000040
 Value stored : 4
 Hash : 4
-the node 0x6030000000d0 to delete is a leaf node.
-the node 0x6030000000d0 is the lesser child of the node 0x603000000040
 
-the node 0x6030000000a0 to delete is a leaf node.
-the node 0x6030000000a0 is the lesser child of the node 0x603000000070
-
-the node 0x603000000070 to delete is a leaf node.
-the node 0x603000000070 is the great child of the node 0x603000000040
-
-the node 0x603000000040 to delete is a leaf node.
-this is the root node
+The first node after the deletion :
+Addr of the node : 0x603000000040
+Addr of the parent node : (nil)
+Value stored : 50
+Hash : 50
