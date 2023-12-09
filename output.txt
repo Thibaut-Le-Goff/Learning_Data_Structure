@@ -1,53 +1,52 @@
-valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./bin/test
 Before the creation of a second node :
-Addr of the node : 0x4a4f040
+Addr of the node : 0x55ebe7cc22a0
 Addr of the parent node : (nil)
 Value stored : 50
 Hash : 50
 
 After the creation of a second node :
-Addr of the node : 0x4a4f040
+Addr of the node : 0x55ebe7cc22a0
 Addr of the parent node : (nil)
-addr of node with a greater hash : 0x4a500e0
+addr of node with a greater hash : 0x55ebe7cc32e0
 Value stored : 50
 Hash : 50
 
 The seconde node :
-Addr of the node : 0x4a500e0
-Addr of the parent node : 0x4a4f040
+Addr of the node : 0x55ebe7cc32e0
+Addr of the parent node : 0x55ebe7cc22a0
 Value stored : 60
 Hash : 60
 
 The seconde node after the creation of a thrid node :
-Addr of the node : 0x4a500e0
-Addr of the parent node : 0x4a4f040
-addr of node with a lesser hash : 0x4a50140
+Addr of the node : 0x55ebe7cc32e0
+Addr of the parent node : 0x55ebe7cc22a0
+addr of node with a lesser hash : 0x55ebe7cc3310
 Value stored : 60
 Hash : 60
 
 The thrid node :
-Addr of the node : 0x4a50140
-Addr of the parent node : 0x4a500e0
+Addr of the node : 0x55ebe7cc3310
+Addr of the parent node : 0x55ebe7cc32e0
 Value stored : 55
 Hash : 55
 
 The first node after the creation of a fourth node :
-Addr of the node : 0x4a4f040
+Addr of the node : 0x55ebe7cc22a0
 Addr of the parent node : (nil)
-addr of node with a greater hash : 0x4a500e0
-addr of node with a lesser hash : 0x4a501a0
+addr of node with a greater hash : 0x55ebe7cc32e0
+addr of node with a lesser hash : 0x55ebe7cc3340
 Value stored : 50
 Hash : 50
 
 The fourth node :
-Addr of the node : 0x4a501a0
-Addr of the parent node : 0x4a4f040
+Addr of the node : 0x55ebe7cc3340
+Addr of the parent node : 0x55ebe7cc22a0
 Value stored : 4
 Hash : 4
 
 
 The first node after the deletions :
-Addr of the node : 0x4a4f040
+Addr of the node : 0x55ebe7cc22a0
 Addr of the parent node : (nil)
 Value stored : 50
 Hash : 50

@@ -44,8 +44,17 @@ Addr of the parent node : 0x603000000040
 Value stored : 4
 Hash : 4
 
-The first node after the deletion :
+
+The first node after the deletions :
 Addr of the node : 0x603000000040
 Addr of the parent node : (nil)
 Value stored : 50
 Hash : 50
+iterator = 0
+116
+iterator = 1
+101
+iterator = 2
+115
+Result: 116101115
+Result as an int : 116101115

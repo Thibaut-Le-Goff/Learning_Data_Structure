@@ -1,12 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "../include/linked_list/new.h"
 #include "../include/linked_list/crud/read.h"
 #include "../include/linked_list/crud/create.h"
 #include "../include/linked_list/crud/delete.h"
 
-#include "../include/binary_tree/search.h"
+#include "../include/hash/hash.h"
 
 int main() {
     int value = 50;
@@ -47,10 +48,24 @@ int main() {
     delete_node(first_node, 55);
     delete_node(first_node, 60);
 
-    printf("\nThe first node after the deletion :\n");
+    printf("\n\nThe first node after the deletions :\n");
     print_node(first_node, 50);
     delete_node(first_node, 50);
 
+    /// test hash :
+
+    char test_char[] = "test";
+    int lenght_array = sizeof(test_char) / sizeof(test_char[0]);
+
+    create_hash(test_char, &lenght_array);
+
+    /*
+    printf("\nThe rest of the nodes after the deletion :\n");
+    delete_node(first_node, 4);
+    delete_node(first_node, 50);
+    delete_node(first_node, 60);
+    */
+    
     /*
     int num_max_jumps = 10;
     Node *linked_list_iterator_node = linked_list_first_element;

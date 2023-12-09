@@ -2,7 +2,7 @@ CC := gcc
 
 CFLAGS := -g -Wall -Wextra -pedantic-errors -Werror -Wfatal-errors -Iinclude -MMD -MP
 LDFLAGS := -lm
-VALGRIND_FLAGS := --leak-check=full -s
+VALGRIND_FLAGS := --leak-check=full --show-leak-kinds=all --track-origins=yes -s
 
 SRCDIR := src
 BINDIR := bin

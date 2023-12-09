@@ -29,9 +29,12 @@ void create_node(Node *linked_list_first_element, int *value) {
             if (linked_list_iterator_node->node_greater_hash == NULL)
             // if there are no node on the greater branch of the iterator node
             {
-                new_node->parent_node = linked_list_iterator_node;
-                linked_list_iterator_node->node_greater_hash = new_node;
                 // the node created will take the place
+                new_node->parent_node = linked_list_iterator_node;
+                // connection from the new node to its parent
+                linked_list_iterator_node->node_greater_hash = new_node;
+                // connection from the parent node to its child 
+                // at the greater branche
                 break;
                 // and stop the loop 
             }
@@ -50,9 +53,12 @@ void create_node(Node *linked_list_first_element, int *value) {
             if (linked_list_iterator_node->node_lesser_hash == NULL)
             // if there are no node at the lesser branche of the iterator node
             {
-                new_node->parent_node = linked_list_iterator_node;
-                linked_list_iterator_node->node_lesser_hash = new_node;
                 // the node created will take the place
+                new_node->parent_node = linked_list_iterator_node;
+                // connection from the new node to its parent
+                linked_list_iterator_node->node_lesser_hash = new_node;
+                // connection from the parent node to its child 
+                // at the lesser branche
                 break;
                 // and stop the loop 
             }

@@ -70,22 +70,22 @@ void leaf_node_case(Node *node_to_delete)
     {
         node_to_delete->parent_node->node_greater_hash = NULL;
         // the node to delete is disconnected from its parent
-        // frome the side of the parent
+        // from the side of the parent
         
         node_to_delete->parent_node = NULL;
         // the node to delete is disconnected from its parent
-        // frome the side of the children
+        // from the side of the children
     }
     else if (node_to_delete->hash_value < node_to_delete->parent_node->hash_value)
     // if the node to be deleted is on the lower branch of its parent
     {
         node_to_delete->parent_node->node_lesser_hash = NULL;
         // the node to delete is disconnected from its parent
-        // frome the side of the parent
+        // from the side of the parent
 
         node_to_delete->parent_node = NULL;
         // the node to delete is disconnected from its parent
-        // frome the side of the children
+        // from the side of the children
     } 
 }
 
@@ -95,9 +95,9 @@ void parent_node_case(Node *node_to_delete)
 {
     printf("Node parent à suprimer %p", (void *)node_to_delete);
 
-    /*
+    /**/
     // The node to replace the node to delete must be the next higher one
-    if (node_to_delete->node_greater_hash->node_lesser_hash == !NULL)
+    if (node_to_delete->node_greater_hash->node_lesser_hash == NULL)
     // if the node on the greater branch does not have a lesser child
     // that mean the next higher hash is this one
     {
@@ -112,13 +112,18 @@ void parent_node_case(Node *node_to_delete)
 
         // but there still the node who point to the node to delete
 
+        node_to_delete->node_lesser_hash->parent_node = node_to_delete->node_greater_hash;
+        // The greater child become the parent of its previous siter
+
+        node_to_delete->parent_node->node_greater_hash = node_to_delete->node_greater_hash;
+        // the parent of the node to delete adopt its greater child
 
         // finaly, we set all pointer of the node to delete to null :
         node_to_delete->parent_node = NULL;
         node_to_delete->node_lesser_hash = NULL;
         node_to_delete->node_greater_hash = NULL;
     }
-
+    /*
     int num_max_jumps = 10;
     Node *iterator_node_next_sup = node_to_delete;
 
