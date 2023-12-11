@@ -8,27 +8,39 @@ concanetation of the ascii code of every charactere of
 the string
 */
 
-void create_hash(char table[], int *lenght_array)
-{ 
-    char result[20] = {'\0'};
-    
-    for (int i = 0; i <= *lenght_array - 3; ++i) {
-        printf("iterator = %d\n", i);
-        printf("%d\n", table[i]);
-        
-        char characte[20];
+float create_hash(char *table)
+{
+    char result[100] = {'\0'};
 
-        sprintf(characte, "%d", table[i]);
+    char *ptr_table = table;
+
+    int array_iterator;
+    for (array_iterator = 1; *(ptr_table + array_iterator) != '\0'; ++array_iterator) {        
+        char characte[100];
 
         // pb : the int may be too long, a solution 
         //      is to substracte the numbers by pair
-        //sprintf(characte, "%d", abs(table[i] - table[i + 1]));
+        sprintf(characte, "%d", abs(*(ptr_table + array_iterator - 1) - *(ptr_table + array_iterator)));
 
+        // concatenation
         strcat(result, characte);
     }
-
-    printf("Result: %s\n", result);
     
-    long int cresult_as_int = atol(result); 
-    printf("Result as an int : %ld\n", cresult_as_int);
+    // conversion to a long double
+    long double result_as_int = atof(result);
+
+    // if the string is really long 
+    int diminish_result_iterator;
+    for (diminish_result_iterator = 1; diminish_result_iterator <= 1000; ++diminish_result_iterator) {
+        if (result_as_int > 1000) 
+        {
+            result_as_int /= array_iterator;
+        }
+        else if (result_as_int <= 1000)
+        {
+            break;
+        }
+    }
+
+    return (float)result_as_int;
 }

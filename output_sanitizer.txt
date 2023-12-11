@@ -50,11 +50,6 @@ Addr of the node : 0x603000000040
 Addr of the parent node : (nil)
 Value stored : 50
 Hash : 50
-iterator = 0
-116
-iterator = 1
-101
-iterator = 2
-115
-Result: 116101115
-Result as an int : 116101115
+
+hash of George Washington : 214.057678
+hash1 of John Adams : 377.678345

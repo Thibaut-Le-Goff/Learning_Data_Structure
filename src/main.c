@@ -54,10 +54,14 @@ int main() {
 
     /// test hash :
 
-    char test_char[] = "test";
-    int lenght_array = sizeof(test_char) / sizeof(test_char[0]);
+    char test_char[] = "George Washington";
+    float hash = create_hash(test_char);
+    printf("\nhash of %s : %f\n", test_char, hash);
 
-    create_hash(test_char, &lenght_array);
+
+    char test1_char[] = "John Adams";
+    float hash1 = create_hash(test1_char);
+    printf("hash1 of %s : %f\n", test1_char, hash1);
 
     /*
     printf("\nThe rest of the nodes after the deletion :\n");
