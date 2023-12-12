@@ -1,4 +1,4 @@
-Before the creation of a second node :
+The first node before the creation of a second node :
 Addr of the node : 0x603000000040
 Addr of the parent node : (nil)
 Value stored : 50

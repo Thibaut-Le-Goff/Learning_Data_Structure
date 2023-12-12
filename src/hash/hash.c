@@ -10,6 +10,12 @@ the string
 
 float create_hash(char *table)
 {
+
+    if (table == NULL) {
+        fprintf(stderr, "Error: Null pointer passed to create_hash.\n");
+        return 0.0;
+    }
+
     char result[100] = {'\0'};
 
     char *ptr_table = table;

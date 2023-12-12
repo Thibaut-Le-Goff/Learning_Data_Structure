@@ -1,5 +1,5 @@
 valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./bin/test
-Before the creation of a second node :
+The first node before the creation of a second node :
 Addr of the node : 0x4a4f040
 Addr of the parent node : (nil)
 Value stored : 50
