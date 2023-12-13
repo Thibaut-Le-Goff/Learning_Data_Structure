@@ -18,7 +18,7 @@ int main() {
     print_node(first_node, 50);
 
     int seconde_value = 60;
-    create_node(first_node, &seconde_value);
+    create_node_recursion(first_node, &seconde_value);
 
     printf("\nAfter the creation of a second node :\n");
     print_node(first_node, 50);
@@ -43,9 +43,9 @@ int main() {
 
     printf("\nThe fourth node :\n");
     print_node_recursion(first_node, 4);
-
-    delete_node(first_node, 4);
+    
     delete_node(first_node, 55);
+    delete_node(first_node, 4);
     delete_node(first_node, 60);
 
     printf("\n\nThe first node after the deletions :\n");

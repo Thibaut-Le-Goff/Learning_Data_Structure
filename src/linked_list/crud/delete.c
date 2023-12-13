@@ -91,6 +91,8 @@ void leaf_node_case(Node *node_to_delete)
 
 // -----------------------------------------------------------------------------------------------------------
 
+void no_lesser_hash_node_replace(Node *node_to_delete);
+
 /**/
 void parent_node_case(Node *node_to_delete)
 {
@@ -102,42 +104,58 @@ void parent_node_case(Node *node_to_delete)
     // if the node on the greater branch,of the node to delete, does not 
     // have a lesser child that mean the next higher hash is this one
     {
-        Node *remplacement_node = node_to_delete->node_greater_hash;
-
-        // the node who will replace the node to delete will inherit his pointe
-        if (node_to_delete->node_lesser_hash != NULL)
-        // if the node to delete have a lesser child
-        // if the node of replacement have a sister
-        {
-            remplacement_node->node_lesser_hash = node_to_delete->node_lesser_hash;
-            // 
-            node_to_delete->node_lesser_hash->parent_node = remplacement_node;
-            // The greater child become the parent of its previous siter        
-        }
-
-        node_to_delete->node_greater_hash->parent_node = node_to_delete->parent_node;
-        // except the one who point to his greater branch because it would mean
-        // to create a pointer who point to its value
-
-        // the pointer coming from the node to delete have been inherit to
-        // to the replacement node.
-
-        // but there still the node who point to the node to delete
-
-        node_to_delete->parent_node->node_greater_hash = node_to_delete->node_greater_hash;
-        // the parent of the node to delete adopt its greater child
-
-        // finaly, we set all pointer of the node to delete to null :
-        node_to_delete->parent_node = NULL;
-        node_to_delete->node_lesser_hash = NULL;
-        node_to_delete->node_greater_hash = NULL;
+        no_lesser_hash_node_replace(node_to_delete);
     }
+    else if (node_to_delete->node_greater_hash->node_lesser_hash != NULL)
+    // if the node on the greater branch,of the node to delete
+    // have a lesser child that mean the next higher hash is the
+    // one of the lesser 
+    {
+        int num_max_jumps = 10;
+        Node *linked_list_iterator_node = node_to_delete;
+
+        for (int jump_thought_nodes = 0; jump_thought_nodes <= num_max_jumps; ++jump_thought_nodes) 
+        {
+            if (linked_list_iterator_node->node_lesser_hash == NULL) 
+            {
+                no_lesser_hash_node_replace(node_to_delete);
+            }
+
+        }
+    }
+
     /*
-    int num_max_jumps = 10;
     Node *iterator_node_next_sup = node_to_delete;
 
-    for (int jump_thought_nodes = 0; jump_thought_nodes <= num_max_jumps; ++jump_thought_nodes)
     {
         iterator_node_next_sup
     }*/
+}
+
+void no_lesser_hash_node_replace(Node *node_to_delete) {
+
+    Node *remplacement_node = node_to_delete->node_greater_hash;
+
+    // the node who will replace the node to delete will inherit his pointe
+    if (node_to_delete->node_lesser_hash != NULL)
+    // if the node to delete have a lesser child
+    // if the node of replacement have a sister
+    {
+        remplacement_node->node_lesser_hash = node_to_delete->node_lesser_hash;
+        // the sister becam his lesser child
+        node_to_delete->node_lesser_hash->parent_node = remplacement_node;
+        // The greater child become the parent of its previous siter
+
+        node_to_delete->node_lesser_hash = NULL;   
+    }
+
+    remplacement_node->parent_node = node_to_delete->parent_node;
+    // the remplacement node recognize the parent of the node 
+    // to delete as its parent
+    node_to_delete->parent_node->node_greater_hash = remplacement_node;
+    // the parent of the node to delete adopt its greater child
+
+    // finaly, we set all pointer of the node to delete to null :
+    node_to_delete->parent_node = NULL;
+    node_to_delete->node_greater_hash = NULL;
 }

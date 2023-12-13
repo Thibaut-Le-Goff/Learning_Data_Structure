@@ -73,7 +73,7 @@ void create_node(Node *linked_list_first_element, int *value) {
         else if (new_node->hash_value == linked_list_iterator_node->hash_value)
         // if there is a hash collision
         {
-            printf("Error : Hash collision");
+            fprintf(stderr, "Error : Hash collision");
 
             // the node must be freed because it is invalid
             free(new_node);
@@ -81,7 +81,7 @@ void create_node(Node *linked_list_first_element, int *value) {
         }
 
         if (jump_thought_nodes == num_max_jumps) {
-            printf("Error : The node created was not able to find a place to fit in %d jumps.", num_max_jumps + 1);
+            fprintf(stderr, "Error : The node created was not able to find a place to fit in %d jumps.", num_max_jumps + 1);
             free(new_node);
         }
     }
@@ -113,7 +113,7 @@ void create_node_recursion(Node *linked_list_first_element, int *value) {
 void find_place_node(Node *linked_list_iterator_node, Node *new_node) {
 
     if (linked_list_iterator_node == NULL) {
-        printf("Error : The node created was not able to find a place to fit.");
+        fprintf(stderr, "Error : The node created was not able to find a place to fit.");
         free(new_node);
     }
 
@@ -163,7 +163,7 @@ void find_place_node(Node *linked_list_iterator_node, Node *new_node) {
     else if (new_node->hash_value == linked_list_iterator_node->hash_value)
     // if there is a hash collision
     {
-        printf("Error : Hash collision");
+        fprintf(stderr, "Error : Hash collision");
 
         // the node must be freed because it is invalid
         free(new_node);
