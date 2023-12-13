@@ -44,7 +44,7 @@ Addr of the node : 0x4a501a0
 Addr of the parent node : 0x4a4f040
 Value stored : 4
 Hash : 4
-
+Node parent à suprimer 0x4a500e0
 
 The first node after the deletions :
 Addr of the node : 0x4a4f040

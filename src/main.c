@@ -44,9 +44,9 @@ int main() {
     printf("\nThe fourth node :\n");
     print_node_recursion(first_node, 4);
     
-    delete_node(first_node, 55);
-    delete_node(first_node, 4);
     delete_node(first_node, 60);
+    delete_node(first_node, 4);
+    delete_node(first_node, 55);
 
     printf("\n\nThe first node after the deletions :\n");
     print_node_recursion(first_node, 50);
