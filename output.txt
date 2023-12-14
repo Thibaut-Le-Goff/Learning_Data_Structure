@@ -1,55 +1,57 @@
 The first node before the creation of a second node :
-Addr of the node : 0x55ad5ac4f2a0
+Addr of the node : 0x5608068942a0
 Addr of the parent node : (nil)
 Value stored : 50
 Hash : 50
 
 After the creation of a second node :
-Addr of the node : 0x55ad5ac4f2a0
+Addr of the node : 0x5608068942a0
 Addr of the parent node : (nil)
-addr of node with a greater hash : 0x55ad5ac502e0
+addr of node with a greater hash : 0x5608068952e0
 Value stored : 50
 Hash : 50
 
 The seconde node :
-Addr of the node : 0x55ad5ac502e0
-Addr of the parent node : 0x55ad5ac4f2a0
+Addr of the node : 0x5608068952e0
+Addr of the parent node : 0x5608068942a0
 Value stored : 60
 Hash : 60
 
 The seconde node after the creation of a thrid node :
-Addr of the node : 0x55ad5ac502e0
-Addr of the parent node : 0x55ad5ac4f2a0
-addr of node with a lesser hash : 0x55ad5ac50310
+Addr of the node : 0x5608068952e0
+Addr of the parent node : 0x5608068942a0
+addr of node with a lesser hash : 0x560806895310
 Value stored : 60
 Hash : 60
 
 The thrid node :
-Addr of the node : 0x55ad5ac50310
-Addr of the parent node : 0x55ad5ac502e0
+Addr of the node : 0x560806895310
+Addr of the parent node : 0x5608068952e0
 Value stored : 55
 Hash : 55
 
 The first node after the creation of a fourth node :
-Addr of the node : 0x55ad5ac4f2a0
+Addr of the node : 0x5608068942a0
 Addr of the parent node : (nil)
-addr of node with a greater hash : 0x55ad5ac502e0
-addr of node with a lesser hash : 0x55ad5ac50340
+addr of node with a greater hash : 0x5608068952e0
+addr of node with a lesser hash : 0x560806895340
 Value stored : 50
 Hash : 50
 
 The fourth node :
-Addr of the node : 0x55ad5ac50340
-Addr of the parent node : 0x55ad5ac4f2a0
+Addr of the node : 0x560806895340
+Addr of the parent node : 0x5608068942a0
 Value stored : 4
 Hash : 4
-Node parent à suprimer 0x55ad5ac502e0
+Node parent à suprimer 0x5608068952e0
 
 The first node after the deletions :
-Addr of the node : 0x55ad5ac4f2a0
+Addr of the node : 0x5608068942a0
 Addr of the parent node : (nil)
 Value stored : 50
 Hash : 50
 
-hash of George Washington : 214.057678
-hash1 of John Adams : 377.678345
+hash of George Washington : 209.667099
+hash1 of John Adams : -369.017181
+hash3 of test : -208.812042
+hash4 of uftu : 266.533752

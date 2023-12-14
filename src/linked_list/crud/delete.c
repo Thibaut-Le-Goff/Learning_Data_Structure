@@ -55,7 +55,7 @@ void delete_node(Node *linked_list_first_element, int hash_node_to_delete) {
 
         if (jump_thought_nodes == NUM_MAX_JUMPS) 
         {
-            fprintf(stderr, "Error : The node wanted was not found in %d jumps.", NUM_MAX_JUMPS);
+            fprintf(stderr, "Error : The node wanted was not found in %d jumps.", jump_thought_nodes + 1);
         }
     }
 }
@@ -161,7 +161,7 @@ void from_greater_to_lesser_path(Node *node_to_delete) {
          
         if (jump_thought_nodes == NUM_MAX_JUMPS)
         {
-            fprintf(stderr, "Error : The node wanted was not found in %d jumps.", NUM_MAX_JUMPS);
+            fprintf(stderr, "Error : The node wanted was not found in %d jumps.", jump_thought_nodes + 1);
         }
     }
 }
@@ -198,7 +198,7 @@ void from_lesser_to_greater_path(Node *node_to_delete) {
          
         if (jump_thought_nodes == NUM_MAX_JUMPS) 
         {
-            fprintf(stderr, "Error : The node wanted was not found in %d jumps.", NUM_MAX_JUMPS);
+            fprintf(stderr, "Error : The node wanted was not found in %d jumps.", jump_thought_nodes + 1);
         }
     }
 }

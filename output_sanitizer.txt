@@ -51,5 +51,7 @@ Addr of the parent node : (nil)
 Value stored : 50
 Hash : 50
 
-hash of George Washington : 214.057678
-hash1 of John Adams : 377.678345
+hash of George Washington : 209.667099
+hash1 of John Adams : -369.017181
+hash3 of test : -208.812042
+hash4 of uftu : 266.533752

@@ -63,6 +63,16 @@ int main() {
     float hash1 = create_hash(test1_char);
     printf("hash1 of %s : %f\n", test1_char, hash1);
 
+
+    // test and uftu have the same hash
+    char test3_char[] = "test";
+    float hash3 = create_hash(test3_char);
+    printf("hash3 of %s : %f\n", test3_char, hash3);
+
+    char test4_char[] = "uftu";
+    float hash4 = create_hash(test4_char);
+    printf("hash4 of %s : %f\n", test4_char, hash4);
+
     /*
     printf("\nThe rest of the nodes after the deletion :\n");
     delete_node(first_node, 4);
