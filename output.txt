@@ -1,52 +1,52 @@
 The first node before the creation of a second node :
-Addr of the node : 0x55d52e6102a0
+Addr of the node : 0x55ad5ac4f2a0
 Addr of the parent node : (nil)
 Value stored : 50
 Hash : 50
 
 After the creation of a second node :
-Addr of the node : 0x55d52e6102a0
+Addr of the node : 0x55ad5ac4f2a0
 Addr of the parent node : (nil)
-addr of node with a greater hash : 0x55d52e6112e0
+addr of node with a greater hash : 0x55ad5ac502e0
 Value stored : 50
 Hash : 50
 
 The seconde node :
-Addr of the node : 0x55d52e6112e0
-Addr of the parent node : 0x55d52e6102a0
+Addr of the node : 0x55ad5ac502e0
+Addr of the parent node : 0x55ad5ac4f2a0
 Value stored : 60
 Hash : 60
 
 The seconde node after the creation of a thrid node :
-Addr of the node : 0x55d52e6112e0
-Addr of the parent node : 0x55d52e6102a0
-addr of node with a lesser hash : 0x55d52e611310
+Addr of the node : 0x55ad5ac502e0
+Addr of the parent node : 0x55ad5ac4f2a0
+addr of node with a lesser hash : 0x55ad5ac50310
 Value stored : 60
 Hash : 60
 
 The thrid node :
-Addr of the node : 0x55d52e611310
-Addr of the parent node : 0x55d52e6112e0
+Addr of the node : 0x55ad5ac50310
+Addr of the parent node : 0x55ad5ac502e0
 Value stored : 55
 Hash : 55
 
 The first node after the creation of a fourth node :
-Addr of the node : 0x55d52e6102a0
+Addr of the node : 0x55ad5ac4f2a0
 Addr of the parent node : (nil)
-addr of node with a greater hash : 0x55d52e6112e0
-addr of node with a lesser hash : 0x55d52e611340
+addr of node with a greater hash : 0x55ad5ac502e0
+addr of node with a lesser hash : 0x55ad5ac50340
 Value stored : 50
 Hash : 50
 
 The fourth node :
-Addr of the node : 0x55d52e611340
-Addr of the parent node : 0x55d52e6102a0
+Addr of the node : 0x55ad5ac50340
+Addr of the parent node : 0x55ad5ac4f2a0
 Value stored : 4
 Hash : 4
-Node parent à suprimer 0x55d52e6112e0
+Node parent à suprimer 0x55ad5ac502e0
 
 The first node after the deletions :
-Addr of the node : 0x55d52e6102a0
+Addr of the node : 0x55ad5ac4f2a0
 Addr of the parent node : (nil)
 Value stored : 50
 Hash : 50
