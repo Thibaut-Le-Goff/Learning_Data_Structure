@@ -17,7 +17,7 @@ float create_hash(char *table)
     }
 
 
-    char result[100] = {'\0'};
+    char result[50] = {'\0'};
     int sum_ascii_characters = 0;
 
 

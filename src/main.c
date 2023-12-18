@@ -11,7 +11,6 @@
 
 int main() {
     int value = 50;
-
     Node *first_node = new_linked_list(&value);
 
     printf("The first node before the creation of a second node :\n");
@@ -45,12 +44,16 @@ int main() {
     print_node_recursion(first_node, 4);
     
     delete_node(first_node, 60);
-    delete_node(first_node, 4);
+
+    printf("\nThe thrid node changed of parent :\n");
+    print_node_recursion(first_node, 55);
+
+    delete_node(first_node, 50);
     delete_node(first_node, 55);
 
-    printf("\n\nThe first node after the deletions :\n");
-    print_node_recursion(first_node, 50);
-    delete_node(first_node, 50);
+    //printf("\n\nThe first node after the deletions :\n");
+    //print_node_recursion(first_node, 50);
+    delete_node(first_node, 4);
 
     /// test hash :
 

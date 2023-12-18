@@ -1,6 +1,6 @@
 CC := gcc
 
-CFLAGS := -g -Wall -Wextra -pedantic-errors -Werror -Wfatal-errors -Iinclude -MMD -MP
+CFLAGS := -std=c99 -g -Wall -Wextra -pedantic-errors -Werror -Wfatal-errors -Iinclude -MMD -MP
 LDFLAGS := -lm
 VALGRIND_FLAGS := --leak-check=full --show-leak-kinds=all --track-origins=yes -s
 
@@ -43,7 +43,7 @@ run:
 
 sanitize: clean compile_sanitize
 
-CFLAGSSANITIZER := -g -Wall -Wextra -pedantic-errors -Werror -Wfatal-errors -Iinclude -fsanitize=address -static-libasan -MMD -MP
+#CFLAGSSANITIZER := -g -Wall -Wextra -pedantic-errors -Werror -Wfatal-errors -Iinclude -fsanitize=address -static-libasan -MMD -MP
 LDFLAGSSANITIZER := -lm -fsanitize=address -static-libasan
 
 compile_sanitize: CFLAGS += -fsanitize=address

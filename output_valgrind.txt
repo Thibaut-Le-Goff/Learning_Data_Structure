@@ -45,12 +45,14 @@ Addr of the parent node : 0x4b2d040
 Value stored : 4
 Hash : 4
 Node parent à suprimer 0x4b2e0e0
+premier Node 0x4b2d040
 
-The first node after the deletions :
-Addr of the node : 0x4b2d040
-Addr of the parent node : (nil)
-Value stored : 50
-Hash : 50
+The thrid node changed of parent :
+Addr of the node : 0x4b2e140
+Addr of the parent node : 0x4b2d040
+Value stored : 55
+Hash : 55
+Node parent à suprimer 0x4b2d040
 
 hash of George Washington : 209.667099
 hash1 of John Adams : -369.017181

@@ -5,8 +5,10 @@
 
 #define NUM_MAX_JUMPS 10
 
-void leaf_node_case(Node *linked_list_iterator_node);
-void parent_node_case(Node *linked_list_iterator_node);
+
+void leaf_node_case(Node *node_to_delete);
+//void parent_node_case(Node *node_to_delete);
+void parent_node_case(Node *linked_list_first_element, Node *node_to_delete);
 
 
 void delete_node(Node *linked_list_first_element, int hash_node_to_delete) {
@@ -46,7 +48,8 @@ void delete_node(Node *linked_list_first_element, int hash_node_to_delete) {
             // if the node to delete is a parent node :
             // it has at least one child
             {
-                parent_node_case(linked_list_iterator_node);
+                //parent_node_case(linked_list_iterator_node);
+                parent_node_case(linked_list_first_element, linked_list_iterator_node);
             }
 
             free(linked_list_iterator_node);
@@ -93,53 +96,57 @@ void leaf_node_case(Node *node_to_delete)
 
 // --------------------------------------- parent_node_case --------------------------------------------------------------------
 
+/*
+void from_greater_node_to_smallest_hash(Node *node_to_delete);
+void from_lesser_node_to_biggest_hash(Node *node_to_delete);
 
-void from_greater_to_lesser_path(Node *node_to_delete);
-void from_lesser_to_greater_path(Node *node_to_delete);
+void replacement_of_node(Node *node_to_delete, Node *remplacement_node);
+*/
 
-void remplacement_of_node(Node *node_to_delete, Node *remplacement_node);
+void from_greater_node_to_smallest_hash(Node *linked_list_first_element, Node *node_to_delete);
+void from_lesser_node_to_biggest_hash(Node *linked_list_first_element, Node *node_to_delete);
 
-void parent_node_case(Node *node_to_delete)
+void replacement_of_node(Node *linked_list_first_element, Node *node_to_delete, Node *remplacement_node);
+
+//void parent_node_case(Node *node_to_delete)
+void parent_node_case(Node *linked_list_first_element, Node *node_to_delete)
 {
-    printf("Node parent à suprimer %p", (void *)node_to_delete);
+    printf("Node parent à suprimer %p\n", (void *)node_to_delete);
 
     /**/
     // The node to replace the node to delete must be the next higher one
     if (node_to_delete->node_lesser_hash == NULL)
-    // if the node to delete, does not 
-    // have a lesser child that mean the next higher hash is the one 
-    // on the greater branche or the lesser one 
-
-    // if the node on the greater branch, of the node to delete
-    // have a lesser child that mean the next higher hash is the
-    // one with the lesser hash on the lesser path
+    // if the node to delete, does not have a lesser 
+    // child that mean the next higher hash is the one 
+    // on the greater branche with the lesser hash
     {
-        from_greater_to_lesser_path(node_to_delete);
+        // we will look for the smallest hash 
+        // from the greater child
+        from_greater_node_to_smallest_hash(linked_list_first_element, node_to_delete);
     }
     else if (node_to_delete->node_greater_hash == NULL)
-    // if the node to delete, does not 
-    // have a greater child that mean the next higher hash is the one 
-    // on the greater branche or the lesser one 
-
-    // if the node on the greater branch, of the node to delete
-    // have a lesser child that mean the next higher hash is the
-    // one with the lesser hash on the lesser path
+    // if the node to delete, does not have a greater 
+    // child that mean the next higher hash is the one 
+    // on the lesser branche with the greater hash 
     {
-        from_lesser_to_greater_path(node_to_delete);
+        // we will look for the biggest hash 
+        // from the lesser child
+        from_lesser_node_to_biggest_hash(linked_list_first_element, node_to_delete);
     }
 }
 
 
-// --------------------------------------- from_greater_to_lesser_path --------------------------------------------------------------------
+// --------------------------------------- from_greater_node_to_smallest_hash --------------------------------------------------------------------
 
 
-void from_greater_to_lesser_path(Node *node_to_delete) {
+//void from_greater_node_to_smallest_hash(Node *node_to_delete) {
+void from_greater_node_to_smallest_hash(Node *linked_list_first_element, Node *node_to_delete) {
         
     Node *linked_list_iterator_node = node_to_delete->node_greater_hash;
 
     for (int jump_thought_nodes = 0; jump_thought_nodes <= NUM_MAX_JUMPS; ++jump_thought_nodes)
     // we will iterate through the nodes by the lesser path because 
-    // the less hash value in this path is the next greater hash after 
+    // the smallest hash value in this path is the next greater hash after 
     // the hash to delete (because we are starting by its greater branche)
     {
         if (linked_list_iterator_node->node_lesser_hash == NULL)
@@ -147,7 +154,7 @@ void from_greater_to_lesser_path(Node *node_to_delete) {
         // is considered to be the node of remplacement
         {
             Node *remplacement_node = linked_list_iterator_node;
-            remplacement_of_node(node_to_delete, remplacement_node);
+            replacement_of_node(linked_list_first_element, node_to_delete, remplacement_node);
             break;
         }
         else if (linked_list_iterator_node->node_lesser_hash != NULL)
@@ -167,29 +174,30 @@ void from_greater_to_lesser_path(Node *node_to_delete) {
 }
 
 
-// --------------------------------------- from_lesser_to_greater_path --------------------------------------------------------------------
+// --------------------------------------- from_lesser_node_to_biggest_hash --------------------------------------------------------------------
 
 
-void from_lesser_to_greater_path(Node *node_to_delete) {
-        
+//void from_lesser_node_to_biggest_hash(Node *node_to_delete) {
+void from_lesser_node_to_biggest_hash(Node *linked_list_first_element, Node *node_to_delete) {
+      
     Node *linked_list_iterator_node = node_to_delete->node_lesser_hash;
 
     for (int jump_thought_nodes = 0; jump_thought_nodes <= NUM_MAX_JUMPS; ++jump_thought_nodes)
-    // we will iterate through the nodes by the lesser path because 
-    // the less hash value in this path is the next greater hash after 
-    // the hash to delete (because we are starting by its greater branche)
+    // we will iterate through the nodes by the greater path because 
+    // the biggest hash value in this path is the next greater hash after
+    // the hash to delete (because we are starting by its lesser branche)
     {
         if (linked_list_iterator_node->node_greater_hash == NULL)
-        // if there are no lesser hash, the iterator node 
+        // if there are no greater hash, the iterator node 
         // is considered to be the node of remplacement
         {
             Node *remplacement_node = linked_list_iterator_node;
-            remplacement_of_node(node_to_delete, remplacement_node);
+            replacement_of_node(linked_list_first_element, node_to_delete, remplacement_node);
             break;
         }
         else if (linked_list_iterator_node->node_greater_hash != NULL)
-        // if there are a lesser hash, the iterator node 
-        // is considered to have a hash value greater than 
+        // if there are a greater hash, the iterator node 
+        // is considered to have a hash value smaller than 
         // another node, this is not the next greater node 
         // of the node to delete, the iteration continu
         {
@@ -204,18 +212,20 @@ void from_lesser_to_greater_path(Node *node_to_delete) {
 }
 
 
-// --------------------------------------- remplacement_of_node --------------------------------------------------------------------
+// --------------------------------------- replacement_of_node --------------------------------------------------------------------
 
 
-void remplacement_of_node(Node *node_to_delete, Node *remplacement_node) {
+//void replacement_of_node(Node *node_to_delete, Node *remplacement_node) {
+void replacement_of_node(Node *linked_list_first_element, Node *node_to_delete, Node *remplacement_node) {
 
     // the node who will replace the node to delete will inherit his pointe
+
     if ( (node_to_delete->node_lesser_hash != NULL) && 
          (node_to_delete->node_lesser_hash != remplacement_node) )
     // if the node to delete have a lesser child
     // who is not the node of replacement 
     // (to prevent the node to delete to give a pointer who 
-    // point to the greater child to itself)
+    // point to the lesser child to itself)
     {
         remplacement_node->node_lesser_hash = node_to_delete->node_lesser_hash;
         // the sister becam his lesser child
@@ -245,14 +255,17 @@ void remplacement_of_node(Node *node_to_delete, Node *remplacement_node) {
     // if the node to delete is not the root node
     {
         remplacement_node->parent_node = node_to_delete->parent_node;
-        // the remplacement node recognize the parent of the node 
+        // the remplacement node recognize the parent of the node
         // to delete as its parent
         node_to_delete->parent_node->node_greater_hash = remplacement_node;
-        // the parent of the node to delete adopt its greater child    
+        // the parent of the node to delete adopt its greater child
         
         node_to_delete->parent_node = NULL;
     }
-    //if else (node_to_delete->parent_node == NULL)
+    /**/
+    else if (node_to_delete->parent_node == NULL)
     // if the node to delete is the root node
-    //{}
+    {
+        linked_list_first_element = remplacement_node;
+    }
 }
