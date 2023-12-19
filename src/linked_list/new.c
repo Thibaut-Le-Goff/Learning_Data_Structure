@@ -11,7 +11,6 @@ Node *new_linked_list(int *value)
     first_node->parent_node = NULL;
 
     first_node->value = *value;
-
     first_node->hash_value = *value;
 
     return first_node;
