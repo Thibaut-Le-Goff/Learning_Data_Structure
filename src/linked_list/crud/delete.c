@@ -52,12 +52,14 @@ void delete_node(Node **linked_list_first_element, int hash_node_to_delete) {
                 parent_node_case(linked_list_first_element, linked_list_iterator_node);
             }
 
+            /*
             if (linked_list_iterator_node->parent_node != NULL)
             // if the node to delette is not the root node
             {
                 free(linked_list_iterator_node);
             }
-
+            */
+            
             //free(linked_list_iterator_node);
             break;
         }
@@ -97,6 +99,8 @@ void leaf_node_case(Node *node_to_delete)
         // the node to delete is disconnected from its parent
         // from the side of the children
     }
+
+    free(node_to_delete);
 }
 
 
@@ -117,17 +121,24 @@ void replacement_of_node(Node **linked_list_first_element, Node *node_to_delete,
 //void parent_node_case(Node *node_to_delete)
 void parent_node_case(Node **linked_list_first_element, Node *node_to_delete)
 {
-    printf("Node parent à suprimer %p\n", (void *)node_to_delete);
+    printf("\n\nNode parent à suprimer %p\n", (void *)node_to_delete);
 
     /**/
     // The node to replace the node to delete must be the next higher one
-    if (node_to_delete->node_lesser_hash == NULL)
+    if ( (node_to_delete->node_lesser_hash == NULL) ||
     // if the node to delete, does not have a lesser 
     // child that mean the next higher hash is the one 
     // on the greater branche with the lesser hash
+         (node_to_delete->node_lesser_hash != NULL &&
+         node_to_delete->node_greater_hash != NULL) )
+    // or if the node to delete has a greater and a esser child 
     {
         // we will look for the smallest hash 
         // from the greater child
+        printf("node_to_delete : %p\n", (void*)node_to_delete);
+        printf("node_to_delete->parent_node : %p\n", (void*)node_to_delete->parent_node);
+        printf("from_greater_node_to_smallest_hash\n");
+        
         from_greater_node_to_smallest_hash(linked_list_first_element, node_to_delete);
     }
     else if (node_to_delete->node_greater_hash == NULL)
@@ -136,9 +147,17 @@ void parent_node_case(Node **linked_list_first_element, Node *node_to_delete)
     // on the lesser branche with the greater hash 
     {
         // we will look for the biggest hash 
-        // from the lesser child
+        // from the lesser child*
+        printf("from_lesser_node_to_biggest_hash\n");
+        printf("node_to_delete : %p\n", (void*)node_to_delete);
+        printf("node_to_delete->parent_node : %p\n", (void*)node_to_delete->parent_node);
+
         from_lesser_node_to_biggest_hash(linked_list_first_element, node_to_delete);
     }
+
+    //printf("aucun des deux\n");
+    //print_node(*linked_list_first_element, node_to_delete->hash_value);
+    //printf("\n");
 }
 
 
@@ -256,28 +275,65 @@ void replacement_of_node(Node **linked_list_first_element, Node *node_to_delete,
         node_to_delete->node_greater_hash = NULL;
     }
 
+    printf("\ndurant le remplacement :\n");
+    printf("replacement_node : %p node_to_delete : %p\n", (void*)replacement_node, (void*)node_to_delete);
+    printf("replacement_node->parent_node : %p node_to_delete->parent_node : %p\n", (void*)replacement_node->parent_node, (void*)node_to_delete->parent_node);
+
     if (node_to_delete->parent_node != NULL)
     // if the node to delete has a parent
     // if the node to delete is not the root node
     {
+        printf("replacement_node : %p node_to_delete : %p\n", (void*)replacement_node, (void*)node_to_delete);
+        printf("replacement_node->parent_node : %p node_to_delete->parent_node : %p\n", (void*)replacement_node->parent_node, (void*)node_to_delete->parent_node);
+
         replacement_node->parent_node = node_to_delete->parent_node;
-        // the remplacement node recognize the parent of the node
+        // the replacement node recognize the parent of the node
         // to delete as its parent
-        node_to_delete->parent_node->node_greater_hash = replacement_node;
-        // the parent of the node to delete adopt its greater child
+
+        // the parent of the node to delete must recognize
+        // the node to delete as its child
+        if (node_to_delete->parent_node->node_greater_hash == node_to_delete)
+        // if the node to delete was the greater child 
+        // of its parent
+        {
+            node_to_delete->parent_node->node_greater_hash = replacement_node;
+            // the parent of the node to delete adopt 
+            // the replacement node as its greater child            
+        }
+        else if (node_to_delete->parent_node->node_lesser_hash == node_to_delete)
+        // if the node to delete was the lesser child 
+        // of its parent
+        {
+            node_to_delete->parent_node->node_lesser_hash = replacement_node;
+            // the parent of the node to delete adopt 
+            // the replacement node as its lesser child            
+        }
+
         
         node_to_delete->parent_node = NULL;
+        
+        free(node_to_delete);
     }
     /**/
     else if (node_to_delete->parent_node == NULL)
     // if the node to delete is the root node
     {
-        printf("linked_list_first_element : %p\n", (void*)linked_list_first_element);
+        printf("\nlinked_list_first_element : %p\n", (void*)*linked_list_first_element);
+        print_node(*linked_list_first_element, (*linked_list_first_element)->hash_value);
+
+        printf("est relplacer par :\n");
+        //print_node(*linked_list_first_element, replacement_node->hash_value);
+
+        replacement_node->parent_node = NULL;
 
         *linked_list_first_element = replacement_node;
-        free(replacement_node);
+        //free(replacement_node);
 
-        printf("linked_list_first_element : %p\n", (void*)linked_list_first_element);
+        //(*linked_list_first_element)->parent_node = NULL;
+        //free(node_to_delete);
+
+        printf("linked_list_first_element : %p\n", (void*)*linked_list_first_element);
+        print_node(*linked_list_first_element, (*linked_list_first_element)->hash_value);
     }
 }
 
