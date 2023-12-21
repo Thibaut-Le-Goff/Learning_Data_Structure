@@ -48,14 +48,21 @@ int main() {
     printf("\ndeletion of the nodes :\n");
     
     printf("\ndeletion of the First node :\n");
+    print_node_recursion(first_node, 50);
+
+    printf("\nthe third node will take the place :\n");
+    print_node_recursion(first_node, 55);
+
     delete_node(&first_node, 50);
 
-    //printf("\nThe thrid node changed of parent :\n");
-    //print_node_recursion(first_node, 55);
+    printf("\nThe new first node :\n");
+    print_node_recursion(first_node, 55);
 
+    /*
     printf("\n\ndeletion of the seconde node :\n");
     print_node(first_node, 60);
     delete_node(&first_node, 60);
+    */
 
     printf("\n\ndeletion of the third node :\n");
     print_node(first_node, 55);
