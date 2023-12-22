@@ -60,7 +60,7 @@ void delete_node(Node **linked_list_first_element, int hash_node_to_delete) {
             }
             */
             
-            //free(linked_list_iterator_node);
+            free(linked_list_iterator_node);
             break;
         }
 
@@ -100,7 +100,7 @@ void leaf_node_case(Node *node_to_delete)
         // from the side of the children
     }
 
-    free(node_to_delete);
+    //free(node_to_delete);
 }
 
 
@@ -358,7 +358,7 @@ void replacement_of_node(Node **linked_list_first_element, Node *node_to_delete,
         
         node_to_delete->parent_node = NULL;
         
-        free(node_to_delete);
+        //free(node_to_delete);
     }
     /**/
     else if (node_to_delete->parent_node == NULL)
@@ -376,7 +376,7 @@ void replacement_of_node(Node **linked_list_first_element, Node *node_to_delete,
         //free(replacement_node);
 
         //(*linked_list_first_element)->parent_node = NULL;
-        free(node_to_delete);
+        //free(node_to_delete);
 
         //printf("linked_list_first_element : %p\n", (void*)*linked_list_first_element);
         //print_node(*linked_list_first_element, (*linked_list_first_element)->hash_value);
