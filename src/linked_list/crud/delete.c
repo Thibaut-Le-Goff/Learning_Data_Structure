@@ -248,26 +248,33 @@ void from_lesser_node_to_biggest_hash(Node **linked_list_first_element, Node *no
 void replacement_of_node(Node **linked_list_first_element, Node *node_to_delete, Node *replacement_node) {
 
     /**/
-    if (replacement_node->node_greater_hash != NULL)
+    if (replacement_node->parent_node->node_lesser_hash == replacement_node)
     // if the replacement node has a greater child
     {
-        replacement_node->node_greater_hash->parent_node = replacement_node->parent_node;
-        // the greater child of the replacement node 
-        // accept the parent of the replacement node 
-        // as its own
+        if (replacement_node->node_greater_hash != NULL)
+        {
+            replacement_node->node_greater_hash->parent_node = replacement_node->parent_node;
+            // the greater child of the replacement node 
+            // accept the parent of the replacement node 
+            // as its own            
+        }
+
 
         replacement_node->parent_node->node_lesser_hash = replacement_node->node_greater_hash;
         // the parent of the replacement node recognize 
         // the greater child of the replacement node 
         // as its lesser child
     }
-    else if (replacement_node->node_lesser_hash != NULL)
+    else if (replacement_node->parent_node->node_greater_hash == replacement_node)
     // if the replacement node has a lesser child
     {
-        replacement_node->node_lesser_hash->parent_node = replacement_node->parent_node;
-        // the lesser child of the replacement node 
-        // accept the parent of the replacement node 
-        // as its own
+        if (replacement_node->node_lesser_hash != NULL)
+        {
+            replacement_node->node_lesser_hash->parent_node = replacement_node->parent_node;
+            // the lesser child of the replacement node 
+            // accept the parent of the replacement node 
+            // as its own
+        }
 
         replacement_node->parent_node->node_greater_hash = replacement_node->node_lesser_hash;
         // the parent of the replacement node recognize 
@@ -276,6 +283,9 @@ void replacement_of_node(Node **linked_list_first_element, Node *node_to_delete,
     }
 
     // the node who will replace the node to delete will inherit his pointe
+    replacement_node->node_lesser_hash = node_to_delete->node_lesser_hash;
+    // the node of replacement adopte the lesser
+    // child of the node to delete
 
     if ( (node_to_delete->node_lesser_hash != NULL) && 
          (node_to_delete->node_lesser_hash != replacement_node) )
@@ -284,15 +294,16 @@ void replacement_of_node(Node **linked_list_first_element, Node *node_to_delete,
     // (to prevent the node to delete to give a pointer who 
     // point to the lesser child to itself)
     {
-        replacement_node->node_lesser_hash = node_to_delete->node_lesser_hash;
-        // the node of replacement adopte the lesser 
-        // child of the node to delete
         node_to_delete->node_lesser_hash->parent_node = replacement_node;
         // The lesser child of the node to delete
         // accept the replacement node as its parent
 
         node_to_delete->node_lesser_hash = NULL;
     }
+
+    replacement_node->node_greater_hash = node_to_delete->node_greater_hash;
+    // the node of replacement adopte the greater 
+    // child of the node to delete
 
     if ( (node_to_delete->node_greater_hash != NULL) && 
          (node_to_delete->node_greater_hash != replacement_node) )
@@ -301,9 +312,6 @@ void replacement_of_node(Node **linked_list_first_element, Node *node_to_delete,
     // (to prevent the node to delete to give a pointer who 
     // point to the greater child to itself)
     {
-        replacement_node->node_greater_hash = node_to_delete->node_greater_hash;
-        // the node of replacement adopte the greater 
-        // child of the node to delete
         node_to_delete->node_greater_hash->parent_node = replacement_node;
         // The greater child of the node to delete
         // accept the replacement node as its parent
@@ -317,16 +325,16 @@ void replacement_of_node(Node **linked_list_first_element, Node *node_to_delete,
     printf("replacement_node->parent_node : %p node_to_delete->parent_node : %p\n", (void*)replacement_node->parent_node, (void*)node_to_delete->parent_node);
     */
 
+    replacement_node->parent_node = node_to_delete->parent_node;
+    // the replacement node recognize the parent of the node
+    // to delete as its parent
+
     if (node_to_delete->parent_node != NULL)
     // if the node to delete has a parent
     // if the node to delete is not the root node
     {
         //printf("replacement_node : %p node_to_delete : %p\n", (void*)replacement_node, (void*)node_to_delete);
         //printf("replacement_node->parent_node : %p node_to_delete->parent_node : %p\n", (void*)replacement_node->parent_node, (void*)node_to_delete->parent_node);
-
-        replacement_node->parent_node = node_to_delete->parent_node;
-        // the replacement node recognize the parent of the node
-        // to delete as its parent
 
         // the parent of the node to delete must recognize
         // the node to delete as its child
@@ -362,13 +370,13 @@ void replacement_of_node(Node **linked_list_first_element, Node *node_to_delete,
         //printf("est relplacer par :\n");
         //print_node(*linked_list_first_element, replacement_node->hash_value);
 
-        replacement_node->parent_node = NULL;
+        //replacement_node->parent_node = NULL;
 
         *linked_list_first_element = replacement_node;
         //free(replacement_node);
 
         //(*linked_list_first_element)->parent_node = NULL;
-        //free(node_to_delete);
+        free(node_to_delete);
 
         //printf("linked_list_first_element : %p\n", (void*)*linked_list_first_element);
         //print_node(*linked_list_first_element, (*linked_list_first_element)->hash_value);
