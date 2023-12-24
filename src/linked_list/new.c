@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "../../include/linked_list/new.h"
 
-Node *new_linked_list(int *value) 
+Node *new_linked_list(float *value) 
 {
     Node *first_node = malloc(sizeof(Node));
 

@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include "../../../include/linked_list/new.h"
 
-void create_node(Node *linked_list_first_element, int *value) {
+void create_node(Node *linked_list_first_element, float *value) {
 
     // creation of the new node
     Node *new_node = malloc(sizeof(Node));
@@ -92,7 +92,7 @@ void create_node(Node *linked_list_first_element, int *value) {
 
 void find_place_node(Node *linked_list_iterator_node, Node *new_node);
 
-void create_node_recursion(Node *linked_list_first_element, int *value) {
+void create_node_recursion(Node *linked_list_first_element, float *value) {
 
     // creation of the new node
     Node *new_node = malloc(sizeof(Node));

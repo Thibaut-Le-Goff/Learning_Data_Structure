@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "../../../include/linked_list/new.h"
 
-void print_node(Node *linked_list_first_element, int hash_node_to_print) {
+void print_node(Node *linked_list_first_element, float hash_node_to_print) {
 
     int num_max_jumps = 10;
     // 
@@ -40,10 +40,14 @@ void print_node(Node *linked_list_first_element, int hash_node_to_print) {
                 printf("addr of node with a lesser hash : %p\n", (void *)linked_list_iterator_node->node_lesser_hash);
             }
 
-            printf("Value stored : %d\n", linked_list_iterator_node->value);
-            printf("Hash : %d\n", linked_list_iterator_node->hash_value);
+            printf("Value stored : %f\n", linked_list_iterator_node->value);
+            printf("Hash : %f\n", linked_list_iterator_node->hash_value);
 
             break;
+        }
+        else
+        {
+            fprintf(stderr, "Error : The node wanted does not have a hash value.\n");
         }
 
         if (jump_thought_nodes == num_max_jumps) {
@@ -54,7 +58,7 @@ void print_node(Node *linked_list_first_element, int hash_node_to_print) {
 
 // ----------------------- Recursion version ------------------------
 
-void print_node_recursion(Node* linked_list_iterator_node, int hash_node_to_print) {
+void print_node_recursion(Node* linked_list_iterator_node, float hash_node_to_print) {
 
     if (linked_list_iterator_node == NULL) {
         fprintf(stderr, "Error : The node wanted was not found.\n");
@@ -89,7 +93,7 @@ void print_node_recursion(Node* linked_list_iterator_node, int hash_node_to_prin
             printf("addr of node with a lesser hash : %p\n", (void *)linked_list_iterator_node->node_lesser_hash);
         }
 
-        printf("Value stored : %d\n", linked_list_iterator_node->value);
-        printf("Hash : %d\n", linked_list_iterator_node->hash_value);
+        printf("Value stored : %f\n", linked_list_iterator_node->value);
+        printf("Hash : %f\n", linked_list_iterator_node->hash_value);
     }
 }

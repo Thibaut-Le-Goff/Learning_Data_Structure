@@ -28,11 +28,11 @@
         // who passed throught the nodes
         // int counter_node_pass_throught;
 
-        int value;
+        float value;
 
-        int hash_value;
+        float hash_value;
     };
 
-    Node *new_linked_list(int *value);
+    Node *new_linked_list(float *value);
 
 #endif
