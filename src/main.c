@@ -10,7 +10,7 @@
 
 #include "../include/hash/hash.h"
 
-#define NUM_NODES 5
+#define NUM_NODES 10
 
 int main() {
 
@@ -20,6 +20,9 @@ int main() {
     srand(time(NULL));
     float rand_hash_root_node_to_create = (float)rand() / RAND_MAX * (NUM_NODES);
     Node *first_node_linked_list = new_linked_list(&rand_hash_root_node_to_create);
+
+    printf("\n\nThe root node has been created :\n");
+    print_node(first_node_linked_list, rand_hash_root_node_to_create);
 
     list_hash_node_created[0] = rand_hash_root_node_to_create;
 
@@ -45,7 +48,7 @@ int main() {
         // create a random value for the deletion of the node
         int rand_index_node_to_delete = rand() % NUM_NODES;  
 
-        printf("\nindex node to delete : %d\n", rand_index_node_to_delete);
+        printf("\n\nindex node to delete : %d\n", rand_index_node_to_delete);
 
         if (list_hash_node_created[rand_index_node_to_delete] != -1)
         // if the node was not already deleted
