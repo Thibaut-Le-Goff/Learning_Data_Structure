@@ -54,7 +54,7 @@ void delete_node(Node **linked_list_first_element, float hash_node_to_delete) {
             }
             else
             {
-                printf("autre");
+                printf("racine");
             }
 
             printf("\n");
@@ -247,15 +247,11 @@ void replacement_of_node(Node **linked_list_first_element, Node *node_to_delete,
     a gap who need to be filed by redirecting some
     pointers 
     */
-    
-    // path redirection from replacement node replacment
-    /*
-    if (replacement_node->parent_node != node_to_delete)
-    {
-        path_redirection(replacement_node);
-    }*/
 
-    //path_redirection(node_to_delete, replacement_node);
+    printf("\n\nLe node de remplacement avant la redirection du chemin et l'héritage:\n");
+    print_node(*linked_list_first_element, replacement_node->hash_value);
+
+
     path_redirection(replacement_node);
 
     /*
@@ -266,6 +262,10 @@ void replacement_of_node(Node **linked_list_first_element, Node *node_to_delete,
     lesser_child_inheritance(node_to_delete, replacement_node);
     greater_child_inheritance(node_to_delete, replacement_node);
     parent_inheritance(linked_list_first_element, node_to_delete, replacement_node);
+
+
+    printf("\nLe node de remplacement après la redirection du chemin et l'héritage:\n");
+    print_node(*linked_list_first_element, replacement_node->hash_value);
 }
 
 
@@ -304,29 +304,8 @@ void path_redirection(Node *replacement_node) {
             // as its own
         }
         
-        /*
-        if (replacement_node->parent_node != node_to_delete)
-        {
-            replacement_node->parent_node->node_lesser_hash = replacement_node->node_greater_hash;
-        }*/
-        if (replacement_node->parent_node->node_lesser_hash != NULL)
-        {
-            replacement_node->parent_node->node_lesser_hash = replacement_node->node_lesser_hash;
-            //replacement_node->node_lesser_hash->parent_node = replacement_node->parent_node;
-        }
-        else if (replacement_node->parent_node->node_lesser_hash != NULL)
-        {
-            replacement_node->parent_node->node_lesser_hash = replacement_node->node_greater_hash; 
-            //replacement_node->node_greater_hash->parent_node = replacement_node->parent_node;      
-        }
-        
-        //replacement_node->parent_node->node_lesser_hash = replacement_node->node_greater_hash;
-        // the parent of the replacement node 
-        // accept its lesser child as its greater
-        //replacement_node->node_greater_hash->parent_node = replacement_node->parent_node;
-        // the greater child of the replacement node 
-        // accept the parent of the replacement node 
-        // as its own
+        replacement_node->parent_node->node_lesser_hash = replacement_node->node_greater_hash;
+
     }
     else if (replacement_node->parent_node->node_greater_hash == replacement_node)
     // if the node of replacement is the greater child of its parent
@@ -347,29 +326,25 @@ void path_redirection(Node *replacement_node) {
             // accept the parent of the replacement node 
             // as its own
         }
-        /*
-        if (replacement_node->parent_node != node_to_delete)
-        {
-            replacement_node->parent_node->node_greater_hash = replacement_node->node_lesser_hash;
-        }*/
-        if (replacement_node->parent_node->node_greater_hash != NULL)
-        {
-            replacement_node->parent_node->node_greater_hash = replacement_node->node_greater_hash;
-            //replacement_node->node_greater_hash->parent_node = replacement_node->parent_node;
-        }
-        else if (replacement_node->parent_node->node_greater_hash != NULL)
-        {
-            replacement_node->parent_node->node_greater_hash = replacement_node->node_lesser_hash;
-            //replacement_node->node_lesser_hash->parent_node = replacement_node->parent_node;
-        }
 
-        //replacement_node->parent_node->node_greater_hash = replacement_node->node_lesser_hash;
-        // the parent of the replacement node 
-        // accept its greater child as its lesser
-        //replacement_node->node_lesser_hash->parent_node = replacement_node->parent_node;
-        // the lesser child of the replacement node 
-        // accept the parent of the replacement node 
-        // as its own
+        replacement_node->parent_node->node_greater_hash = replacement_node->node_lesser_hash;
+
+        /**/
+        if (replacement_node->node_greater_hash != NULL)
+        // if the replacement node has a greater child we need to give it
+        // to another node because it will be disconnected from it
+        // the child will be adopted by its ancestor (the parent of its parent)
+        {
+            //replacement_node->parent_node->node_lesser_hash = replacement_node->node_greater_hash;
+            // the parent of the replacement node 
+            // accept its lesser child as its greater
+            replacement_node->node_greater_hash->parent_node = replacement_node->parent_node;
+            // the greater child of the replacement node 
+            // accept the parent of the replacement node 
+            // as its own
+        }
+        
+        replacement_node->parent_node->node_lesser_hash = replacement_node->node_greater_hash;
     }
 }
 
