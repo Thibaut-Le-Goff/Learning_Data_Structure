@@ -3,6 +3,8 @@
 #include <stdlib.h>
 #include "../../../include/linked_list/new.h"
 
+#define NUM_MAX_JUMPS 100
+
 void create_node(Node *linked_list_first_element, float *value) {
 
     // creation of the new node
@@ -16,12 +18,10 @@ void create_node(Node *linked_list_first_element, float *value) {
 
     new_node->hash_value = *value;
 
-    int num_max_jumps = 10;
-
     // find the place to put the new node
     Node *linked_list_iterator_node = linked_list_first_element;
 
-    for (int jump_thought_nodes = 0; jump_thought_nodes <= num_max_jumps; ++jump_thought_nodes)
+    for (int jump_thought_nodes = 0; jump_thought_nodes <= NUM_MAX_JUMPS - 1; ++jump_thought_nodes)
     {
         if (new_node->hash_value > linked_list_iterator_node->hash_value)
         // if the node created has a hash value greater than the iterator node 
@@ -80,8 +80,8 @@ void create_node(Node *linked_list_first_element, float *value) {
             break;
         }
 
-        if (jump_thought_nodes == num_max_jumps) {
-            fprintf(stderr, "Error : The node created was not able to find a place to fit in %d jumps.", num_max_jumps + 1);
+        if (jump_thought_nodes == NUM_MAX_JUMPS) {
+            fprintf(stderr, "Error : The node created was not able to find a place to fit in %d jumps.", NUM_MAX_JUMPS);
             free(new_node);
         }
     }

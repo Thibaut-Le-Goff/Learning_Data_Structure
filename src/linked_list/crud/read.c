@@ -2,13 +2,14 @@
 #include <stdlib.h>
 #include "../../../include/linked_list/new.h"
 
+#define NUM_MAX_JUMPS 100
+
 void print_node(Node *linked_list_first_element, float hash_node_to_print) {
 
-    int num_max_jumps = 10;
     // 
     Node *linked_list_iterator_node = linked_list_first_element;
 
-    for (int jump_thought_nodes = 0; jump_thought_nodes <= num_max_jumps; ++jump_thought_nodes)
+    for (int jump_thought_nodes = 0; jump_thought_nodes <= NUM_MAX_JUMPS - 1; ++jump_thought_nodes)
     {
         if (hash_node_to_print > linked_list_iterator_node->hash_value)
         // if the node wanted has a hash value greater than the iterator node 
@@ -50,8 +51,8 @@ void print_node(Node *linked_list_first_element, float hash_node_to_print) {
             fprintf(stderr, "Error : The node wanted does not have a hash value.\n");
         }
 
-        if (jump_thought_nodes == num_max_jumps) {
-            fprintf(stderr, "Error : The node wanted was not found in %d jumps.\n", num_max_jumps + 1);
+        if (jump_thought_nodes == NUM_MAX_JUMPS) {
+            fprintf(stderr, "Error : The node wanted was not found in %d jumps.\n", NUM_MAX_JUMPS);
         }
     }
 }

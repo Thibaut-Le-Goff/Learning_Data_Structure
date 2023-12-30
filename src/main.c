@@ -10,7 +10,7 @@
 
 #include "../include/hash/hash.h"
 
-#define NUM_NODES 10
+#define NUM_NODES 2000
 
 int main() {
 

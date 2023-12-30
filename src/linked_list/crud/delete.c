@@ -3,7 +3,7 @@
 #include "../../../include/linked_list/new.h"
 #include "../../../include/linked_list/crud/read.h"
 
-#define NUM_MAX_JUMPS 10
+#define NUM_MAX_JUMPS 100
 
 
 void leaf_node_case(Node *node_to_delete);
@@ -14,7 +14,7 @@ void delete_node(Node **linked_list_first_element, float hash_node_to_delete) {
 
     Node *linked_list_iterator_node = *linked_list_first_element;
 
-    for (int jump_thought_nodes = 0; jump_thought_nodes <= NUM_MAX_JUMPS; ++jump_thought_nodes)
+    for (int jump_thought_nodes = 0; jump_thought_nodes <= NUM_MAX_JUMPS - 1; ++jump_thought_nodes)
     {
         if (hash_node_to_delete > linked_list_iterator_node->hash_value)
         // if the node wanted has a hash value greater than the iterator node 
@@ -251,10 +251,14 @@ void replacement_of_node(Node **linked_list_first_element, Node *node_to_delete,
     printf("\n\nLe node de remplacement avant la redirection du chemin et l'héritage:\n");
     print_node(*linked_list_first_element, replacement_node->hash_value);
 
-
     path_redirection(replacement_node);
 
-    /*
+    /*if (replacement_node->parent_node != node_to_delete)
+    {
+        path_redirection(replacement_node);
+    }
+
+    
     The replacement node will inherit of the pointer 
     of the node to delete and its pointer are set to NULL
     */
@@ -264,8 +268,15 @@ void replacement_of_node(Node **linked_list_first_element, Node *node_to_delete,
     parent_inheritance(linked_list_first_element, node_to_delete, replacement_node);
 
 
+    //printf("\nLe node de remplacement après l'héritage :\n");
     printf("\nLe node de remplacement après la redirection du chemin et l'héritage:\n");
     print_node(*linked_list_first_element, replacement_node->hash_value);
+
+    /*
+    path_redirection(replacement_node);
+
+    printf("\n\nLe node de remplacement avant la redirection du chemin :\n");
+    print_node(*linked_list_first_element, replacement_node->hash_value);*/
 }
 
 
@@ -329,7 +340,7 @@ void path_redirection(Node *replacement_node) {
 
         replacement_node->parent_node->node_greater_hash = replacement_node->node_lesser_hash;
 
-        /**/
+        /*
         if (replacement_node->node_greater_hash != NULL)
         // if the replacement node has a greater child we need to give it
         // to another node because it will be disconnected from it
@@ -344,7 +355,7 @@ void path_redirection(Node *replacement_node) {
             // as its own
         }
         
-        replacement_node->parent_node->node_lesser_hash = replacement_node->node_greater_hash;
+        replacement_node->parent_node->node_lesser_hash = replacement_node->node_greater_hash;*/
     }
 }
 
@@ -355,12 +366,13 @@ void path_redirection(Node *replacement_node) {
 void lesser_child_inheritance(Node *node_to_delete, Node *replacement_node) {
 
     // the node who will replace the node to delete will inherit his pointe
-    replacement_node->node_lesser_hash = node_to_delete->node_lesser_hash;
+    //replacement_node->node_lesser_hash = node_to_delete->node_lesser_hash;
     // the node of replacement adopte the lesser
     // child of the node to delete
 
     if ( (node_to_delete->node_lesser_hash != NULL) && 
          (node_to_delete->node_lesser_hash != replacement_node) )
+    //if (node_to_delete->node_lesser_hash != replacement_node)
     // if the node to delete have a lesser child
     // who is not the node of replacement 
     // (to prevent the node to delete to give a pointer who 
@@ -369,6 +381,8 @@ void lesser_child_inheritance(Node *node_to_delete, Node *replacement_node) {
         node_to_delete->node_lesser_hash->parent_node = replacement_node;
         // The lesser child of the node to delete
         // accept the replacement node as its parent
+
+        replacement_node->node_lesser_hash = node_to_delete->node_lesser_hash;//
 
         node_to_delete->node_lesser_hash = NULL;
     }
@@ -380,12 +394,13 @@ void lesser_child_inheritance(Node *node_to_delete, Node *replacement_node) {
 
 void greater_child_inheritance(Node *node_to_delete, Node *replacement_node) {
 
-    replacement_node->node_greater_hash = node_to_delete->node_greater_hash;
+    //replacement_node->node_greater_hash = node_to_delete->node_greater_hash;
     // the node of replacement adopte the greater 
     // child of the node to delete
 
     if ( (node_to_delete->node_greater_hash != NULL) && 
          (node_to_delete->node_greater_hash != replacement_node) )
+    //if (node_to_delete->node_greater_hash != replacement_node)
     // if the node to delete has a greater child 
     // who is not the node of replacement 
     // (to prevent the node to delete to give a pointer who 
@@ -394,6 +409,8 @@ void greater_child_inheritance(Node *node_to_delete, Node *replacement_node) {
         node_to_delete->node_greater_hash->parent_node = replacement_node;
         // The greater child of the node to delete
         // accept the replacement node as its parent
+
+        replacement_node->node_greater_hash = node_to_delete->node_greater_hash;//
 
         node_to_delete->node_greater_hash = NULL;
     }
@@ -421,7 +438,7 @@ void parent_inheritance(Node **linked_list_first_element, Node *node_to_delete, 
         {
             node_to_delete->parent_node->node_greater_hash = replacement_node;
             // the parent of the node to delete adopt 
-            // the replacement node as its greater child            
+            // the replacement node as its greater child
         }
         else if (node_to_delete->parent_node->node_lesser_hash == node_to_delete)
         // if the node to delete was the lesser child 
@@ -431,7 +448,11 @@ void parent_inheritance(Node **linked_list_first_element, Node *node_to_delete, 
             // the parent of the node to delete adopt 
             // the replacement node as its lesser child            
         }
-        
+                    
+        //replacement_node->parent_node = node_to_delete->parent_node
+        // the node of replacement accept the parent of the node to 
+        // delete as its own
+
         node_to_delete->parent_node = NULL;
     }
     else if (node_to_delete->parent_node == NULL)
