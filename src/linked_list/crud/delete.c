@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+
 #include "../../../include/linked_list/new.h"
 #include "../../../include/linked_list/crud/read.h"
 
@@ -41,7 +42,7 @@ void delete_node(Node **linked_list_first_element, float hash_node_to_delete) {
             // if the node to delete is a leaf node :
             // it has no child but has a parent
             {
-                printf("enfant");
+                //printf("enfant");
                 leaf_node_case(linked_list_iterator_node);
             }
             else if ( (linked_list_iterator_node->node_greater_hash != NULL) || 
@@ -49,15 +50,16 @@ void delete_node(Node **linked_list_first_element, float hash_node_to_delete) {
             // if the node to delete is a parent node :
             // it has at least one child
             {
-                printf("parent");
+                //printf("parent");
                 parent_node_case(linked_list_first_element, linked_list_iterator_node);
             }
+            /*
             else
             {
                 printf("racine");
             }
 
-            printf("\n");
+            printf("\n");*/
 
             /*
             there is a third case when the node does not 
@@ -248,8 +250,8 @@ void replacement_of_node(Node **linked_list_first_element, Node *node_to_delete,
     pointers 
     */
 
-    printf("\n\nLe node de remplacement avant la redirection du chemin et l'héritage:\n");
-    print_node(*linked_list_first_element, replacement_node->hash_value);
+    //printf("\n\nLe node de remplacement avant la redirection du chemin et l'héritage:\n");
+    //print_node(*linked_list_first_element, replacement_node->hash_value);
 
     path_redirection(replacement_node);
 
@@ -269,8 +271,8 @@ void replacement_of_node(Node **linked_list_first_element, Node *node_to_delete,
 
 
     //printf("\nLe node de remplacement après l'héritage :\n");
-    printf("\nLe node de remplacement après la redirection du chemin et l'héritage:\n");
-    print_node(*linked_list_first_element, replacement_node->hash_value);
+    //printf("\nLe node de remplacement après la redirection du chemin et l'héritage:\n");
+    //print_node(*linked_list_first_element, replacement_node->hash_value);
 
     /*
     path_redirection(replacement_node);
@@ -339,23 +341,6 @@ void path_redirection(Node *replacement_node) {
         }
 
         replacement_node->parent_node->node_greater_hash = replacement_node->node_lesser_hash;
-
-        /*
-        if (replacement_node->node_greater_hash != NULL)
-        // if the replacement node has a greater child we need to give it
-        // to another node because it will be disconnected from it
-        // the child will be adopted by its ancestor (the parent of its parent)
-        {
-            //replacement_node->parent_node->node_lesser_hash = replacement_node->node_greater_hash;
-            // the parent of the replacement node 
-            // accept its lesser child as its greater
-            replacement_node->node_greater_hash->parent_node = replacement_node->parent_node;
-            // the greater child of the replacement node 
-            // accept the parent of the replacement node 
-            // as its own
-        }
-        
-        replacement_node->parent_node->node_lesser_hash = replacement_node->node_greater_hash;*/
     }
 }
 

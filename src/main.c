@@ -4,13 +4,15 @@
 #include <time.h>
 
 #include "../include/linked_list/new.h"
+#include "../include/linked_list/balancing.h"
+
 #include "../include/linked_list/crud/read.h"
 #include "../include/linked_list/crud/create.h"
 #include "../include/linked_list/crud/delete.h"
 
 #include "../include/hash/hash.h"
 
-#define NUM_NODES 2000
+#define NUM_NODES 1000
 
 int main() {
 
@@ -18,43 +20,46 @@ int main() {
 
     // create a random value for the creation of the first node
     srand(time(NULL));
+    
     float rand_hash_root_node_to_create = (float)rand() / RAND_MAX * (NUM_NODES);
     Node *first_node_linked_list = new_linked_list(&rand_hash_root_node_to_create);
 
-    printf("\n\nThe root node has been created :\n");
-    print_node(first_node_linked_list, rand_hash_root_node_to_create);
+    //printf("\n\nThe root node has been created :\n");
+    //print_node(first_node_linked_list, rand_hash_root_node_to_create);
 
     list_hash_node_created[0] = rand_hash_root_node_to_create;
 
     for (int number_nodes_created = 1; number_nodes_created <= NUM_NODES - 1; ++number_nodes_created)
     {
         // create a random value for the creation of the node
-        //srand(time(NULL));
         float rand_hash_node_to_create = (float)rand() / RAND_MAX * (NUM_NODES);
 
         create_node_recursion(first_node_linked_list, &rand_hash_node_to_create);
 
-        printf("\n\nA new node has been created :\n");
-        print_node(first_node_linked_list, rand_hash_node_to_create);
+        //printf("\n\nA new node has been created :\n");
+        //print_node(first_node_linked_list, rand_hash_node_to_create);
 
         // the hash value is stored in the array
         list_hash_node_created[number_nodes_created] = rand_hash_node_to_create;
     }
 
-    printf("\n\nevery nodes has been created\n\n");
+
+    balance_binary_tree(&first_node_linked_list);
+
+    // delette the nodes in a random order
 
     for (int number_nodes_to_delete = NUM_NODES; number_nodes_to_delete != 0; --number_nodes_to_delete)
     {
         // create a random value for the deletion of the node
         int rand_index_node_to_delete = rand() % NUM_NODES;  
 
-        printf("\n\nindex node to delete : %d\n", rand_index_node_to_delete);
+        //printf("\n\nindex node to delete : %d\n", rand_index_node_to_delete);
 
         if (list_hash_node_created[rand_index_node_to_delete] != -1)
         // if the node was not already deleted
         {
-            printf("\nThe node to delete is :\n");
-            print_node(first_node_linked_list, list_hash_node_created[rand_index_node_to_delete]);
+            //printf("\nThe node to delete is :\n");
+            //print_node_recursion(first_node_linked_list, list_hash_node_created[rand_index_node_to_delete]);
 
             delete_node(&first_node_linked_list, list_hash_node_created[rand_index_node_to_delete]);
 
@@ -62,7 +67,7 @@ int main() {
         }
         else
         {
-            printf("\nthe node has already been deleted.\n");
+            //printf("\nthe node has already been deleted.\n");
             ++number_nodes_to_delete;
         }
     }

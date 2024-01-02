@@ -1,7 +1,10 @@
-/**/
 #include <stdio.h>
 #include <stdlib.h>
+
 #include "../../../include/linked_list/new.h"
+
+#include "../../../include/hash/hash.h"
+
 
 #define NUM_MAX_JUMPS 100
 
@@ -14,15 +17,24 @@ void create_node(Node *linked_list_first_element, float *value) {
     new_node->node_lesser_hash = NULL;
     new_node->parent_node = NULL;
 
+    new_node->counter_node_passed_throught = 0;
+
     new_node->value = *value;
 
     new_node->hash_value = *value;
+    //new_node->hash_value = create_hash((char*)value);
+
+//----------------------------------------------------------------------------------------------
 
     // find the place to put the new node
     Node *linked_list_iterator_node = linked_list_first_element;
 
     for (int jump_thought_nodes = 0; jump_thought_nodes <= NUM_MAX_JUMPS - 1; ++jump_thought_nodes)
     {
+
+        // the fact the node created passed throught the iterator node is notified :
+        ++linked_list_iterator_node->counter_node_passed_throught;
+
         if (new_node->hash_value > linked_list_iterator_node->hash_value)
         // if the node created has a hash value greater than the iterator node 
         {
@@ -101,6 +113,8 @@ void create_node_recursion(Node *linked_list_first_element, float *value) {
     new_node->node_lesser_hash = NULL;
     new_node->parent_node = NULL;
 
+    new_node->counter_node_passed_throught = 0;
+
     new_node->value = *value;
 
     new_node->hash_value = *value;
@@ -116,6 +130,9 @@ void find_place_node(Node *linked_list_iterator_node, Node *new_node) {
         fprintf(stderr, "Error : The node created was not able to find a place to fit.");
         free(new_node);
     }
+
+    // the fact the node created passed throught the iterator node is notified :
+    ++linked_list_iterator_node->counter_node_passed_throught;
 
     if (new_node->hash_value > linked_list_iterator_node->hash_value)
     // if the node created has a hash value greater than the iterator node 
