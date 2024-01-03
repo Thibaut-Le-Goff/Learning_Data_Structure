@@ -2,18 +2,23 @@
 #include <stdlib.h>
 #include <string.h> 
 
-#include "../../include/linked_list/new.h"
+#include "../../include/binary_tree/new.h"
 
 #include "../../include/hash/hash.h"
 
 
-Node *new_linked_list(float *value) 
+Node *new_binary_tree(float *value) 
 {
     Node *first_node = malloc(sizeof(Node));
 
+    // for the tree
     first_node->node_greater_hash = NULL;
     first_node->node_lesser_hash = NULL;
     first_node->parent_node = NULL;
+
+    // for the linked list
+    first_node->next_node = NULL;
+    first_node->previous_node = NULL;
 
     first_node->counter_node_passed_throught = 0;
 

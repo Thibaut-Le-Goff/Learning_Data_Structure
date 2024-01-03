@@ -15,8 +15,8 @@
         // will need to do an iteration
 
         // for iteration
-        // Node *next_node;
-        // Node *previous_node;
+        Node *next_node;
+        Node *previous_node;
 
         // a tree is balanced if the number of
         // nodes on both side is not more different 
@@ -33,6 +33,6 @@
         float hash_value;
     };
 
-    Node *new_linked_list(float *value);
+    Node *new_binary_tree(float *value);
 
 #endif

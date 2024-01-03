@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "../../../include/linked_list/new.h"
+#include "../../../include/binary_tree/new.h"
 
 #define NUM_MAX_JUMPS 100
 

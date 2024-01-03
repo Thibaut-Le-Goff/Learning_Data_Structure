@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "../../include/linked_list/new.h"
+#include "../../include/binary_tree/new.h"
 
 void balance_binary_tree(Node **linked_list_first_element) {
 
