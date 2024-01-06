@@ -26,7 +26,7 @@
         // we can kept track of the path its
         // used and count the number of nodes
         // who passed throught the nodes
-        int counter_node_passed_throught;
+        int counter_node_passed_through;
 
         float value;
 

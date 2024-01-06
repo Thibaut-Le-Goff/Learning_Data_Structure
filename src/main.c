@@ -12,7 +12,7 @@
 
 #include "../include/hash/hash.h"
 
-#define NUM_NODES 1000
+#define NUM_NODES 10
 
 int main() {
 
@@ -60,7 +60,7 @@ int main() {
         // if the node was not already deleted
         {
             //printf("\nThe node to delete is :\n");
-            //print_node_recursion(first_node_binary_tree, list_hash_node_created[rand_index_node_to_delete]);
+            balance_binary_tree(&first_node_binary_tree);
 
             delete_node(&first_node_binary_tree, list_hash_node_created[rand_index_node_to_delete]);
 

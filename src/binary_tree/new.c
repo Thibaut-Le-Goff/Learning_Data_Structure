@@ -20,7 +20,7 @@ Node *new_binary_tree(float *value)
     first_node->next_node = NULL;
     first_node->previous_node = NULL;
 
-    first_node->counter_node_passed_throught = 0;
+    first_node->counter_node_passed_through = 0;
 
     first_node->value = *value;
 

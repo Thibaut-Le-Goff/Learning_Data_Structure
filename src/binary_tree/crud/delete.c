@@ -17,6 +17,11 @@ void delete_node(Node **linked_list_first_element, float hash_node_to_delete) {
 
     for (int jump_thought_nodes = 0; jump_thought_nodes <= NUM_MAX_JUMPS - 1; ++jump_thought_nodes)
     {
+
+        // we have to mdecrease the number of nodes who passed 
+        // through the node in order to keep this number acurate:
+        --linked_list_iterator_node->counter_node_passed_through;
+
         if (hash_node_to_delete > linked_list_iterator_node->hash_value)
         // if the node wanted has a hash value greater than the iterator node 
         {
@@ -237,6 +242,11 @@ void parent_inheritance(Node **linked_list_first_element, Node *node_to_delete, 
 
 void replacement_of_node(Node **linked_list_first_element, Node *node_to_delete, Node *replacement_node) {
 
+    // the node of replacement need to inhetirate the number 
+    // of nodes who passed through the node to delette in order to 
+    // keep that number acurrate
+    replacement_node->counter_node_passed_through = node_to_delete->counter_node_passed_through;
+
     /*
     lors du deplacement du node de remplacement il y a deux posibilités :
     - déplacer uniquement le node est combler le trou créer par celui ci 
@@ -245,7 +255,7 @@ void replacement_of_node(Node **linked_list_first_element, Node *node_to_delete,
     - déplacer le node de remplacement mais aussi son fils (petit ou grand)
 
     The replacement node is disconected from the tree 
-    to be reconnected in anothe location this may create 
+    to be reconnected in anothe location this create 
     a gap who need to be filed by redirecting some
     pointers 
     */
