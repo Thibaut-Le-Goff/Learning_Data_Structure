@@ -131,10 +131,10 @@ void create_node(Node *linked_list_first_element, float *value) {
 
             // we know the hash of the new node is lesser than the hash
             // of the iterator, but we must know if its closer to it
-            // than the actual next_node (lower in that case)
+            // than the actual previous_node (greater in that case)
 
             if ( (linked_list_iterator_node->previous_node != NULL) &&
-                 (new_node->hash_value < linked_list_iterator_node->previous_node->hash_value) )
+                 (new_node->hash_value > linked_list_iterator_node->previous_node->hash_value) )
             // if there is already a node considered as the previous node
             // and if the hash of the new node is greater than the one
             // of the previous node.
@@ -144,7 +144,7 @@ void create_node(Node *linked_list_first_element, float *value) {
                 ///// from the side of the iterator previous node :
                 // the iterator next node recognize the new node 
                 // as its previous node
-                linked_list_iterator_node->next_node->previous_node = new_node;
+                linked_list_iterator_node->previous_node->next_node = new_node;
                 // the new node recognize the iterator previous node as
                 // its previous
                 new_node->previous_node = linked_list_iterator_node->previous_node;

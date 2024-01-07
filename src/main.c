@@ -12,7 +12,7 @@
 
 #include "../include/hash/hash.h"
 
-#define NUM_NODES 10
+#define NUM_NODES 5
 
 int main() {
 
@@ -44,7 +44,7 @@ int main() {
     }
 
 
-    balance_binary_tree(&first_node_binary_tree);
+    //balance_binary_tree(&first_node_binary_tree);
 
 
     // delette the nodes in a random order

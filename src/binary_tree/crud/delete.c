@@ -10,6 +10,7 @@
 void leaf_node_case(Node *node_to_delete);
 void parent_node_case(Node **linked_list_first_element, Node *node_to_delete);
 
+void set_node_pointers_to_null(Node *node_to_delete);
 
 void delete_node(Node **linked_list_first_element, float hash_node_to_delete) {
 
@@ -73,7 +74,7 @@ void delete_node(Node **linked_list_first_element, float hash_node_to_delete) {
             its point to nothing and nothing point to it
             it can be freed right away
             */
-
+            set_node_pointers_to_null(linked_list_iterator_node);
             free(linked_list_iterator_node);
             break;
         }
@@ -98,7 +99,7 @@ void leaf_node_case(Node *node_to_delete)
         // the node to delete is disconnected from its parent
         // from the side of the parent
         
-        node_to_delete->parent_node = NULL;
+        //node_to_delete->parent_node = NULL;
         // the node to delete is disconnected from its parent
         // from the side of the children
     }
@@ -109,7 +110,7 @@ void leaf_node_case(Node *node_to_delete)
         // the node to delete is disconnected from its parent
         // from the side of the parent
 
-        node_to_delete->parent_node = NULL;
+        //node_to_delete->parent_node = NULL;
         // the node to delete is disconnected from its parent
         // from the side of the children
     }
@@ -123,7 +124,6 @@ void from_greater_node_to_smallest_hash(Node **linked_list_first_element, Node *
 void from_lesser_node_to_biggest_hash(Node **linked_list_first_element, Node *node_to_delete);
 
 void replacement_of_node(Node **linked_list_first_element, Node *node_to_delete, Node *replacement_node);
-
 
 void parent_node_case(Node **linked_list_first_element, Node *node_to_delete)
 {
@@ -233,11 +233,15 @@ void from_lesser_node_to_biggest_hash(Node **linked_list_first_element, Node *no
 
 
 void path_redirection(Node *replacement_node);
-//void path_redirection(Node *node_to_delete, Node *replacement_node);
 
+// tree inheritance
 void lesser_child_inheritance(Node *node_to_delete, Node *replacement_node);
 void greater_child_inheritance(Node *node_to_delete, Node *replacement_node);
 void parent_inheritance(Node **linked_list_first_element, Node *node_to_delete, Node *replacement_node);
+
+// list inheritance
+void previous_node_inheritance(Node *node_to_delete);
+void next_node_inheritance(Node *node_to_delete);
 
 
 void replacement_of_node(Node **linked_list_first_element, Node *node_to_delete, Node *replacement_node) {
@@ -288,7 +292,14 @@ void replacement_of_node(Node **linked_list_first_element, Node *node_to_delete,
     path_redirection(replacement_node);
 
     printf("\n\nLe node de remplacement avant la redirection du chemin :\n");
-    print_node(*linked_list_first_element, replacement_node->hash_value);*/
+    print_node(*linked_list_first_element, replacement_node->hash_value);
+    */
+
+    // The node to delette need to give the address of its previous node  
+    // to its next node and also the address of its next node to
+    // its previous in order to fill the gap created by the deletion.
+    previous_node_inheritance(node_to_delete);
+    next_node_inheritance(node_to_delete);
 }
 
 
@@ -379,7 +390,7 @@ void lesser_child_inheritance(Node *node_to_delete, Node *replacement_node) {
 
         replacement_node->node_lesser_hash = node_to_delete->node_lesser_hash;//
 
-        node_to_delete->node_lesser_hash = NULL;
+        //node_to_delete->node_lesser_hash = NULL;
     }
 }
 
@@ -406,8 +417,8 @@ void greater_child_inheritance(Node *node_to_delete, Node *replacement_node) {
         // accept the replacement node as its parent
 
         replacement_node->node_greater_hash = node_to_delete->node_greater_hash;//
-
-        node_to_delete->node_greater_hash = NULL;
+    
+        //node_to_delete->node_greater_hash = NULL;
     }
 }
 
@@ -447,8 +458,6 @@ void parent_inheritance(Node **linked_list_first_element, Node *node_to_delete, 
         //replacement_node->parent_node = node_to_delete->parent_node
         // the node of replacement accept the parent of the node to 
         // delete as its own
-
-        node_to_delete->parent_node = NULL;
     }
     else if (node_to_delete->parent_node == NULL)
     // if the node to delete is the root node
@@ -456,6 +465,40 @@ void parent_inheritance(Node **linked_list_first_element, Node *node_to_delete, 
         *linked_list_first_element = replacement_node;
     }
 }
+
+// The node to delette need to give the address of its previous node  
+// to its next node in order to fill the gap created by the deletion.
+void previous_node_inheritance(Node *node_to_delete) {
+    if (node_to_delete->next_node != NULL)
+    // if the node to delette is not the last on the list
+    {
+        node_to_delete->next_node->previous_node = node_to_delete->previous_node;
+    }
+}
+
+
+// The node to delette need to give the address of its next node to
+// its previous in order to fill the gap created by the deletion.
+void next_node_inheritance(Node *node_to_delete) {
+    if (node_to_delete->previous_node != NULL)
+    // if the node to delette is not the first on the list
+    {
+        node_to_delete->previous_node->next_node = node_to_delete->next_node;
+    }
+}
+
+void set_node_pointers_to_null(Node *node_to_delete) {
+
+    // from the tree
+    node_to_delete->node_greater_hash = NULL;
+    node_to_delete->node_lesser_hash = NULL;
+    node_to_delete->parent_node = NULL;
+
+    // from the list
+    node_to_delete->previous_node = NULL;
+    node_to_delete->next_node = NULL;
+}
+
 
 /*
     list:             Show the source code.
