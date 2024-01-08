@@ -1,0 +1,130 @@
+There are 5 nodes on the tree.
+There are 4 nodes on the left side of the tree.
+
+The nodes from the root in an ascending order :
+
+Addr of the node : 0x606000000020
+Addr of the parent node on the tree : (nil)
+addr of node with a lesser hash on the tree : 0x606000000080
+addr of the previous node on the list : 0x606000000140
+Value stored : 3.904510
+Hash : 3.904510
+
+The nodes from the root in a descending order :
+
+Addr of the node : 0x606000000020
+Addr of the parent node on the tree : (nil)
+addr of node with a lesser hash on the tree : 0x606000000080
+addr of the previous node on the list : 0x606000000140
+Value stored : 3.904510
+Hash : 3.904510
+
+Addr of the node : 0x606000000140
+Addr of the parent node on the tree : 0x6060000000e0
+addr of the next node on the list : 0x606000000020
+addr of the previous node on the list : 0x6060000000e0
+Value stored : 3.339419
+Hash : 3.339419
+
+Addr of the node : 0x6060000000e0
+Addr of the parent node on the tree : 0x606000000080
+addr of node with a greater hash on the tree : 0x606000000140
+addr of the next node on the list : 0x606000000140
+addr of the previous node on the list : 0x606000000080
+Value stored : 2.085480
+Hash : 2.085480
+
+Addr of the node : 0x606000000080
+Addr of the parent node on the tree : 0x606000000020
+addr of node with a greater hash on the tree : 0x6060000000e0
+addr of node with a lesser hash on the tree : 0x6060000001a0
+addr of the next node on the list : 0x6060000000e0
+addr of the previous node on the list : 0x6060000001a0
+Value stored : 1.150909
+Hash : 1.150909
+
+Addr of the node : 0x6060000001a0
+Addr of the parent node on the tree : 0x606000000080
+addr of the next node on the list : 0x606000000080
+Value stored : 0.142593
+Hash : 0.142593
+
+
+There are 4 nodes on the tree.
+There are 3 nodes on the left side of the tree.
+
+The nodes from the root in an ascending order :
+
+Addr of the node : 0x606000000020
+Addr of the parent node on the tree : (nil)
+addr of node with a lesser hash on the tree : 0x606000000080
+addr of the previous node on the list : 0x606000000140
+Value stored : 3.904510
+Hash : 3.904510
+
+The nodes from the root in a descending order :
+
+Addr of the node : 0x606000000020
+Addr of the parent node on the tree : (nil)
+addr of node with a lesser hash on the tree : 0x606000000080
+addr of the previous node on the list : 0x606000000140
+Value stored : 3.904510
+Hash : 3.904510
+
+=================================================================
+==12513==ERROR: AddressSanitizer: heap-use-after-free on address 0x606000000170 at pc 0x557c9b2a9f0a bp 0x7ffc42ff62e0 sp 0x7ffc42ff62d8
+READ of size 4 at 0x606000000170 thread T0
+    #0 0x557c9b2a9f09 in show_hash_previous_node src/binary_tree/balancing.c:47
+    #1 0x557c9b2a9f8d in show_hash_previous_node src/binary_tree/balancing.c:51
+    #2 0x557c9b2a9df9 in balance_binary_tree src/binary_tree/balancing.c:30
+    #3 0x557c9b2aab34 in main src/main.c:63
+    #4 0x7f36e76311c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #5 0x7f36e7631284 in __libc_start_main_impl ../csu/libc-start.c:360
+    #6 0x557c9b1cb3b0 in _start (/home/thibaut/Documents/code/c/Learning_Data_Structure/bin/test+0x93b0)
+
+0x606000000170 is located 48 bytes inside of 56-byte region [0x606000000140,0x606000000178)
+freed by thread T0 here:
+    #0 0x557c9b25def8 in __interceptor_free.part.0 (/home/thibaut/Documents/code/c/Learning_Data_Structure/bin/test+0x9bef8)
+    #1 0x557c9b2a812f in delete_node src/binary_tree//crud/delete.c:78
+    #2 0x557c9b2aab97 in main src/main.c:65
+    #3 0x7f36e76311c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+previously allocated by thread T0 here:
+    #0 0x557c9b25f21f in malloc (/home/thibaut/Documents/code/c/Learning_Data_Structure/bin/test+0x9d21f)
+    #1 0x557c9b2a6e94 in create_node src/binary_tree//crud/create.c:18
+    #2 0x557c9b2aa9bf in main src/main.c:37
+    #3 0x7f36e76311c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+SUMMARY: AddressSanitizer: heap-use-after-free src/binary_tree/balancing.c:47 in show_hash_previous_node
+Shadow bytes around the buggy address:
+  0x0c0c7fff7fd0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0c7fff7fe0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0c7fff7ff0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0c7fff8000: fa fa fa fa 00 00 00 00 00 00 00 fa fa fa fa fa
+  0x0c0c7fff8010: 00 00 00 00 00 00 00 fa fa fa fa fa 00 00 00 00
+=>0x0c0c7fff8020: 00 00 00 fa fa fa fa fa fd fd fd fd fd fd[fd]fa
+  0x0c0c7fff8030: fa fa fa fa 00 00 00 00 00 00 00 fa fa fa fa fa
+  0x0c0c7fff8040: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0c7fff8050: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0c7fff8060: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0c7fff8070: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==12513==ABORTING

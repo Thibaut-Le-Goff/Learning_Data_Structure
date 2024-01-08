@@ -244,12 +244,17 @@ void previous_node_inheritance(Node *node_to_delete);
 void next_node_inheritance(Node *node_to_delete);
 
 
+void fill_gap_list(Node *node_to_delete);
+
+
 void replacement_of_node(Node **linked_list_first_element, Node *node_to_delete, Node *replacement_node) {
 
     // the node of replacement need to inhetirate the number 
     // of nodes who passed through the node to delette in order to 
     // keep that number acurrate
     replacement_node->counter_node_passed_through = node_to_delete->counter_node_passed_through;
+
+    fill_gap_list(node_to_delete);
 
     /*
     lors du deplacement du node de remplacement il y a deux posibilités :
@@ -298,8 +303,10 @@ void replacement_of_node(Node **linked_list_first_element, Node *node_to_delete,
     // The node to delette need to give the address of its previous node  
     // to its next node and also the address of its next node to
     // its previous in order to fill the gap created by the deletion.
-    previous_node_inheritance(node_to_delete);
-    next_node_inheritance(node_to_delete);
+    //fill_gap_list(node_to_delete);
+
+    //previous_node_inheritance(node_to_delete);
+    //next_node_inheritance(node_to_delete);
 }
 
 
@@ -466,25 +473,47 @@ void parent_inheritance(Node **linked_list_first_element, Node *node_to_delete, 
     }
 }
 
-// The node to delette need to give the address of its previous node  
-// to its next node in order to fill the gap created by the deletion.
-void previous_node_inheritance(Node *node_to_delete) {
-    if (node_to_delete->next_node != NULL)
-    // if the node to delette is not the last on the list
+void fill_gap_list(Node *node_to_delete) {
+    /**/
+    if ( (node_to_delete->previous_node == NULL) &&
+         (node_to_delete->next_node != NULL) )
+    // if the node to delette is the first 
+    // but not the last
     {
-        node_to_delete->next_node->previous_node = node_to_delete->previous_node;
+        node_to_delete->next_node->previous_node = NULL;
+        //node_to_delete->next_node->previous_node = node_to_delete->previous_node;
     }
-}
-
-
-// The node to delette need to give the address of its next node to
-// its previous in order to fill the gap created by the deletion.
-void next_node_inheritance(Node *node_to_delete) {
-    if (node_to_delete->previous_node != NULL)
-    // if the node to delette is not the first on the list
+    else if ( (node_to_delete->previous_node != NULL) &&
+              (node_to_delete->next_node == NULL) )
+    // if the node to delette is not the first 
+    // but the last
     {
-        node_to_delete->previous_node->next_node = node_to_delete->next_node;
+        node_to_delete->previous_node->next_node = NULL;
+        //node_to_delete->previous_node->next_node = node_to_delete->next_node;
     }
+    else if ( (node_to_delete->previous_node != NULL) &&
+              (node_to_delete->next_node != NULL) )
+    // if the node to delette is not the first 
+    // but not the last
+    {
+        // to prevent to mix the pointers, we need 
+        // to store theme separatly (?):
+        Node *previous_node_to_node_to_delete = node_to_delete->previous_node;
+        Node *next_node_to_node_to_delete = node_to_delete->next_node;
+
+        node_to_delete->next_node->previous_node = previous_node_to_node_to_delete;
+        node_to_delete->previous_node->next_node = next_node_to_node_to_delete;
+    }
+
+    /*
+    // to prevent to mix the pointers, we need 
+    // to store theme separatly:
+    Node *previous_node_to_node_to_delete = node_to_delete->previous_node;
+    Node *next_node_to_node_to_delete = node_to_delete->next_node;
+
+    node_to_delete->next_node->previous_node = previous_node_to_node_to_delete;
+    node_to_delete->previous_node->next_node = next_node_to_node_to_delete;
+    */
 }
 
 void set_node_pointers_to_null(Node *node_to_delete) {
@@ -497,6 +526,54 @@ void set_node_pointers_to_null(Node *node_to_delete) {
     // from the list
     node_to_delete->previous_node = NULL;
     node_to_delete->next_node = NULL;
+}
+
+
+
+
+/**/
+// The node to delette need to give the address of its previous node  
+// to its next node in order to fill the gap created by the deletion.
+void previous_node_inheritance(Node *node_to_delete) {
+
+    if ( (node_to_delete->next_node != NULL) &&
+         (node_to_delete->previous_node != NULL) )
+    // if the node to delette is not the last on the list
+    // and if the node to delette has a previous node
+    {
+        // the node behind to the node to delette 
+        // become the previous node of the node 
+        // in front of the node to delette
+        node_to_delete->next_node->previous_node = node_to_delete->previous_node;
+    }
+    else if ( (node_to_delete->next_node != NULL) &&
+              (node_to_delete->previous_node == NULL) )
+    // if the node to delette is not the last on the list
+    // and if the node to delette does not have a 
+    // previous node
+    {
+        node_to_delete->next_node->previous_node = NULL;
+    }
+}
+
+
+// The node to delette need to give the address of its next node to
+// its previous in order to fill the gap created by the deletion.
+void next_node_inheritance(Node *node_to_delete) {
+    if ( (node_to_delete->previous_node != NULL) &&
+         (node_to_delete->next_node != NULL) )
+    // if the node to delette is not the first on the list
+    {
+        node_to_delete->previous_node->next_node = node_to_delete->next_node;
+    }
+    else if ( (node_to_delete->previous_node != NULL) &&
+              (node_to_delete->next_node == NULL) )
+    // if the node to delette is not the first on the list
+    // and if the node to delette does not have a 
+    // next node
+    {
+        node_to_delete->previous_node->next_node = NULL;
+    }
 }
 
 

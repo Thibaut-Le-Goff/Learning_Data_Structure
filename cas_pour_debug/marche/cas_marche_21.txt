@@ -1,0 +1,175 @@
+There are 5 nodes on the tree.
+There are 4 nodes on the right side of the tree.
+
+The nodes from the root in an ascending order :
+
+Addr of the node : 0x606000000020
+Addr of the parent node on the tree : (nil)
+addr of node with a greater hash on the tree : 0x606000000080
+addr of the next node on the list : 0x606000000140
+Value stored : 0.692391
+Hash : 0.692391
+
+Addr of the node : 0x606000000140
+Addr of the parent node on the tree : 0x6060000000e0
+addr of the next node on the list : 0x6060000000e0
+addr of the previous node on the list : 0x606000000020
+Value stored : 1.358582
+Hash : 1.358582
+
+Addr of the node : 0x6060000000e0
+Addr of the parent node on the tree : 0x606000000080
+addr of node with a lesser hash on the tree : 0x606000000140
+addr of the next node on the list : 0x606000000080
+addr of the previous node on the list : 0x606000000140
+Value stored : 2.720253
+Hash : 2.720253
+
+Addr of the node : 0x606000000080
+Addr of the parent node on the tree : 0x606000000020
+addr of node with a greater hash on the tree : 0x6060000001a0
+addr of node with a lesser hash on the tree : 0x6060000000e0
+addr of the next node on the list : 0x6060000001a0
+addr of the previous node on the list : 0x6060000000e0
+Value stored : 3.369756
+Hash : 3.369756
+
+Addr of the node : 0x6060000001a0
+Addr of the parent node on the tree : 0x606000000080
+addr of the previous node on the list : 0x606000000080
+Value stored : 3.744495
+Hash : 3.744495
+
+The nodes from the root in a descending order :
+
+Addr of the node : 0x606000000020
+Addr of the parent node on the tree : (nil)
+addr of node with a greater hash on the tree : 0x606000000080
+addr of the next node on the list : 0x606000000140
+Value stored : 0.692391
+Hash : 0.692391
+
+
+There are 4 nodes on the tree.
+There are 3 nodes on the right side of the tree.
+
+The nodes from the root in an ascending order :
+
+Addr of the node : 0x606000000020
+Addr of the parent node on the tree : (nil)
+addr of node with a greater hash on the tree : 0x606000000080
+addr of the next node on the list : 0x606000000140
+Value stored : 0.692391
+Hash : 0.692391
+
+Addr of the node : 0x606000000140
+Addr of the parent node on the tree : 0x606000000080
+addr of the next node on the list : 0x606000000080
+addr of the previous node on the list : 0x606000000020
+Value stored : 1.358582
+Hash : 1.358582
+
+Addr of the node : 0x606000000080
+Addr of the parent node on the tree : 0x606000000020
+addr of node with a greater hash on the tree : 0x6060000001a0
+addr of node with a lesser hash on the tree : 0x606000000140
+addr of the next node on the list : 0x6060000001a0
+addr of the previous node on the list : 0x606000000140
+Value stored : 3.369756
+Hash : 3.369756
+
+Addr of the node : 0x6060000001a0
+Addr of the parent node on the tree : 0x606000000080
+addr of the previous node on the list : 0x606000000080
+Value stored : 3.744495
+Hash : 3.744495
+
+The nodes from the root in a descending order :
+
+Addr of the node : 0x606000000020
+Addr of the parent node on the tree : (nil)
+addr of node with a greater hash on the tree : 0x606000000080
+addr of the next node on the list : 0x606000000140
+Value stored : 0.692391
+Hash : 0.692391
+
+
+There are 3 nodes on the tree.
+There are 3 nodes on the right side of the tree.
+
+The nodes from the root in an ascending order :
+
+Addr of the node : 0x606000000140
+Addr of the parent node on the tree : (nil)
+addr of node with a greater hash on the tree : 0x606000000080
+addr of the next node on the list : 0x606000000080
+Value stored : 1.358582
+Hash : 1.358582
+
+Addr of the node : 0x606000000080
+Addr of the parent node on the tree : 0x606000000140
+addr of node with a greater hash on the tree : 0x6060000001a0
+addr of the next node on the list : 0x6060000001a0
+addr of the previous node on the list : 0x606000000140
+Value stored : 3.369756
+Hash : 3.369756
+
+Addr of the node : 0x6060000001a0
+Addr of the parent node on the tree : 0x606000000080
+addr of the previous node on the list : 0x606000000080
+Value stored : 3.744495
+Hash : 3.744495
+
+The nodes from the root in a descending order :
+
+Addr of the node : 0x606000000140
+Addr of the parent node on the tree : (nil)
+addr of node with a greater hash on the tree : 0x606000000080
+addr of the next node on the list : 0x606000000080
+Value stored : 1.358582
+Hash : 1.358582
+
+
+There are 2 nodes on the tree.
+There are 2 nodes on the right side of the tree.
+
+The nodes from the root in an ascending order :
+
+Addr of the node : 0x606000000140
+Addr of the parent node on the tree : (nil)
+addr of node with a greater hash on the tree : 0x6060000001a0
+addr of the next node on the list : 0x6060000001a0
+Value stored : 1.358582
+Hash : 1.358582
+
+Addr of the node : 0x6060000001a0
+Addr of the parent node on the tree : 0x606000000140
+addr of the previous node on the list : 0x606000000140
+Value stored : 3.744495
+Hash : 3.744495
+
+The nodes from the root in a descending order :
+
+Addr of the node : 0x606000000140
+Addr of the parent node on the tree : (nil)
+addr of node with a greater hash on the tree : 0x6060000001a0
+addr of the next node on the list : 0x6060000001a0
+Value stored : 1.358582
+Hash : 1.358582
+
+
+There are 1 nodes on the tree.
+
+The nodes from the root in an ascending order :
+
+Addr of the node : 0x6060000001a0
+Addr of the parent node on the tree : (nil)
+Value stored : 3.744495
+Hash : 3.744495
+
+The nodes from the root in a descending order :
+
+Addr of the node : 0x6060000001a0
+Addr of the parent node on the tree : (nil)
+Value stored : 3.744495
+Hash : 3.744495
