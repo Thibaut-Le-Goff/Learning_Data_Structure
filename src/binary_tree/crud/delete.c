@@ -10,7 +10,18 @@
 void leaf_node_case(Node *node_to_delete);
 void parent_node_case(Node **linked_list_first_element, Node *node_to_delete);
 
+
+// list inheritance
+void previous_node_inheritance(Node *node_to_delete);
+void next_node_inheritance(Node *node_to_delete);
+
+
+void fill_gap_list(Node *node_to_delete);
+
+
 void set_node_pointers_to_null(Node *node_to_delete);
+
+
 
 void delete_node(Node **linked_list_first_element, float hash_node_to_delete) {
 
@@ -74,6 +85,12 @@ void delete_node(Node **linked_list_first_element, float hash_node_to_delete) {
             its point to nothing and nothing point to it
             it can be freed right away
             */
+
+            // The node to delette need to give the address of its previous node  
+            // to its next node and also the address of its next node to
+            // its previous in order to fill the gap created by the deletion.
+            fill_gap_list(linked_list_iterator_node);
+        
             set_node_pointers_to_null(linked_list_iterator_node);
             free(linked_list_iterator_node);
             break;
@@ -239,13 +256,6 @@ void lesser_child_inheritance(Node *node_to_delete, Node *replacement_node);
 void greater_child_inheritance(Node *node_to_delete, Node *replacement_node);
 void parent_inheritance(Node **linked_list_first_element, Node *node_to_delete, Node *replacement_node);
 
-// list inheritance
-void previous_node_inheritance(Node *node_to_delete);
-void next_node_inheritance(Node *node_to_delete);
-
-
-void fill_gap_list(Node *node_to_delete);
-
 
 void replacement_of_node(Node **linked_list_first_element, Node *node_to_delete, Node *replacement_node) {
 
@@ -254,7 +264,7 @@ void replacement_of_node(Node **linked_list_first_element, Node *node_to_delete,
     // keep that number acurrate
     replacement_node->counter_node_passed_through = node_to_delete->counter_node_passed_through;
 
-    fill_gap_list(node_to_delete);
+    //fill_gap_list(node_to_delete);
 
     /*
     lors du deplacement du node de remplacement il y a deux posibilités :
@@ -498,11 +508,15 @@ void fill_gap_list(Node *node_to_delete) {
     {
         // to prevent to mix the pointers, we need 
         // to store theme separatly (?):
+        /*
         Node *previous_node_to_node_to_delete = node_to_delete->previous_node;
         Node *next_node_to_node_to_delete = node_to_delete->next_node;
 
         node_to_delete->next_node->previous_node = previous_node_to_node_to_delete;
         node_to_delete->previous_node->next_node = next_node_to_node_to_delete;
+        */
+        node_to_delete->next_node->previous_node = node_to_delete->previous_node;
+        node_to_delete->previous_node->next_node = node_to_delete->next_node;
     }
 
     /*
@@ -510,9 +524,13 @@ void fill_gap_list(Node *node_to_delete) {
     // to store theme separatly:
     Node *previous_node_to_node_to_delete = node_to_delete->previous_node;
     Node *next_node_to_node_to_delete = node_to_delete->next_node;
-
+    
     node_to_delete->next_node->previous_node = previous_node_to_node_to_delete;
-    node_to_delete->previous_node->next_node = next_node_to_node_to_delete;
+    node_to_delete->previous_node->next_node = next_node_to_node_to_delete;    
+    
+
+    node_to_delete->next_node->previous_node = node_to_delete->previous_node;
+    node_to_delete->previous_node->next_node = node_to_delete->next_node;
     */
 }
 

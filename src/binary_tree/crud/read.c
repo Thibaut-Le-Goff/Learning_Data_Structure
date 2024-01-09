@@ -4,6 +4,9 @@
 
 #define NUM_MAX_JUMPS 100
 
+void show_node(Node *node_to_show);
+
+
 void print_node(Node *linked_list_first_element, float hash_node_to_print) {
 
     // 
@@ -29,29 +32,7 @@ void print_node(Node *linked_list_first_element, float hash_node_to_print) {
         else if (hash_node_to_print == linked_list_iterator_node->hash_value)
         // if the hash is the one of the one we are looking for
         {
-            printf("Addr of the node : %p\n", (void *)linked_list_iterator_node);
-
-            printf("Addr of the parent node on the tree : %p\n", (void *)linked_list_iterator_node->parent_node);
-
-            if (linked_list_iterator_node->node_greater_hash != NULL) {
-                printf("addr of node with a greater hash on the tree : %p\n", (void *)linked_list_iterator_node->node_greater_hash);       
-            }
-
-            if (linked_list_iterator_node->node_lesser_hash != NULL) {
-                printf("addr of node with a lesser hash on the tree : %p\n", (void *)linked_list_iterator_node->node_lesser_hash);
-            }
-
-            if (linked_list_iterator_node->next_node != NULL) {
-                printf("addr of the next node on the list : %p\n", (void *)linked_list_iterator_node->next_node);       
-            }
-
-            if (linked_list_iterator_node->previous_node != NULL) {
-                printf("addr of the previous node on the list : %p\n", (void *)linked_list_iterator_node->previous_node);
-            }
-
-            printf("Value stored : %f\n", linked_list_iterator_node->value);
-            printf("Hash : %f\n\n", linked_list_iterator_node->hash_value);
-
+            show_node(linked_list_iterator_node);
             break;
         }
         else
@@ -91,18 +72,38 @@ void print_node_recursion(Node* linked_list_iterator_node, float hash_node_to_pr
     else if (hash_node_to_print == linked_list_iterator_node->hash_value)
     // if the hash is the one of the one we are looking for
     {
-        printf("Addr of the node : %p\n", (void *)linked_list_iterator_node);
-        printf("Addr of the parent node : %p\n", (void *)linked_list_iterator_node->parent_node);
-
-        if (linked_list_iterator_node->node_greater_hash != NULL) {
-            printf("addr of node with a greater hash : %p\n", (void *)linked_list_iterator_node->node_greater_hash);       
-        }
-
-        if (linked_list_iterator_node->node_lesser_hash != NULL) {
-            printf("addr of node with a lesser hash : %p\n", (void *)linked_list_iterator_node->node_lesser_hash);
-        }
-
-        printf("Value stored : %f\n", linked_list_iterator_node->value);
-        printf("Hash : %f\n\n", linked_list_iterator_node->hash_value);
+        show_node(linked_list_iterator_node);
     }
+}
+
+
+
+void show_node(Node *node_to_show) {
+
+    printf("Addr of the node : %p\n", (void *)node_to_show);
+
+    if (node_to_show->parent_node != NULL) {
+        printf("Addr of the parent node on the tree : %p\n", (void *)node_to_show->parent_node);
+    }
+
+    if (node_to_show->node_greater_hash != NULL) {
+        printf("addr of node with a greater hash on the tree : %p\n", (void *)node_to_show->node_greater_hash);       
+    }
+
+    if (node_to_show->node_lesser_hash != NULL) {
+        printf("addr of node with a lesser hash on the tree : %p\n", (void *)node_to_show->node_lesser_hash);
+    }
+
+    if (node_to_show->next_node != NULL) {
+        printf("addr of the next node on the list : %p\n", (void *)node_to_show->next_node);       
+    }
+
+    if (node_to_show->previous_node != NULL) {
+        printf("addr of the previous node on the list : %p\n", (void *)node_to_show->previous_node);
+    }
+
+    printf("The number of nodes who passed through this one is : %d\n", node_to_show->counter_node_passed_through);
+
+    printf("Value stored : %f\n", node_to_show->value);
+    printf("Hash : %f\n\n", node_to_show->hash_value);
 }
