@@ -31,7 +31,8 @@ void delete_node(Node **linked_list_first_element, float hash_node_to_delete) {
     {
 
         // we have to mdecrease the number of nodes who passed 
-        // through the node in order to keep this number acurate:
+        // through the node in order to keep this number acurate
+        // after the deletion of the node :
         --linked_list_iterator_node->counter_node_passed_through;
 
         if (hash_node_to_delete > linked_list_iterator_node->hash_value)
@@ -182,6 +183,12 @@ void from_greater_node_to_smallest_hash(Node **linked_list_first_element, Node *
     // the smallest hash value in this path is the next greater hash after 
     // the hash to delete (because we are starting by its greater branche)
     {
+
+        // we have to mdecrease the number of nodes who passed 
+        // through the node in order to keep this number acurate
+        // after the replacement of the node :
+        --linked_list_iterator_node->counter_node_passed_through;
+
         if (linked_list_iterator_node->node_lesser_hash == NULL)
         // if there are no lesser hash, the iterator node 
         // is considered to be the node of remplacement
@@ -219,6 +226,12 @@ void from_lesser_node_to_biggest_hash(Node **linked_list_first_element, Node *no
     // the biggest hash value in this path is the next greater hash after
     // the hash to delete (because we are starting by its lesser branche)
     {
+
+        // we have to mdecrease the number of nodes who passed 
+        // through the node in order to keep this number acurate
+        // after the replacement of the node :
+        --linked_list_iterator_node->counter_node_passed_through;
+
         if (linked_list_iterator_node->node_greater_hash == NULL)
         // if there are no greater hash, the iterator node 
         // is considered to be the node of remplacement
