@@ -335,8 +335,6 @@ void replacement_of_node(Node **linked_list_first_element, Node *node_to_delete,
 
 //---------------------------------------- redirection of the path to the new node ------------------------------------------------------------------
 
-
-//void path_redirection(Node *node_to_delete, Node *replacement_node) {
 void path_redirection(Node *replacement_node) {
 
     /*
@@ -418,9 +416,7 @@ void lesser_child_inheritance(Node *node_to_delete, Node *replacement_node) {
         // The lesser child of the node to delete
         // accept the replacement node as its parent
 
-        replacement_node->node_lesser_hash = node_to_delete->node_lesser_hash;//
-
-        //node_to_delete->node_lesser_hash = NULL;
+        replacement_node->node_lesser_hash = node_to_delete->node_lesser_hash;
     }
 }
 
@@ -521,30 +517,10 @@ void fill_gap_list(Node *node_to_delete) {
     {
         // to prevent to mix the pointers, we need 
         // to store theme separatly (?):
-        /*
-        Node *previous_node_to_node_to_delete = node_to_delete->previous_node;
-        Node *next_node_to_node_to_delete = node_to_delete->next_node;
 
-        node_to_delete->next_node->previous_node = previous_node_to_node_to_delete;
-        node_to_delete->previous_node->next_node = next_node_to_node_to_delete;
-        */
         node_to_delete->next_node->previous_node = node_to_delete->previous_node;
         node_to_delete->previous_node->next_node = node_to_delete->next_node;
     }
-
-    /*
-    // to prevent to mix the pointers, we need 
-    // to store theme separatly:
-    Node *previous_node_to_node_to_delete = node_to_delete->previous_node;
-    Node *next_node_to_node_to_delete = node_to_delete->next_node;
-    
-    node_to_delete->next_node->previous_node = previous_node_to_node_to_delete;
-    node_to_delete->previous_node->next_node = next_node_to_node_to_delete;    
-    
-
-    node_to_delete->next_node->previous_node = node_to_delete->previous_node;
-    node_to_delete->previous_node->next_node = node_to_delete->next_node;
-    */
 }
 
 void set_node_pointers_to_null(Node *node_to_delete) {
