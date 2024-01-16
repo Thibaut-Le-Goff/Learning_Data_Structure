@@ -22,12 +22,14 @@ void balance_binary_tree(Node **linked_list_first_element) {
     {
         printf("There are %d nodes on the right side of the tree.\n", (*linked_list_first_element)->node_greater_hash->counter_node_passed_through + 1);
     }
-
+    
+    /*
     printf("\nThe nodes from the root in an ascending order :\n\n");
     show_hash_next_node(linked_list_first_element, *linked_list_first_element);
 
     printf("The nodes from the root in a descending order :\n\n");
     show_hash_previous_node(linked_list_first_element, *linked_list_first_element);
+    */
 }
 
 
