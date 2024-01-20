@@ -71,10 +71,10 @@ float create_hash(char *table)
 }*/
 
 int create_hash_tree(char *table) {
-    int array_iterator;
-    int sum_xor_ascii_characters;
+    int sum_xor_ascii_characters = 0;
+    int array_iterator = 1;
 
-    for (array_iterator = 1; *(table + array_iterator) != '\0'; ++array_iterator) {        
+    for (int array_iterator = 1; *(table + array_iterator) != '\0'; ++array_iterator) {        
         sum_xor_ascii_characters += *(table + array_iterator - 1) ^ *(table + array_iterator);
     }
 
@@ -89,8 +89,8 @@ int create_hash_tree(char *table) {
 
 
 int create_hash_table(char *table, int *length_array) {
+    int sum_xor_ascii_characters = 0;
     int array_iterator;
-    int sum_xor_ascii_characters;
 
     for (array_iterator = 1; *(table + array_iterator) != '\0'; ++array_iterator) {        
         sum_xor_ascii_characters += *(table + array_iterator - 1) ^ *(table + array_iterator);
