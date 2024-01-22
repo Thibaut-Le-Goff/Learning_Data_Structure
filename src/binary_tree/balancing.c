@@ -6,8 +6,9 @@
 #include "../../include/binary_tree/crud/create.h"
 #include "../../include/binary_tree/crud/delete.h"
 #include "../../include/binary_tree/crud/read.h"
+#include "../../include/binary_tree/crud/get.h"
 
-#define balancing_threshold
+#define balancing_threshold 1
 
 
 void show_hash_next_node(Node **linked_list_first_element, Node *node_hash_to_show);
@@ -51,17 +52,8 @@ void balance_binary_tree(Node **linked_list_first_element) {
     */
 
     // POC from the root node
-    int middle_node_index_0 = (*linked_list_first_element)->counter_node_passed_through;
-    printf("\nThe index of the middle node is : %d.\n", middle_node_index_0);
-
-    int middle_node_index_1 = ((*linked_list_first_element)->counter_node_passed_through) + 1;
-    printf("\nThe index of the middle node is : %d.\n", middle_node_index_1);
-
-    int middle_node_index_2 = (((*linked_list_first_element)->counter_node_passed_through) + 1) / 2;
-    printf("\nThe index of the middle node is : %d.\n", middle_node_index_2);
-
-    int middle_node_index_3 = ceil((float)(((*linked_list_first_element)->counter_node_passed_through) + 1) / 2);
-    printf("\nThe index of the middle node is : %d.\n", middle_node_index_3);
+    int middle_node_index = ceil((float)(((*linked_list_first_element)->counter_node_passed_through) + 1) / 2);
+    printf("\nThe index of the middle node is : %d.\n", middle_node_index);
 
     //look up for the lowest hash :
     Node *lowest_node = search_lowest_node_hash(*linked_list_first_element);
@@ -76,8 +68,58 @@ void balance_binary_tree(Node **linked_list_first_element) {
     }
 
     // look up for the middle node :
-    Node *middle_node = lowest_node;
-    for (int node_iterator = 0; node_iterator <= middle_node_index_3 - 2; ++node_iterator) {      
+    Node *new_root_balanced_tree = lowest_node;
+    for (int node_iterator = 2; node_iterator <= middle_node_index; ++node_iterator) {      
+        if (new_root_balanced_tree->next_node != NULL) {
+            new_root_balanced_tree = new_root_balanced_tree->next_node;
+        }
+    }
+
+    printf("\nThe middle node is, this node is the new root of the balanced tree :\n");
+    print_node(*linked_list_first_element, new_root_balanced_tree->hash_value);
+
+    // create the new tree 
+
+    /*
+    We have the new root for the creation of, but, wee still need to 
+    find the next nodes to add to the new tree, we can't putt them in
+    a random order.
+
+    For this we need to repeat the same algorithme made to fin the
+    root on both sides, that mean creating a function that is caling 
+    itself two time.
+    
+
+    int *min_lesser_area = 0;
+    Node *first_node_lesser_area = lowest_node;
+    int *max_lesser_area = middle_node_index - 1;
+
+
+    int *min_greater_area = middle_node_index + 1;
+    Node *first_node_greater_area = middle_node->next_node;
+    int *max_greater_area = (*linked_list_first_element)->counter_node_passed_through + 1;*/
+}
+
+/*
+void find_middle_node_area(Node *new_root_balanced_tree, Node *first_node_in_area, int *min_area, int *max_area) {
+    int middle_node_index = ceil((float)*max_area - *min_area / 2);
+    printf("\nThe index of the middle node is : %d.\n", middle_node_index);
+
+    //look up for the lowest hash under  :
+    Node *lowest_node = search_lowest_node_hash(*first_node_in_area);
+
+    if (lowest_node == NULL) {
+        printf("\nThe lowest node was not found.\n");
+    } 
+    else
+    {
+        printf("\nThe lowest node is :\n");
+        print_node(*linked_list_first_element, lowest_node->hash_value);    
+    }
+
+    // look up for the middle node :
+    Node *middle_node = first_nlowest_nodeode_in_area;
+    for (int node_iterator = 2; node_iterator <= middle_node_index; ++node_iterator) {
         if (middle_node->next_node != NULL) {
             middle_node = middle_node->next_node; 
         }
@@ -85,7 +127,16 @@ void balance_binary_tree(Node **linked_list_first_element) {
 
     printf("\nThe middle node is, this node is the new root of the balanced tree :\n");
     print_node(*linked_list_first_element, middle_node->hash_value);
-}
+
+    int *min_lesser_area = 0;
+    Node *first_node_lesser_area = lowest_node;
+    int *max_lesser_area = middle_node_index - 1;
+
+
+    int *min_greater_area = middle_node_index + 1;
+    Node *first_node_greater_area = middle_node->next_node;
+    int *max_greater_area = max_area;
+}*/
 
 
 void show_hash_next_node(Node **linked_list_first_element, Node *node_hash_to_show) {
@@ -109,7 +160,6 @@ void show_hash_previous_node(Node **linked_list_first_element, Node *node_hash_t
     }
 }
 
-/**/
 Node *search_lowest_node_hash(Node *starting_node) {
     if (starting_node->node_lesser_hash != NULL) 
     {

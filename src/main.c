@@ -12,7 +12,7 @@
 
 #include "../include/hash/hash.h"
 
-#define NUM_NODES 5
+#define NUM_NODES 10
 
 int main() {
 
@@ -33,7 +33,6 @@ int main() {
     for (int number_nodes_created = 1; number_nodes_created <= NUM_NODES - 1; ++number_nodes_created)
     {
         // create a random value for the creation of the node
-        //float rand_hash_node_to_create = (float)rand() / RAND_MAX * (NUM_NODES);
         float rand_hash_node_to_create = ((float)rand() / RAND_MAX) * (2 * NUM_NODES) - NUM_NODES;
 
         //create_node(first_node_binary_tree, &rand_hash_node_to_create);
