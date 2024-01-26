@@ -10,7 +10,7 @@
 #include "../include/binary_tree/crud/create.h"
 #include "../include/binary_tree/crud/delete.h"
 
-#include "../include/hash/hash.h"
+#include "../include/hash/create_hash.h"
 
 #define NUM_NODES 10
 

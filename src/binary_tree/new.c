@@ -4,7 +4,7 @@
 
 #include "../../include/binary_tree/new.h"
 
-#include "../../include/hash/hash.h"
+#include "../../include/hash/create_hash.h"
 
 
 Node *new_binary_tree(float *value) 
