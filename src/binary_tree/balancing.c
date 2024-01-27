@@ -15,6 +15,7 @@ void show_hash_next_node(Node **linked_list_first_element, Node *node_hash_to_sh
 void show_hash_previous_node(Node **linked_list_first_element, Node *node_hash_to_show);
 Node *search_lowest_node_hash(Node *starting_node);
 
+void find_middle_node_area(Node *new_root_balanced_tree, Node *first_node_in_area, int *min_area, int *max_area);
 
 void balance_binary_tree(Node **linked_list_first_element) {
 
@@ -87,56 +88,65 @@ void balance_binary_tree(Node **linked_list_first_element) {
 
     For this we need to repeat the same algorithme made to fin the
     root on both sides, that mean creating a function that is caling 
-    itself two time.
+    itself two time.*/
     
 
-    int *min_lesser_area = 0;
+    int min_lesser_area = 0;
     Node *first_node_lesser_area = lowest_node;
-    int *max_lesser_area = middle_node_index - 1;
+    int max_lesser_area = middle_node_index - 1;
+
+    printf("\nThe first node of the lesser area, between the index %d and %d is :\n", min_lesser_area, max_lesser_area);
+    print_node(*linked_list_first_element, first_node_lesser_area->hash_value);
+
+    find_middle_node_area(*linked_list_first_element, first_node_lesser_area, &min_lesser_area, &max_lesser_area);
 
 
-    int *min_greater_area = middle_node_index + 1;
-    Node *first_node_greater_area = middle_node->next_node;
-    int *max_greater_area = (*linked_list_first_element)->counter_node_passed_through + 1;*/
+    int min_greater_area = middle_node_index + 1;
+    Node *first_node_greater_area = new_root_balanced_tree->next_node;
+    int max_greater_area = (*linked_list_first_element)->counter_node_passed_through + 1;
+
+    printf("\nThe first node of the greater area, between the index %d and %d is :\n",  min_greater_area, max_greater_area);
+    print_node(*linked_list_first_element, first_node_greater_area->hash_value);
+
+    find_middle_node_area(*linked_list_first_element, first_node_greater_area, &min_greater_area, &max_greater_area);
 }
 
-/*
-void find_middle_node_area(Node *new_root_balanced_tree, Node *first_node_in_area, int *min_area, int *max_area) {
-    int middle_node_index = ceil((float)*max_area - *min_area / 2);
+/**/
+void find_middle_node_area(Node *linked_list_first_element, Node *first_node_in_area, int *min_area, int *max_area) {
+        
+    int middle_node_index = ceil((float)((*max_area - *min_area) / 2));
     printf("\nThe index of the middle node is : %d.\n", middle_node_index);
-
-    //look up for the lowest hash under  :
-    Node *lowest_node = search_lowest_node_hash(*first_node_in_area);
-
-    if (lowest_node == NULL) {
-        printf("\nThe lowest node was not found.\n");
-    } 
-    else
+    
+    //if ((middle_node_index >= 1) && (middle_node->next_node != NULL))
+    if (middle_node_index >= 1)
     {
-        printf("\nThe lowest node is :\n");
-        print_node(*linked_list_first_element, lowest_node->hash_value);    
-    }
+        // look up for the middle node :
+        Node *middle_node = first_node_in_area;
+        for (int node_iterator = 2; node_iterator <= middle_node_index; ++node_iterator) {
+            if (middle_node->next_node != NULL) {
+                middle_node = middle_node->next_node; 
+            }
+        }
 
-    // look up for the middle node :
-    Node *middle_node = first_nlowest_nodeode_in_area;
-    for (int node_iterator = 2; node_iterator <= middle_node_index; ++node_iterator) {
-        if (middle_node->next_node != NULL) {
-            middle_node = middle_node->next_node; 
+        printf("\nThe middle node, with the index %d, is between the area %d and %d is :\n", middle_node_index, *min_area, *max_area);
+        print_node(linked_list_first_element, middle_node->hash_value);
+
+        int *min_lesser_area = min_area;
+        Node *first_node_lesser_area = first_node_in_area;
+        int max_lesser_area = middle_node_index - 1;
+
+        find_middle_node_area(linked_list_first_element, first_node_lesser_area, min_lesser_area, &max_lesser_area);
+
+        if (middle_node->next_node != NULL)
+        {
+            int min_greater_area = middle_node_index + 1;
+            Node *first_node_greater_area = middle_node->next_node;
+            int *max_greater_area = max_area;
+
+            find_middle_node_area(linked_list_first_element, first_node_greater_area, &min_greater_area, max_greater_area);
         }
     }
-
-    printf("\nThe middle node is, this node is the new root of the balanced tree :\n");
-    print_node(*linked_list_first_element, middle_node->hash_value);
-
-    int *min_lesser_area = 0;
-    Node *first_node_lesser_area = lowest_node;
-    int *max_lesser_area = middle_node_index - 1;
-
-
-    int *min_greater_area = middle_node_index + 1;
-    Node *first_node_greater_area = middle_node->next_node;
-    int *max_greater_area = max_area;
-}*/
+}
 
 
 void show_hash_next_node(Node **linked_list_first_element, Node *node_hash_to_show) {
@@ -159,6 +169,7 @@ void show_hash_previous_node(Node **linked_list_first_element, Node *node_hash_t
         show_hash_previous_node(linked_list_first_element, node_hash_to_show->previous_node);
     }
 }
+
 
 Node *search_lowest_node_hash(Node *starting_node) {
     if (starting_node->node_lesser_hash != NULL) 

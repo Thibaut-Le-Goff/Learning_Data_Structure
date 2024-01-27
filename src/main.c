@@ -46,11 +46,10 @@ int main() {
     }
 
 
-    //balance_binary_tree(&first_node_binary_tree);
+    balance_binary_tree(&first_node_binary_tree);
 
 
     // delette the nodes in a random order
-
     for (int number_nodes_to_delete = NUM_NODES; number_nodes_to_delete != 0; --number_nodes_to_delete)
     {
         // create a random index for the deletion of the node
@@ -62,7 +61,7 @@ int main() {
         // if the node was not already deleted
         {
             //printf("\nThe node to delete is :\n");
-            balance_binary_tree(&first_node_binary_tree);
+            //balance_binary_tree(&first_node_binary_tree);
 
             delete_node(&first_node_binary_tree, list_hash_node_created[rand_index_node_to_delete]);
 

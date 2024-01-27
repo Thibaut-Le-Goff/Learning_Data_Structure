@@ -45,13 +45,14 @@ void create_node(Node *linked_list_first_element, float *value) {
         // if the node created has a hash value greater than the iterator node 
         {
             /*
-            Node* linked_list_choosen_path = linked_list_iterator_node->node_greater_hash;
-            node_choosen_path(linked_list_iterator_node, linked_list_choosen_path, new_node);
-            */
+            We need to sort the node in as ascending order
+            in order to balance the tree, here we take advantage
+            of the binary tree algorithm :
 
             // we know the hash of the new node is greater than the hash
             // of the iterator, but we must know if its closer to it
             // than the actual next_node (lower in that case)
+            */
             determination_previous_node_of_new_node(linked_list_iterator_node, new_node);
             
 
@@ -80,13 +81,14 @@ void create_node(Node *linked_list_first_element, float *value) {
         // iterator node
         {
             /*
-            Node* linked_list_choosen_path = linked_list_iterator_node->node_lesser_hash;
-            node_choosen_path(linked_list_iterator_node, linked_list_choosen_path, new_node);
-            */
-
+            We need to sort the node in as ascending order
+            in order to balance the tree, here we take advantage
+            of the binary tree algorithm :
+            
             // we know the hash of the new node is lesser than the hash
             // of the iterator, but we must know if its closer to it
             // than the actual previous_node (greater in that case)
+            */
             determination_next_node_of_new_node(linked_list_iterator_node, new_node);
 
             
