@@ -2,13 +2,16 @@
 #include <stdlib.h>
 
 #include "../../../include/binary_tree/new.h"
+#include "../../../include/binary_tree/crud/read.h"
 
 #include "../../../include/list/sort.h"
 
 #include "../../../include/hash/create_hash.h"
 
-
 #define NUM_MAX_JUMPS 100
+
+void collision_case(Node *linked_list_iterator_node);
+
 
 void create_node(Node *linked_list_first_element, float *value) {
 
@@ -115,7 +118,29 @@ void create_node(Node *linked_list_first_element, float *value) {
         else if (new_node->hash_value == linked_list_iterator_node->hash_value)
         // if there is a hash collision
         {
-            fprintf(stderr, "Error : Hash collision");
+            fprintf(stderr, "Error : Hash collision at the creation of the node.\n");
+
+            /*
+            the node must be freed because it is invalid
+            but connection has been made by the node
+            how provoke the collision, simply freeing it will 
+            create a gap in the tree and list 
+            we have to ecreate the connections from 
+            linked_list_iterator_node
+            */
+
+            fprintf(stderr, "The node who was the first to be created :\n");
+            show_node_stdr(linked_list_iterator_node);
+
+            fprintf(stderr, "The node who created the collision :\n");
+            show_node_stdr(new_node);
+
+            collision_case(linked_list_iterator_node);
+
+            fprintf(stderr, "The node who was the first to be created after the resolution :\n");
+            show_node_stdr(linked_list_iterator_node);
+
+            // note : the counter of nodes passed is also wrong because of this
 
             // the node must be freed because it is invalid
             free(new_node);
@@ -225,9 +250,67 @@ void find_place_node(Node *linked_list_iterator_node, Node *new_node) {
     else if (new_node->hash_value == linked_list_iterator_node->hash_value)
     // if there is a hash collision
     {
-        fprintf(stderr, "Error : Hash collision");
+        fprintf(stderr, "Error : Hash collision at the creation of the node.\n");
+
+        /*
+        the node must be freed because it is invalid
+        but connection has been made by the node
+        how provoke the collision, simply freeing it will 
+        create a gap in the tree and list 
+        we have to ecreate the connections from 
+        linked_list_iterator_node
+        */
+
+        fprintf(stderr, "The node who was the first to be created :\n");
+        show_node_stdr(linked_list_iterator_node);
+
+        fprintf(stderr, "The node who created the collision :\n");
+        show_node_stdr(new_node);
+
+        collision_case(linked_list_iterator_node);
+
+        fprintf(stderr, "The node who was the first to be created after the resolution :\n");
+        show_node_stdr(linked_list_iterator_node);
+
+        // note : the counter of nodes passed is also wrong because of this
 
         // the node must be freed because it is invalid
         free(new_node);
+    }
+}
+
+void collision_case(Node *linked_list_iterator_node) {
+    // tree connections
+    if ( (linked_list_iterator_node->parent_node != NULL) &&
+         (linked_list_iterator_node->hash_value > linked_list_iterator_node->parent_node->hash_value) )
+    {
+        linked_list_iterator_node->parent_node->node_greater_hash = linked_list_iterator_node;
+    }
+    else if ( (linked_list_iterator_node->parent_node != NULL) &&
+              (linked_list_iterator_node->hash_value < linked_list_iterator_node->parent_node->hash_value) )
+    {
+        linked_list_iterator_node->parent_node->node_lesser_hash = linked_list_iterator_node;
+    }
+
+    if (linked_list_iterator_node->node_greater_hash != NULL)
+    {
+        linked_list_iterator_node->node_greater_hash->parent_node = linked_list_iterator_node;
+    }
+
+    if (linked_list_iterator_node->node_lesser_hash != NULL) 
+    {
+        linked_list_iterator_node->node_lesser_hash->parent_node = linked_list_iterator_node;
+    }
+
+
+    // list reconnections
+    if (linked_list_iterator_node->next_node != NULL) 
+    {
+        linked_list_iterator_node->next_node->previous_node = linked_list_iterator_node;
+    }
+
+    if (linked_list_iterator_node->previous_node != NULL) 
+    {
+        linked_list_iterator_node->previous_node->next_node = linked_list_iterator_node;
     }
 }

@@ -106,3 +106,35 @@ void show_node(Node *node_to_show) {
     printf("Value stored : %f\n", node_to_show->value);
     printf("Hash : %f\n\n", node_to_show->hash_value);
 }
+
+
+
+void show_node_stdr(Node *node_to_show) {
+
+    fprintf(stderr, "Addr of the node : %p\n", (void *)node_to_show);
+
+    if (node_to_show->parent_node != NULL) {
+        fprintf(stderr, "Addr of the parent node on the tree : %p\n", (void *)node_to_show->parent_node);
+    }
+
+    if (node_to_show->node_greater_hash != NULL) {
+        fprintf(stderr, "addr of node with a greater hash on the tree : %p\n", (void *)node_to_show->node_greater_hash);       
+    }
+
+    if (node_to_show->node_lesser_hash != NULL) {
+        fprintf(stderr, "addr of node with a lesser hash on the tree : %p\n", (void *)node_to_show->node_lesser_hash);
+    }
+
+    if (node_to_show->next_node != NULL) {
+        fprintf(stderr, "addr of the next node on the list : %p\n", (void *)node_to_show->next_node);       
+    }
+
+    if (node_to_show->previous_node != NULL) {
+        fprintf(stderr, "addr of the previous node on the list : %p\n", (void *)node_to_show->previous_node);
+    }
+
+    fprintf(stderr, "The number of nodes who passed through this one is : %d\n", node_to_show->counter_node_passed_through);
+
+    fprintf(stderr, "Value stored : %f\n", node_to_show->value);
+    fprintf(stderr, "Hash : %f\n\n", node_to_show->hash_value);
+}

@@ -75,3 +75,16 @@ Node *get_node_recursion(Node* linked_list_iterator_node, float hash_node_to_pri
 
     return NULL;
 }
+
+Node *get_lowest_node(Node *starting_node) {
+    if (starting_node->node_lesser_hash != NULL) 
+    {
+        return get_lowest_node(starting_node->node_lesser_hash);
+    }
+    else if (starting_node->node_lesser_hash == NULL)
+    {
+        return starting_node;
+    }
+
+    return NULL;
+}
