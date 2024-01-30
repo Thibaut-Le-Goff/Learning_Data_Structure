@@ -11,14 +11,14 @@ of the binary tree algorithm :
 - Before the new node goes to the greater path we see if
 the new node is smaller than the node considered to 
 be the next node of the iterator node, to see if the new
-one is closer to the iterator than the actual next node 
-of the iterator node.
+one is closer to the iterator_node than the actual next node 
+of the iterator_node.
 
 - Before the new node goes to the lesser path we see if
 the new node is greater than the node considered to 
 be the previous node of the iterator node, to see if the new
-one is closer to the iterator nodes than the actual previous 
-node of the iterator node.
+one is closer to the iterator_node than the actual previous 
+node of the iterator_node.
 */
 
 void determination_previous_node_of_new_node(Node *linked_list_iterator_node, Node *new_node) {

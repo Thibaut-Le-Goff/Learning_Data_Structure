@@ -8,10 +8,11 @@
 
 #include "../../../include/hash/create_hash.h"
 
+#include "../../../include/stdr_outputs/binary_tree/collision.h"
+
 #define NUM_MAX_JUMPS 100
 
 void collision_case(Node *linked_list_iterator_node);
-
 
 void create_node(Node *linked_list_first_element, float *value) {
 
@@ -250,7 +251,7 @@ void find_place_node(Node *linked_list_iterator_node, Node *new_node) {
     else if (new_node->hash_value == linked_list_iterator_node->hash_value)
     // if there is a hash collision
     {
-        fprintf(stderr, "Error : Hash collision at the creation of the node.\n");
+        //fprintf(stderr, "Error : Hash collision at the creation of the node.\n");
 
         /*
         the node must be freed because it is invalid
@@ -261,16 +262,13 @@ void find_place_node(Node *linked_list_iterator_node, Node *new_node) {
         linked_list_iterator_node
         */
 
-        fprintf(stderr, "The node who was the first to be created :\n");
-        show_node_stdr(linked_list_iterator_node);
+        collision_warning(new_node, linked_list_iterator_node, "find_place_node");
 
-        fprintf(stderr, "The node who created the collision :\n");
-        show_node_stdr(new_node);
 
-        collision_case(linked_list_iterator_node);
+        //collision_case(linked_list_iterator_node);
 
-        fprintf(stderr, "The node who was the first to be created after the resolution :\n");
-        show_node_stdr(linked_list_iterator_node);
+
+        //collision_warning(new_node, linked_list_iterator_node, "find_place_node");
 
         // note : the counter of nodes passed is also wrong because of this
 
