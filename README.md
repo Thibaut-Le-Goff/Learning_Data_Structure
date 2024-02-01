@@ -11,3 +11,7 @@ Or horizontally:
 <p align="center">
     <img src="images/idee2(2).png" width="700"/>
 </p>
+
+<p align="center">
+    <img src="images/idee3.png" width="700"/>
+</p>
