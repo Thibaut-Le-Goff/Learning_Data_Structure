@@ -12,7 +12,7 @@
 
 #include "../include/hash/create_hash.h"
 
-#define NUM_NODES 10
+#define NUM_NODES 11
 
 int main() {
 

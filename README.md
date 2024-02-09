@@ -33,27 +33,27 @@ The problem is to find the middle node of the whole list, and the one of the are
 One solution would probably be to iterate through each node of the tree, O(log(n)), and make a comparison between the number of nodes to the left and right of iterator_node and the number of nodes it would have to its left and right if it were in a linked-list.
 
 For the root:
-- At the node 8, we see that there are two nodes at the left and eight on the right 
+- At the node 8, we see that there are two nodes at the right and eight on the left 
   but we need a node with ```floor((float)(((*linked_list_first_element)->counter_node_passed_through) + 1) / 2)``` nodes, 5 in this case, on the left 
   and the right.
 
   In response, we will go to the path with the most nodes and record the number
   of nodes on the other path + 1 to count the iterator_node, in that case, we go 
-  to the right path and we record the number of nodes on the left path + 1, which 
+  to the left path and we record the number of nodes on the right path + 1, which 
   is $2 + 1 = 3$.
 
-- iterator_node is now at the node on the right path, node 5, we will add to the
+- iterator_node is now at the node on the left path, node 5, we will add to the
   number of node at the same side of the side the number of nodes we previsously 
   recorded.
 
   In our case, we add $3$ to the number of nodes on the right path, giving 
   $2 + 3 = 5$
 
-  This means that the right path is considered to have 5 nodes on the right path
-  but it also has 5 nodes on the left, which makes it the the root of the 
+  This means that the node is considered to have 5 nodes on the right path
+  but it also has 5 nodes on the left, which makes it the root of the 
   balanced tree.
 
-- finally, to avoid redundant memory, we delette the node 5.
+- Finally, to avoid redundant memory, we delete the node 5.
 
 For the lesser child of the root:
 

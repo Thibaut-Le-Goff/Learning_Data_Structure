@@ -1,6 +1,6 @@
 CC := gcc
 
-CFLAGS := -std=c99 -g -Wall -Wextra -pedantic-errors -Werror -Wfatal-errors -Iinclude -MMD -MP
+CFLAGS := -std=c99 -g -Wall -Wextra -pedantic-errors -fstrict-aliasing -fstack-protector-all -fPIE -Werror -Wfatal-errors -Iinclude -MMD -MP
 LDFLAGS := -lm
 VALGRIND_FLAGS := --leak-check=full --show-leak-kinds=all --track-origins=yes -s
 
