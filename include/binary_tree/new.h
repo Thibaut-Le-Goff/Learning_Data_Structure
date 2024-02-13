@@ -1,5 +1,5 @@
-#ifndef NEW_H
-#define NEW_H
+#ifndef __NEW_H__
+#define __NEW_H__
 
     typedef struct Node Node;
 
@@ -35,4 +35,4 @@
 
     Node *new_binary_tree(float *value);
 
-#endif
+#endif //__NEW_H__

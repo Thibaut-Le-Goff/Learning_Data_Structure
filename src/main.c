@@ -4,7 +4,7 @@
 #include <time.h>
 
 #include "../include/binary_tree/new.h"
-#include "../include/binary_tree/balancing.h"
+#include "../include/binary_tree/balanced_tree/balancing.h"
 
 #include "../include/binary_tree/crud/read.h"
 #include "../include/binary_tree/crud/create.h"
@@ -13,6 +13,7 @@
 #include "../include/hash/create_hash.h"
 
 #define NUM_NODES 11
+// the programme crash at 4,000 nodes due to hash collisions.
 
 int main() {
 
@@ -21,7 +22,6 @@ int main() {
     // create a random value for the creation of the first node
     srand(time(NULL));
     
-    //float rand_hash_root_node_to_create = (float)rand() / RAND_MAX * (NUM_NODES);
     float rand_hash_root_node_to_create = ((float)rand() / RAND_MAX) * (2 * NUM_NODES) - NUM_NODES;
     Node *first_node_binary_tree = new_binary_tree(&rand_hash_root_node_to_create);
 
@@ -46,7 +46,8 @@ int main() {
     }
 
 
-    balance_binary_tree(&first_node_binary_tree);
+    Node *root_node_balanced_tree = balance_binary_tree(&first_node_binary_tree);
+    free(root_node_balanced_tree);
 
 
     // delette the nodes in a random order

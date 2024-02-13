@@ -109,6 +109,29 @@ void show_node(Node *node_to_show) {
 
 
 
+void show_next_node(Node *linked_list_first_element, Node *node_hash_to_show) {
+    //printf("Hash : %f.\n", node_hash_to_show->hash_value);
+    print_node(linked_list_first_element, node_hash_to_show->hash_value);
+
+    if (node_hash_to_show->next_node != NULL)
+    {
+        show_next_node(linked_list_first_element, node_hash_to_show->next_node);
+    }
+}
+
+
+void show_previous_node(Node *linked_list_first_element, Node *node_hash_to_show) {
+    //printf("Hash : %f.\n", node_hash_to_show->hash_value);
+    print_node(linked_list_first_element, node_hash_to_show->hash_value);
+
+    if (node_hash_to_show->previous_node != NULL)
+    {
+        show_previous_node(linked_list_first_element, node_hash_to_show->previous_node);
+    }
+}
+
+
+
 void show_node_stdr(Node *node_to_show) {
 
     fprintf(stderr, "Addr of the node : %p\n", (void *)node_to_show);
