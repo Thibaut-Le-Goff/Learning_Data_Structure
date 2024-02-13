@@ -6,6 +6,8 @@
 
 #include "../../../../include/list/sort.h"
 
+#include "../../../../include/hash/create_hash.h"
+
 #include "../../../../include/stdr_outputs/binary_tree/collision.h"
 
 #define NUM_MAX_JUMPS 100
@@ -23,6 +25,8 @@ void collision_case(Node *linked_list_iterator_node);
 void put_node(Node *linked_list_first_element, Node *node_to_put) {
 
     // find the place to put the node
+    Node *linked_list_iterator_node = linked_list_first_element;
+
     for (int jump_thought_nodes = 0; jump_thought_nodes <= NUM_MAX_JUMPS - 1; ++jump_thought_nodes)
     {
         // the fact the node created passed throught the iterator node is notified :
@@ -40,7 +44,7 @@ void put_node(Node *linked_list_first_element, Node *node_to_put) {
             // of the iterator, but we must know if its closer to it
             // than the actual next_node (lower in that case)
             */
-            determination_previous_node_of_node_to_put(linked_list_iterator_node, node_to_put);
+            determination_previous_node_of_new_node(linked_list_iterator_node, node_to_put);
             
 
             if (linked_list_iterator_node->node_greater_hash == NULL)
@@ -76,7 +80,7 @@ void put_node(Node *linked_list_first_element, Node *node_to_put) {
             // of the iterator, but we must know if its closer to it
             // than the actual previous_node (greater in that case)
             */
-            determination_next_node_of_node_to_put(linked_list_iterator_node, node_to_put);
+            determination_next_node_of_new_node(linked_list_iterator_node, node_to_put);
 
             
             if (linked_list_iterator_node->node_lesser_hash == NULL)
@@ -168,7 +172,7 @@ void find_place_node(Node *linked_list_iterator_node, Node *node_to_put) {
         // we know the hash of the new node is greater than the hash
         // of the iterator, but we must know if its closer to it
         // than the actual next_node (lower in that case)
-        determination_previous_node_of_node_to_put(linked_list_iterator_node, node_to_put);
+        determination_previous_node_of_new_node(linked_list_iterator_node, node_to_put);
 
         if (linked_list_iterator_node->node_greater_hash == NULL)
         // if there are no node on the greater branch of the iterator node
@@ -194,7 +198,7 @@ void find_place_node(Node *linked_list_iterator_node, Node *node_to_put) {
         // we know the hash of the new node is lesser than the hash
         // of the iterator, but we must know if its closer to it
         // than the actual previous_node (greater in that case)
-        determination_next_node_of_node_to_put(linked_list_iterator_node, node_to_put);
+        determination_next_node_of_new_node(linked_list_iterator_node, node_to_put);
 
         if (linked_list_iterator_node->node_lesser_hash == NULL)
         // if there are no node at the lesser branche of the iterator node

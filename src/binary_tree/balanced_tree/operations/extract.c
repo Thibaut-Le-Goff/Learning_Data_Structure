@@ -4,6 +4,8 @@
 #include "../../../../include/binary_tree/new.h"
 #include "../../../../include/binary_tree/crud/read.h"
 
+#define NUM_MAX_JUMPS 100
+
 /*
 We need to extract the node from the unbalanced tree 
 before putting it on the balanced tree.
@@ -124,22 +126,22 @@ void parent_node_case(Node **linked_list_first_element, Node *node_to_extract)
 
 void from_greater_node_to_smallest_hash(Node **linked_list_first_element, Node *node_to_extract) {
         
-    Node *node_to_extract = node_to_extract->node_greater_hash;
+    Node *linked_list_iterator_node = node_to_extract->node_greater_hash;
 
     for (int jump_thought_nodes = 0; jump_thought_nodes <= NUM_MAX_JUMPS; ++jump_thought_nodes)
     // we will iterate through the nodes by the lesser path because 
     // the smallest hash value in this path is the next greater hash after 
     // the hash to delete (because we are starting by its greater branche)
     {
-        if (node_to_extract->node_lesser_hash == NULL)
+        if (linked_list_iterator_node->node_lesser_hash == NULL)
         // if there are no lesser hash, the iterator node 
         // is considered to be the node of remplacement
         {
-            Node *replacement_node = node_to_extract;
+            Node *replacement_node = linked_list_iterator_node;
             replacement_of_node(linked_list_first_element, node_to_extract, replacement_node);
             break;
         }
-        else if (node_to_extract->node_lesser_hash != NULL)
+        else if (linked_list_iterator_node->node_lesser_hash != NULL)
         // if there are a lesser hash, the iterator node 
         // is considered to have a hash value greater than 
         // another node, this is not the next greater node 
@@ -148,9 +150,9 @@ void from_greater_node_to_smallest_hash(Node **linked_list_first_element, Node *
             // we have to decrease the number of nodes who passed 
             // through the node in order to keep this number acurate
             // after the replacement of the node :
-            --node_to_extract->counter_node_passed_through;
+            --linked_list_iterator_node->counter_node_passed_through;
 
-            node_to_extract = node_to_extract->node_lesser_hash;
+            linked_list_iterator_node = linked_list_iterator_node->node_lesser_hash;
         }
          
         if (jump_thought_nodes == NUM_MAX_JUMPS)
@@ -166,22 +168,22 @@ void from_greater_node_to_smallest_hash(Node **linked_list_first_element, Node *
 
 void from_lesser_node_to_biggest_hash(Node **linked_list_first_element, Node *node_to_extract) {
       
-    Node *node_to_extract = node_to_extract->node_lesser_hash;
+    Node *linked_list_iterator_node = node_to_extract->node_lesser_hash;
 
     for (int jump_thought_nodes = 0; jump_thought_nodes <= NUM_MAX_JUMPS; ++jump_thought_nodes)
     // we will iterate through the nodes by the greater path because 
     // the biggest hash value in this path is the next greater hash after
     // the hash to delete (because we are starting by its lesser branche)
     {
-        if (node_to_extract->node_greater_hash == NULL)
+        if (linked_list_iterator_node->node_greater_hash == NULL)
         // if there are no greater hash, the iterator node 
         // is considered to be the node of remplacement
         {
-            Node *replacement_node = node_to_extract;
+            Node *replacement_node = linked_list_iterator_node;
             replacement_of_node(linked_list_first_element, node_to_extract, replacement_node);
             break;
         }
-        else if (node_to_extract->node_greater_hash != NULL)
+        else if (linked_list_iterator_node->node_greater_hash != NULL)
         // if there are a greater hash, the iterator node 
         // is considered to have a hash value smaller than 
         // another node, this is not the next greater node 
@@ -190,9 +192,9 @@ void from_lesser_node_to_biggest_hash(Node **linked_list_first_element, Node *no
             // we have to decrease the number of nodes who passed 
             // through the node in order to keep this number acurate
             // after the replacement of the node :
-            --node_to_extract->counter_node_passed_through;
+            --linked_list_iterator_node->counter_node_passed_through;
 
-            node_to_extract = node_to_extract->node_greater_hash;
+            node_to_extract = linked_list_iterator_node->node_greater_hash;
         }
          
         if (jump_thought_nodes == NUM_MAX_JUMPS) 
