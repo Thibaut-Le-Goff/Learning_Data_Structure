@@ -4,6 +4,9 @@
 #include "../../../include/binary_tree/new.h"
 #include "../../../include/binary_tree/crud/read.h"
 
+#include "../../../include/binary_tree/crud/operations/put.h"
+#include "../../../include/binary_tree/crud/operations/extract.h"
+
 #include "../../../include/list/sort.h"
 
 #include "../../../include/hash/create_hash.h"
@@ -12,7 +15,7 @@
 
 #define NUM_MAX_JUMPS 100
 
-void collision_case(Node *linked_list_iterator_node);
+//void collision_case(Node *linked_list_iterator_node);
 
 void create_node(Node *linked_list_first_element, float *value) {
 
@@ -35,6 +38,9 @@ void create_node(Node *linked_list_first_element, float *value) {
     new_node->hash_value = *value;
     //new_node->hash_value = create_hash((char*)value);
 
+    put_node(linked_list_first_element, new_node);
+}
+/*
 //----------------------------------------------------------------------------------------------
 
     // find the place to put the new node
@@ -48,15 +54,15 @@ void create_node(Node *linked_list_first_element, float *value) {
         if (new_node->hash_value > linked_list_iterator_node->hash_value)
         // if the node created has a hash value greater than the iterator node 
         {
-            /*
-            We need to sort the node in as ascending order
-            in order to balance the tree, here we take advantage
-            of the binary tree algorithm :
+            
+            //We need to sort the node in as ascending order
+            //in order to balance the tree, here we take advantage
+            //of the binary tree algorithm :
 
             // we know the hash of the new node is greater than the hash
             // of the iterator, but we must know if its closer to it
             // than the actual next_node (lower in that case)
-            */
+            
             determination_previous_node_of_new_node(linked_list_iterator_node, new_node);
             
 
@@ -84,15 +90,15 @@ void create_node(Node *linked_list_first_element, float *value) {
         // if the node created has a hash value less than the 
         // iterator node
         {
-            /*
-            We need to sort the node in as ascending order
-            in order to balance the tree, here we take advantage
-            of the binary tree algorithm :
+            
+            //We need to sort the node in as ascending order
+            //in order to balance the tree, here we take advantage
+            //of the binary tree algorithm :
             
             // we know the hash of the new node is lesser than the hash
             // of the iterator, but we must know if its closer to it
             // than the actual previous_node (greater in that case)
-            */
+            
             determination_next_node_of_new_node(linked_list_iterator_node, new_node);
 
             
@@ -121,14 +127,14 @@ void create_node(Node *linked_list_first_element, float *value) {
         {
             fprintf(stderr, "Error : Hash collision at the creation of the node.\n");
 
-            /*
-            the node must be freed because it is invalid
-            but connection has been made by the node
-            how provoke the collision, simply freeing it will 
-            create a gap in the tree and list 
-            we have to ecreate the connections from 
-            linked_list_iterator_node
-            */
+            
+            //the node must be freed because it is invalid
+            //but connection has been made by the node
+            //how provoke the collision, simply freeing it will 
+            //create a gap in the tree and list 
+            //we have to ecreate the connections from 
+            //linked_list_iterator_node
+            
 
             fprintf(stderr, "The node who was the first to be created :\n");
             show_node_stdr(linked_list_iterator_node);
@@ -154,12 +160,12 @@ void create_node(Node *linked_list_first_element, float *value) {
         }
     }
 }
-
+*/
 
 
 // ----------------- recursion version --------------------
 
-void find_place_node(Node *linked_list_iterator_node, Node *new_node);
+//void find_place_node(Node *linked_list_iterator_node, Node *new_node);
 
 void create_node_recursion(Node *linked_list_first_element, float *value) {
 
@@ -182,10 +188,10 @@ void create_node_recursion(Node *linked_list_first_element, float *value) {
     new_node->hash_value = *value;
 
     // find the place to put the new node
-    find_place_node(linked_list_first_element, new_node);
+    put_node_recursion(linked_list_first_element, new_node);
 }
 
-
+/*
 void find_place_node(Node *linked_list_iterator_node, Node *new_node) {
 
     if (linked_list_iterator_node == NULL) {
@@ -253,14 +259,13 @@ void find_place_node(Node *linked_list_iterator_node, Node *new_node) {
     {
         //fprintf(stderr, "Error : Hash collision at the creation of the node.\n");
 
-        /*
-        the node must be freed because it is invalid
-        but connection has been made by the node
-        how provoke the collision, simply freeing it will 
-        create a gap in the tree and list 
-        we have to ecreate the connections from 
-        linked_list_iterator_node
-        */
+        //the node must be freed because it is invalid
+        //but connection has been made by the node
+        //how provoke the collision, simply freeing it will 
+        //create a gap in the tree and list 
+        //we have to ecreate the connections from 
+        //linked_list_iterator_node
+        
 
         collision_warning(new_node, linked_list_iterator_node, "find_place_node");
 
@@ -312,3 +317,4 @@ void collision_case(Node *linked_list_iterator_node) {
         linked_list_iterator_node->previous_node->next_node = linked_list_iterator_node;
     }
 }
+*/

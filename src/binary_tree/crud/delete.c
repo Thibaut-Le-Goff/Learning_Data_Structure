@@ -4,8 +4,12 @@
 #include "../../../include/binary_tree/new.h"
 #include "../../../include/binary_tree/crud/read.h"
 
+#include "../../../include/binary_tree/crud/operations/put.h"
+#include "../../../include/binary_tree/crud/operations/extract.h"
+
 #define NUM_MAX_JUMPS 100
 
+/*
 
 void leaf_node_case(Node *node_to_delete);
 void parent_node_case(Node **linked_list_first_element, Node *node_to_delete);
@@ -14,7 +18,7 @@ void parent_node_case(Node **linked_list_first_element, Node *node_to_delete);
 void fill_gap_list(Node *node_to_delete);
 
 void set_node_pointers_to_null(Node *node_to_delete);
-
+*/
 
 void delete_node(Node **linked_list_first_element, float hash_node_to_delete) {
 
@@ -22,7 +26,6 @@ void delete_node(Node **linked_list_first_element, float hash_node_to_delete) {
 
     for (int jump_thought_nodes = 0; jump_thought_nodes <= NUM_MAX_JUMPS; ++jump_thought_nodes)
     {
-
         // we have to mdecrease the number of nodes who passed 
         // through the node in order to keep this number acurate
         // after the deletion of the node :
@@ -46,6 +49,7 @@ void delete_node(Node **linked_list_first_element, float hash_node_to_delete) {
         else if (hash_node_to_delete == linked_list_iterator_node->hash_value)
         // if the hash is the one of the node we are looking for
         {
+            /*
             if ( (linked_list_iterator_node->node_greater_hash == NULL) && 
                  (linked_list_iterator_node->node_lesser_hash == NULL) &&
                  (linked_list_iterator_node->parent_node != NULL) )
@@ -63,13 +67,13 @@ void delete_node(Node **linked_list_first_element, float hash_node_to_delete) {
                 parent_node_case(linked_list_first_element, linked_list_iterator_node);
             }
 
-            /*
-            there is a third case when the node does not 
-            have parent nor children.
-            In that case its the only one node of the linked list
-            its point to nothing and nothing point to it
-            it can be freed right away
-            */
+            
+            //there is a third case when the node does not 
+            //have parent nor children.
+            //In that case its the only one node of the linked list
+            //its point to nothing and nothing point to it
+            //it can be freed right away
+            
 
             // The node to delette need to give the address of its previous node  
             // to its next node and also the address of its next node to
@@ -77,13 +81,15 @@ void delete_node(Node **linked_list_first_element, float hash_node_to_delete) {
             fill_gap_list(linked_list_iterator_node);
         
             set_node_pointers_to_null(linked_list_iterator_node);
-            free(linked_list_iterator_node);
+            */
+            Node *node_to_delete = extract_node(linked_list_first_element, linked_list_iterator_node);            
+            free(node_to_delete);
             break;
         }
 
-        if (jump_thought_nodes == NUM_MAX_JUMPS) 
+        if (jump_thought_nodes == NUM_MAX_JUMPS)
         {
-            fprintf(stderr, "Error : The node wanted was not found in %d jumps.", jump_thought_nodes);
+            fprintf(stderr, "Error : The node to delete was not found in %d jumps.", jump_thought_nodes);
         }
     }
 }
@@ -91,7 +97,7 @@ void delete_node(Node **linked_list_first_element, float hash_node_to_delete) {
 
 // ---------------------------------------- leaf_node_case -------------------------------------------------------------------
 
-
+/*
 void leaf_node_case(Node *node_to_delete)
 {
     if (node_to_delete->hash_value > node_to_delete->parent_node->hash_value)
@@ -250,12 +256,12 @@ void replacement_of_node(Node **linked_list_first_element, Node *node_to_delete,
     // keep that number acurrate
     replacement_node->counter_node_passed_through = node_to_delete->counter_node_passed_through;
 
-    /*
-    The replacement node is disconected from the tree 
-    to be reconnected in anothe location can create 
-    a gap who need to be filed by redirecting some
-    pointers 
-    */
+    
+    //The replacement node is disconected from the tree 
+    //to be reconnected in anothe location can create 
+    //a gap who need to be filed by redirecting some
+    //pointers 
+    
 
     path_redirection(replacement_node);
     
@@ -271,11 +277,11 @@ void replacement_of_node(Node **linked_list_first_element, Node *node_to_delete,
 
 void path_redirection(Node *replacement_node) {
 
-    /*
-    The replacement node is disconected from the tree
-    to be reconnected in anothe location this may create
-    a gap who need to be filed by redirecting some pointers
-    */
+    
+    //The replacement node is disconected from the tree
+    //to be reconnected in anothe location this may create
+    //a gap who need to be filed by redirecting some pointers
+    
 
     // we need to know if the replacement node is the lesser or 
     // greater child of its parent to know wich pointer 
@@ -445,6 +451,7 @@ void set_node_pointers_to_null(Node *node_to_delete) {
     node_to_delete->previous_node = NULL;
     node_to_delete->next_node = NULL;
 }
+*/
 
 
 /*

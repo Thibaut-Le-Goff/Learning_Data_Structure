@@ -7,9 +7,8 @@
 #include "../../../include/binary_tree/crud/read.h"
 #include "../../../include/binary_tree/crud/get.h"
 
-//#include "../../../include/binary_tree/balanced_tree/operations/put.h"
-#include "../../../include/binary_tree/balanced_tree/operations/extract.h"
-
+#include "../../../include/binary_tree/crud/operations/put.h"
+#include "../../../include/binary_tree/crud/operations/extract.h"
 
 #define BALANCING_THRESHOLD 1
 
@@ -19,7 +18,8 @@ void show_hash_previous_node(Node **linked_list_first_element, Node *node_hash_t
 
 void find_middle_node_area(Node *root_node_balanced_tree, Node *linked_list_first_element, Node *first_node_in_area, int *min_area, int *max_area);
 
-Node *balance_binary_tree(Node **linked_list_first_element) {
+//Node *balance_binary_tree(Node **linked_list_first_element) {
+void balance_binary_tree(Node **linked_list_first_element) {
 
     printf("\nThere are %d nodes on the tree.\n", (*linked_list_first_element)->counter_node_passed_through + 1);
 
@@ -109,7 +109,7 @@ Node *balance_binary_tree(Node **linked_list_first_element) {
     */
 
     // Les nodes restants
-    return root_node_balanced_tree;
+    //return root_node_balanced_tree;
 }
 
 

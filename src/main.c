@@ -10,9 +10,11 @@
 #include "../include/binary_tree/crud/create.h"
 #include "../include/binary_tree/crud/delete.h"
 
+#include "../include/stdr_outputs/binary_tree/examine_tree.h"
+
 #include "../include/hash/create_hash.h"
 
-#define NUM_NODES 11
+#define NUM_NODES 4100
 // the programme crash at 4,000 nodes due to hash collisions.
 
 int main() {
@@ -45,10 +47,8 @@ int main() {
         list_hash_node_created[number_nodes_created] = rand_hash_node_to_create;
     }
 
-
-    Node *root_node_balanced_tree = balance_binary_tree(&first_node_binary_tree);
-    free(root_node_balanced_tree);
-
+    //Node *root_node_balanced_tree = balance_binary_tree(&first_node_binary_tree);
+    //free(root_node_balanced_tree);   
 
     // delette the nodes in a random order
     for (int number_nodes_to_delete = NUM_NODES; number_nodes_to_delete != 0; --number_nodes_to_delete)
