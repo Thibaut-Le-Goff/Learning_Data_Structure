@@ -14,71 +14,20 @@
 
 #include "../include/hash/create_hash.h"
 
-#define NUM_NODES 4100
-// the programme crash at 4,000 nodes due to hash collisions.
+#include "../include/tests/random.h"
+
+//#define NUM_NODES 2
+// the programme can crash at 4,000 nodes due to hash collisions.
 
 int main() {
 
-    float list_hash_node_created[NUM_NODES];
-
-    // create a random value for the creation of the first node
-    srand(time(NULL));
-    
-    float rand_hash_root_node_to_create = ((float)rand() / RAND_MAX) * (2 * NUM_NODES) - NUM_NODES;
-    Node *first_node_binary_tree = new_binary_tree(&rand_hash_root_node_to_create);
-
-    //printf("\n\nThe root node has been created :\n");
-    //print_node(first_node_binary_tree, rand_hash_root_node_to_create);
-
-    list_hash_node_created[0] = rand_hash_root_node_to_create;
-
-    for (int number_nodes_created = 1; number_nodes_created <= NUM_NODES - 1; ++number_nodes_created)
-    {
-        // create a random value for the creation of the node
-        float rand_hash_node_to_create = ((float)rand() / RAND_MAX) * (2 * NUM_NODES) - NUM_NODES;
-
-        //create_node(first_node_binary_tree, &rand_hash_node_to_create);
-        create_node_recursion(first_node_binary_tree, &rand_hash_node_to_create);
-
-        //printf("\n\nA new node has been created :\n");
-        //print_node(first_node_binary_tree, rand_hash_node_to_create);
-
-        // the hash value is stored in the array
-        list_hash_node_created[number_nodes_created] = rand_hash_node_to_create;
-    }
-
-    //Node *root_node_balanced_tree = balance_binary_tree(&first_node_binary_tree);
-    //free(root_node_balanced_tree);   
-
-    // delette the nodes in a random order
-    for (int number_nodes_to_delete = NUM_NODES; number_nodes_to_delete != 0; --number_nodes_to_delete)
-    {
-        // create a random index for the deletion of the node
-        int rand_index_node_to_delete = rand() % NUM_NODES;
-
-        //printf("\n\nindex node to delete : %d\n", rand_index_node_to_delete);
-
-        if (list_hash_node_created[rand_index_node_to_delete] != -1)
-        // if the node was not already deleted
-        {
-            //printf("\nThe node to delete is :\n");
-            //balance_binary_tree(&first_node_binary_tree);
-
-            delete_node(&first_node_binary_tree, list_hash_node_created[rand_index_node_to_delete]);
-
-            list_hash_node_created[rand_index_node_to_delete] = -1;
-        }
-        else
-        {
-            //printf("\nthe node has already been deleted.\n");
-            ++number_nodes_to_delete;
-        }
-    }
+    int num_node = 1100;
+    random_binary_tree_test(&num_node);
+    //Random_Binary_Tree *random_tree = random_binary_tree_creation(&num_node);
+    //random_binary_tree_deletion(&num_node, random_tree);
 
 
-
-    /**/
-    /// test hash for the binary tree:
+/// test hash for the binary tree:
 
     char test_char[] = "George Washington";
     int hash = create_hash_tree(test_char);
@@ -96,11 +45,6 @@ int main() {
     char test4_char[] = "uftu";
     int hash4 = create_hash_tree(test4_char);
     printf("hash4 of %s : %d\n", test4_char, hash4);
-
-
-
-
-
 
 
 /// test hash for the table:
