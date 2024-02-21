@@ -21,7 +21,7 @@
 
 int main() {
 
-    int num_node = 1100;
+    int num_node = 2100;
     random_binary_tree_test(&num_node);
     //Random_Binary_Tree *random_tree = random_binary_tree_creation(&num_node);
     //random_binary_tree_deletion(&num_node, random_tree);

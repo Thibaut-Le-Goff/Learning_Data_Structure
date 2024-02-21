@@ -5,7 +5,7 @@
 
     struct Random_Binary_Tree {
         
-        Node **first_node_binary_tree;
+        Node *first_node_binary_tree;
         float *list_hash_node_created;
     };
 
