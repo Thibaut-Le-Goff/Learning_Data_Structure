@@ -85,11 +85,11 @@ void balance_binary_tree(Node **linked_list_first_element) {
         }
     }
 
-    printf("\nThe root node of the balanced tree, at the index %d, is:\n", middle_node_index_rounded_up);
+    printf("\n\nThe root node of the balanced tree, at the index %d, is:\n", middle_node_index_rounded_up);
     print_node(*linked_list_first_element, middle_node->hash_value);
     
-    //Node *root_node_balanced_tree = create_balanced_tree(middle_node);
-    Node *root_node_balanced_tree = extract_node(linked_list_first_element, middle_node);
+    Node *root_node_balanced_tree = middle_node;
+    //Node *root_node_balanced_tree = extract_node(linked_list_first_element, middle_node);
 
     // call of the functions
     int min_area = 0;

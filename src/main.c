@@ -21,14 +21,23 @@
 
 int main() {
 
-    int num_node = 2100;
-    random_binary_tree_test(&num_node);
-    //Random_Binary_Tree *random_tree = random_binary_tree_creation(&num_node);
-    //random_binary_tree_deletion(&num_node, random_tree);
+    // the number of nodes the tree will have 
+    int num_node = 11;
+    //random_binary_tree_test(&num_node);
+
+    // creation of the tree
+    Random_Binary_Tree *random_tree = random_binary_tree_creation(&num_node);
+
+    // variouse tests, collision, balancing, ect...
+    balance_binary_tree(&random_tree->first_node_binary_tree);
+
+    // deletion of the tree
+    random_binary_tree_deletion(&num_node, random_tree);
+
+
 
 
 /// test hash for the binary tree:
-
     char test_char[] = "George Washington";
     int hash = create_hash_tree(test_char);
     printf("\nhash of %s : %d\n", test_char, hash);

@@ -14,28 +14,31 @@
 
 #include "../include/tests/random.h"
 
-void random_binary_tree_test(int *num_node) {
-//Random_Binary_Tree *random_binary_tree_creation(int *num_node) {
+Random_Binary_Tree *create_random_binary_tree(int *num_node, float *rand_hash_root_node_to_create);
+void free_random_binary_tree(Random_Binary_Tree *random_tree);
+//void random_binary_tree_deletion(int *num_node, Random_Binary_Tree *random_tree);
 
-    float list_hash_node_created[*num_node];
 
-    //Random_Binary_Tree *random_tree = (Random_Binary_Tree *)malloc(sizeof(Random_Binary_Tree));
-    //Random_Binary_Tree->list_hash_node_created = [*num_node];
+
+//void random_binary_tree_test(int *num_node) {
+Random_Binary_Tree *random_binary_tree_creation(int *num_node) {
+
+    //float list_hash_node_created[*num_node];
 
     // create a random value for the creation of the first node
     srand(time(NULL));
     
     float rand_hash_root_node_to_create = ((float)rand() / RAND_MAX) * (2 * *num_node) - *num_node;
-    Node *first_node_binary_tree = new_binary_tree(&rand_hash_root_node_to_create);
-
-    //random_tree->first_node_binary_tree = new_binary_tree(&rand_hash_root_node_to_create);
     
+    //Node *first_node_binary_tree = new_binary_tree(&rand_hash_root_node_to_create);
+    Random_Binary_Tree *random_tree = create_random_binary_tree(num_node, &rand_hash_root_node_to_create);
+
 
     //printf("\n\nThe root node has been created :\n");
     //print_node(first_node_binary_tree, rand_hash_root_node_to_create);
 
-    list_hash_node_created[0] = rand_hash_root_node_to_create;
     //list_hash_node_created[0] = rand_hash_root_node_to_create;
+    random_tree->list_hash_node_created[0] = rand_hash_root_node_to_create;
 
     for (int number_nodes_created = 1; number_nodes_created <= *num_node - 1; ++number_nodes_created)
     {
@@ -43,23 +46,27 @@ void random_binary_tree_test(int *num_node) {
         float rand_hash_node_to_create = ((float)rand() / RAND_MAX) * (2 * *num_node) - *num_node;
 
         //create_node(first_node_binary_tree, &rand_hash_node_to_create);
-        create_node_recursion(first_node_binary_tree, &rand_hash_node_to_create);
-        //create_node_recursion(random_tree->first_node_binary_tree, &rand_hash_node_to_create);
+        //create_node_recursion(first_node_binary_tree, &rand_hash_node_to_create);
+        create_node_recursion(random_tree->first_node_binary_tree, &rand_hash_node_to_create);
 
         //printf("\n\nA new node has been created :\n");
         //print_node(first_node_binary_tree, rand_hash_node_to_create);
 
         // the hash value is stored in the array
-        list_hash_node_created[number_nodes_created] = rand_hash_node_to_create;
-        //random_tree->list_hash_node_created[number_nodes_created] = rand_hash_node_to_create;
+        //list_hash_node_created[number_nodes_created] = rand_hash_node_to_create;
+        random_tree->list_hash_node_created[number_nodes_created] = rand_hash_node_to_create;
     }
-/*
+
+    //random_binary_tree_deletion(num_node, random_tree);
     return random_tree;
 }
 
 
+
+
+
 void random_binary_tree_deletion(int *num_node, Random_Binary_Tree *random_tree) {
-*/
+
     // delette the nodes in a random order
     for (int number_nodes_to_delete = *num_node; number_nodes_to_delete != 0; --number_nodes_to_delete)
     {
@@ -68,18 +75,18 @@ void random_binary_tree_deletion(int *num_node, Random_Binary_Tree *random_tree)
 
         //printf("\n\nindex node to delete : %d\n", rand_index_node_to_delete);
 
-        if (list_hash_node_created[rand_index_node_to_delete] != -1)
-        //if (random_tree->list_hash_node_created[rand_index_node_to_delete] != -1)
+        //if (list_hash_node_created[rand_index_node_to_delete] != -1)
+        if (random_tree->list_hash_node_created[rand_index_node_to_delete] != -1)
         // if the node was not already deleted
         {
             //printf("\nThe node to delete is :\n");
             //balance_binary_tree(&first_node_binary_tree);
 
-            //delete_node(random_tree->first_node_binary_tree, random_tree->list_hash_node_created[rand_index_node_to_delete]);
-            delete_node(&first_node_binary_tree, list_hash_node_created[rand_index_node_to_delete]);
+            delete_node(&random_tree->first_node_binary_tree, random_tree->list_hash_node_created[rand_index_node_to_delete]);
+            //delete_node(&first_node_binary_tree, list_hash_node_created[rand_index_node_to_delete]);
 
-            //random_tree->list_hash_node_created[rand_index_node_to_delete] = -1;
-            list_hash_node_created[rand_index_node_to_delete] = -1;
+            random_tree->list_hash_node_created[rand_index_node_to_delete] = -1;
+            //list_hash_node_created[rand_index_node_to_delete] = -1;
         }
         else
         {
@@ -87,4 +94,20 @@ void random_binary_tree_deletion(int *num_node, Random_Binary_Tree *random_tree)
             ++number_nodes_to_delete;
         }
     }
+
+    free_random_binary_tree(random_tree);
+}
+
+Random_Binary_Tree *create_random_binary_tree(int *num_node, float *rand_hash_root_node_to_create) {
+    Random_Binary_Tree *random_tree = (Random_Binary_Tree *)malloc(sizeof(Random_Binary_Tree));
+    
+    random_tree->first_node_binary_tree = new_binary_tree(rand_hash_root_node_to_create);
+    random_tree->list_hash_node_created = (float *)malloc(sizeof(float) * *num_node);
+
+    return random_tree;
+}
+
+void free_random_binary_tree(Random_Binary_Tree *random_tree) {
+    free(random_tree->list_hash_node_created);
+    free(random_tree);
 }
