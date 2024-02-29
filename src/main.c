@@ -22,14 +22,15 @@
 int main() {
 
     // the number of nodes the tree will have 
-    int num_node = 11;
+    int num_node = 5;
     //random_binary_tree_test(&num_node);
 
     // creation of the tree
     Random_Binary_Tree *random_tree = random_binary_tree_creation(&num_node);
 
     // variouse tests, collision, balancing, ect...
-    balance_binary_tree(&random_tree->first_node_binary_tree);
+    random_tree->first_node_binary_tree = balance_binary_tree(&random_tree->first_node_binary_tree);
+    //balance_binary_tree(&random_tree->first_node_binary_tree);
 
     // deletion of the tree
     random_binary_tree_deletion(&num_node, random_tree);

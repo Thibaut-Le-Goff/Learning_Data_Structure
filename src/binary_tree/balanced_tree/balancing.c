@@ -18,27 +18,34 @@ void show_hash_previous_node(Node **linked_list_first_element, Node *node_hash_t
 
 void find_middle_node_area(Node *root_node_balanced_tree, Node *linked_list_first_element, Node *first_node_in_area, int *min_area, int *max_area);
 
-//Node *balance_binary_tree(Node **linked_list_first_element) {
-void balance_binary_tree(Node **linked_list_first_element) {
+Node *balance_binary_tree(Node **linked_list_first_element) {
+//void balance_binary_tree(Node **linked_list_first_element) {
 
     printf("\nThere are %d nodes on the tree.\n", (*linked_list_first_element)->counter_node_passed_through + 1);
+    fprintf(stderr, "\nThere are %d nodes on the tree.\n", (*linked_list_first_element)->counter_node_passed_through + 1);
 
     if ((*linked_list_first_element)->node_lesser_hash != NULL)
     {
         printf("There are %d nodes on the left side of the tree.\n", (*linked_list_first_element)->node_lesser_hash->counter_node_passed_through + 1);
+        fprintf(stderr, "There are %d nodes on the left side of the tree.\n", (*linked_list_first_element)->node_lesser_hash->counter_node_passed_through + 1);
     }
 
     if ((*linked_list_first_element)->node_greater_hash != NULL)
     {
         printf("There are %d nodes on the right side of the tree.\n", (*linked_list_first_element)->node_greater_hash->counter_node_passed_through + 1);
+        fprintf(stderr, "There are %d nodes on the right side of the tree.\n", (*linked_list_first_element)->node_greater_hash->counter_node_passed_through + 1);
     }
     
     
     printf("\nThe nodes from the root in an ascending order :\n\n");
+    fprintf(stderr, "\nThe nodes from the root in an ascending order :\n\n");
     show_next_node(*linked_list_first_element, *linked_list_first_element);
+    show_next_node_stdr(*linked_list_first_element, *linked_list_first_element);
 
     printf("The nodes from the root in a descending order :\n\n");
+    fprintf(stderr, "The nodes from the root in a descending order :\n\n");
     show_previous_node(*linked_list_first_element, *linked_list_first_element);
+    show_previous_node_stdr(*linked_list_first_element, *linked_list_first_element);
     
     /*
     In order to balance the tree, we need to make sure that there are approximately, 
@@ -87,9 +94,15 @@ void balance_binary_tree(Node **linked_list_first_element) {
 
     printf("\n\nThe root node of the balanced tree, at the index %d, is:\n", middle_node_index_rounded_up);
     print_node(*linked_list_first_element, middle_node->hash_value);
-    
-    Node *root_node_balanced_tree = middle_node;
-    //Node *root_node_balanced_tree = extract_node(linked_list_first_element, middle_node);
+
+    fprintf(stderr, "\n\nThe root node of the balanced tree, at the index %d, is:\n", middle_node_index_rounded_up);
+    show_node_stdr(middle_node);
+
+    //Node *root_node_balanced_tree = middle_node;
+    // before extracting the node, we need 
+    // to save the addr of the next_node 
+    Node *first_node_greater_area = middle_node->next_node;
+    Node *root_node_balanced_tree = extract_node(linked_list_first_element, middle_node);
 
     // call of the functions
     int min_area = 0;
@@ -98,18 +111,24 @@ void balance_binary_tree(Node **linked_list_first_element) {
     Node *first_node_lesser_area = lowest_node;
     find_middle_node_area(root_node_balanced_tree, *linked_list_first_element, first_node_lesser_area, &min_area, &max_area);
 
-    Node *first_node_greater_area = middle_node->next_node;
+    //Node *first_node_greater_area = middle_node->next_node;
     find_middle_node_area(root_node_balanced_tree, *linked_list_first_element, first_node_greater_area, &min_area, &max_area);
 
 
-    /*
-    while (linked_list_first_element->counter_node_passed_through != 0) {
-        e
-    }
-    */
+    /**/
+    // there still nodes in the unbalanced tree, they
+    // will be the leaf nodes of the balanced tree
 
-    // Les nodes restants
-    //return root_node_balanced_tree;
+    while ((*linked_list_first_element)->counter_node_passed_through != 0) {
+        Node *leaf_node_balanced_tree = extract_node(linked_list_first_element, *linked_list_first_element);
+        put_node(root_node_balanced_tree, leaf_node_balanced_tree);
+    }
+
+    // the last node remains, we dont need to extract it
+    put_node(root_node_balanced_tree, *linked_list_first_element);    
+    
+
+    return root_node_balanced_tree;
 }
 
 
@@ -134,6 +153,7 @@ void find_middle_node_area(Node *root_node_balanced_tree, Node *linked_list_firs
 
 
     printf("\n\nThe index of the middle node is : %d because (%d - %d) / 2 = %f before being rounded up.\n", middle_node_index_rounded_up, *max_area, *min_area, middle_node_index);
+    fprintf(stderr, "\n\nThe index of the middle node is : %d because (%d - %d) / 2 = %f before being rounded up.\n", middle_node_index_rounded_up, *max_area, *min_area, middle_node_index);
     
     // look up for the middle node :
     Node *middle_node = first_node_in_area;
@@ -146,6 +166,29 @@ void find_middle_node_area(Node *root_node_balanced_tree, Node *linked_list_firs
     printf("\nThe middle node of this area is :\n");
     print_node(linked_list_first_element, middle_node->hash_value);
 
+    fprintf(stderr, "\nThe middle node of this area is :\n");
+    show_node_stdr(middle_node);
+
+    /**/
+    // we need to estract the node and put it on the balanced tree
+    // before extracting the node, we need 
+    // to save the addr of the next_node 
+    if ((middle_node_index_rounded_up > 1) && (middle_node->next_node != NULL))
+    {
+        Node *first_node_greater_area = middle_node->next_node;
+        //show_node_stdr(first_node_greater_area);
+        Node *parent_node_balanced_tree = extract_node(&linked_list_first_element, first_node_greater_area->previous_node);
+        put_node(root_node_balanced_tree, parent_node_balanced_tree);
+
+    } else {
+        Node *parent_node_balanced_tree = extract_node(&linked_list_first_element, middle_node);
+        put_node(root_node_balanced_tree, parent_node_balanced_tree);
+    }
+
+    //Node *parent_node_balanced_tree = extract_node(&linked_list_first_element, first_node_greater_area->previous_node);
+    //put_node(root_node_balanced_tree, parent_node_balanced_tree);
+    
+
 
     if (middle_node_index_rounded_up > 1)
     {
@@ -154,16 +197,21 @@ void find_middle_node_area(Node *root_node_balanced_tree, Node *linked_list_firs
         int max_area = middle_node_index_rounded_up - 1;
 
         //printf("The lesser area, is between %d and %d.\n", min_area, max_area);
+        fprintf(stderr, "The lesser area, is between %d and %d.\n", min_area, max_area);
 
         find_middle_node_area(root_node_balanced_tree, linked_list_first_element, first_node_lesser_area, &min_area, &max_area);
 
         if (middle_node->next_node != NULL)
         {
-            Node *first_node_greater_area = middle_node->next_node;
+            //Node *first_node_greater_area = middle_node->next_node;
 
             //printf("The greater area, is between %d and %d.\n", min_area, max_area);
+            fprintf(stderr, "The greater area, is between %d and %d.\n", min_area, max_area);
 
             find_middle_node_area(root_node_balanced_tree, linked_list_first_element, first_node_greater_area, &min_area, &max_area);
+        }
+        else {
+            free(first_node_greater_area);
         }
     }
 }

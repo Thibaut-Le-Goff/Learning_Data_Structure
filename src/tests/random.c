@@ -19,7 +19,6 @@ void free_random_binary_tree(Random_Binary_Tree *random_tree);
 //void random_binary_tree_deletion(int *num_node, Random_Binary_Tree *random_tree);
 
 
-
 //void random_binary_tree_test(int *num_node) {
 Random_Binary_Tree *random_binary_tree_creation(int *num_node) {
 
