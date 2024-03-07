@@ -98,12 +98,15 @@ Node *balance_binary_tree(Node **linked_list_first_element) {
     fprintf(stderr, "\n\nThe root node of the balanced tree, at the index %d, is:\n", middle_node_index_rounded_up);
     show_node_stdr(middle_node);
 
-    //Node *root_node_balanced_tree = middle_node;
+
+    /* BUG ICI 
+    Node *root_node_balanced_tree = middle_node;
     // before extracting the node, we need 
     // to save the addr of the next_node 
     Node *first_node_greater_area = middle_node->next_node;
-    Node *root_node_balanced_tree = extract_node(linked_list_first_element, middle_node);
+    //Node *root_node_balanced_tree = extract_node(linked_list_first_element, middle_node);
 
+    
     // call of the functions
     int min_area = 0;
     int max_area = middle_node_index_rounded_up - 1;
@@ -113,9 +116,10 @@ Node *balance_binary_tree(Node **linked_list_first_element) {
 
     //Node *first_node_greater_area = middle_node->next_node;
     find_middle_node_area(root_node_balanced_tree, *linked_list_first_element, first_node_greater_area, &min_area, &max_area);
+    */
 
 
-    /**/
+    /*
     // there still nodes in the unbalanced tree, they
     // will be the leaf nodes of the balanced tree
 
@@ -126,9 +130,10 @@ Node *balance_binary_tree(Node **linked_list_first_element) {
 
     // the last node remains, we dont need to extract it
     put_node(root_node_balanced_tree, *linked_list_first_element);    
-    
+    */
 
-    return root_node_balanced_tree;
+    //return root_node_balanced_tree;
+    return *linked_list_first_element;
 }
 
 
@@ -137,6 +142,7 @@ void find_middle_node_area(Node *root_node_balanced_tree, Node *linked_list_firs
         
     float middle_node_index = (float)(*max_area - *min_area) / 2;
 
+    //show_node_stdr(root_node_balanced_tree);
 
 
     // rounding up the number
@@ -168,40 +174,52 @@ void find_middle_node_area(Node *root_node_balanced_tree, Node *linked_list_firs
 
     fprintf(stderr, "\nThe middle node of this area is :\n");
     show_node_stdr(middle_node);
-
+    /*
     //int min_area = 0;
     min_area = 0;
     //Node *first_node_lesser_area = first_node_in_area;
     int pre_max_area = middle_node_index_rounded_up - 1;    
-    max_area = &pre_max_area;    
+    max_area = &pre_max_area;
+    */
 
-    /**/
     if ((middle_node_index_rounded_up > 1) && (middle_node->next_node != NULL))
     {
+        //int min_area = 0;
+        min_area = 0;
+        //Node *first_node_lesser_area = first_node_in_area;
+        int pre_max_area = middle_node_index_rounded_up - 1;
+        max_area = &pre_max_area; 
+
         // we need to estract the node and put it on the balanced tree
         // before extracting the node, we need 
         // to save the addr of the next_node 
-        Node *first_node_greater_area = middle_node->next_node;
+        //Node *first_node_greater_area = middle_node->next_node;
         //show_node_stdr(first_node_greater_area);
-        Node *parent_node_balanced_tree = extract_node(&linked_list_first_element, middle_node);
-        put_node(root_node_balanced_tree, parent_node_balanced_tree);
+        //Node *parent_node_balanced_tree = extract_node(&linked_list_first_element, middle_node);
+        //put_node(root_node_balanced_tree, parent_node_balanced_tree);
 
-        //printf("The lesser area, is between %d and %d.\n", min_area, max_area);
+        printf("The lesser area, is between %d and %d.\n", *min_area, *max_area);
         fprintf(stderr, "The lesser area, is between %d and %d.\n", *min_area, *max_area);
         find_middle_node_area(root_node_balanced_tree, linked_list_first_element, first_node_in_area, min_area, max_area);
 
-        //printf("The greater area, is between %d and %d.\n", min_area, max_area);
+        printf("The greater area, is between %d and %d.\n", *min_area, *max_area);
         fprintf(stderr, "The greater area, is between %d and %d.\n", *min_area, *max_area);
-        find_middle_node_area(root_node_balanced_tree, linked_list_first_element, first_node_greater_area, min_area, max_area);
+        //find_middle_node_area(root_node_balanced_tree, linked_list_first_element, first_node_greater_area, min_area, max_area);
 
-        free(first_node_greater_area);
+        //free(first_node_greater_area);
 
-    } else if ((middle_node_index_rounded_up > 1) && (middle_node->next_node == NULL)) {
+    } else if ((middle_node_index_rounded_up > 1)) {// && (middle_node->next_node == NULL)) {
+        
+        //int min_area = 0;
+        min_area = 0;
+        //Node *first_node_lesser_area = first_node_in_area;
+        int pre_max_area = middle_node_index_rounded_up - 1;
+        max_area = &pre_max_area;
 
-        Node *parent_node_balanced_tree = extract_node(&linked_list_first_element, middle_node);
-        put_node(root_node_balanced_tree, parent_node_balanced_tree);
+        //Node *parent_node_balanced_tree = extract_node(&linked_list_first_element, middle_node);
+        //put_node(root_node_balanced_tree, parent_node_balanced_tree);
 
-        //printf("The lesser area, is between %d and %d.\n", min_area, max_area);
+        printf("The lesser area, is between %d and %d.\n", *min_area, *max_area);
         fprintf(stderr, "The lesser area, is between %d and %d.\n", *min_area, *max_area);
 
         find_middle_node_area(root_node_balanced_tree, linked_list_first_element, first_node_in_area, min_area, max_area);
