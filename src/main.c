@@ -22,7 +22,7 @@
 int main() {
 
     // the number of nodes the tree will have 
-    int num_node = 1000;
+    int num_node = 14;
     // random_binary_tree_test(&num_node);
 
     // creation of the tree
